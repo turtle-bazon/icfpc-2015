@@ -18,5 +18,5 @@
                (:file "game" :depends-on ("unit"))
                (:file "parser" :depends-on ("game"))
                (:file "a-star" :depends-on ("game"))
-               (:file "coverage" :depends-on ("game"))))
+               (:file "coverage" :depends-on ("a-star"))))
 
