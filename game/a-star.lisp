@@ -25,8 +25,13 @@
 ;;; TODO: implement actual movement
 (defmethod move-unit (move (obj unit-on-map) (field hextris-map))
   (cons move
-        (make-unit-on-map :unit (make-instance 'unit :members (members (unit-on-map-unit obj)))
-                          :coord (unit-on-map-coord obj))))
+        (ecase move
+          ((:w :sw :se :e)
+           (make-unit-on-map :unit (unit-on-map-unit obj) :coord (cell-move (unit-on-map-coord obj) move)))
+          (:rotate-cw
+           (make-unit-on-map :unit (unit-rotate* (unit-on-map-unit obj) #'unit-rotate-clockwise-op) :coord (unit-on-map-coord obj)))
+          (:rotate-ccw
+           (make-unit-on-map :unit (unit-rotate* (unit-on-map-unit obj) #'unit-rotate-counter-clockwise-op) :coord (unit-on-map-coord obj))))))
 
 (defmethod position-better-p (end-pos)
   (lambda (pos-a pos-b)
