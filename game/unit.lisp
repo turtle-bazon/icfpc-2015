@@ -4,8 +4,7 @@
 (deftestsuite unit-tests () ())
 
 (defclass unit ()
-  ((members :initarg :members :accessor members)
-   (pivot :initarg :pivot :type cell :accessor pivot)))
+  ((members :initarg :members :accessor members)))
 
 (defun unit-rotate* (unit transform)
   (bind ((pivot-row (cell-row (pivot unit)))
