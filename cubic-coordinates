@@ -1,0 +1,3 @@
+east/west(+/-N): (x, y, z) -> (x + N, y - N, z)
+north-west/south-east(+/-N): (x, y, z) -> (x, y + N, z - N)
+north-east/south-west(+/-N): (x, y, z) -> (x + N, y, z - N)
