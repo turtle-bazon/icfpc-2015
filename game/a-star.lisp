@@ -25,18 +25,18 @@
 ;;; TODO: implement actual movement
 (defmethod move-unit (move (obj unit-on-map) (field hextris-map))
   (cons move
-        (make-unit-on-map :unit (make-instance 'unit
-                                               :pivot (pivot (unit-on-map-unit obj))
-                                               :members (members (unit-on-map-unit obj)))
+        (make-unit-on-map :unit (make-instance 'unit :members (members (unit-on-map-unit obj)))
                           :coord (unit-on-map-coord obj))))
 
 (defmethod position-better-p (end-pos)
   (lambda (pos-a pos-b)
     (flet ((sq-dist (cell-a cell-b)
-             (+ (* (- (cell-row cell-b) (cell-row cell-a))
-                   (- (cell-row cell-b) (cell-row cell-a)))
-                (* (- (cell-col cell-b) (cell-col cell-a))
-                   (- (cell-col cell-b) (cell-col cell-a))))))
+             (+ (* (- (cell-cube-x cell-b) (cell-cube-x cell-a))
+                   (- (cell-cube-x cell-b) (cell-cube-x cell-a)))
+                (* (- (cell-cube-y cell-b) (cell-cube-y cell-a))
+                   (- (cell-cube-y cell-b) (cell-cube-y cell-a)))
+                (* (- (cell-cube-z cell-b) (cell-cube-z cell-a))
+                   (- (cell-cube-z cell-b) (cell-cube-z cell-a))))))
       (< (sq-dist (unit-on-map-coord pos-a) (unit-on-map-coord end-pos))
          (sq-dist (unit-on-map-coord pos-b) (unit-on-map-coord end-pos))))))
   
