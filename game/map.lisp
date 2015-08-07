@@ -84,7 +84,7 @@
    (field :initarg :field :accessor field)))
 
 (defmethod initialize-instance :after ((obj hextris-map) &key width height &allow-other-keys)
-  (setf (field obj) (make-array (* width height) :element-type 'bit))g
+  (setf (field obj) (make-array (* width height) :element-type 'bit))
   nil)
 
 (defmethod map-cell-free-p ((obj hextris-map) (c cell))

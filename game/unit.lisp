@@ -68,3 +68,8 @@
             (return nil))
           (finally (return cell)))))
 
+(defmethod unit-lock ((obj unit) (field hextris-map))
+  (let ((field-copy (clone-map field)))
+    (iter (for cell in (members obj))
+          (setf (map-cell field-copy cell) t))
+    field-copy))
