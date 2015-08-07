@@ -6,42 +6,31 @@
 (defclass unit ()
   ((members :initarg :members :accessor members)))
 
-;;;; TODO: to be fixed
+(defun unit-rotate-clockwise-op (cell)
+  (bind ((x (cell-cube-x cell))
+         (y (cell-cube-y cell))
+         (z (cell-cube-z cell)))
+    (setf (cell-cube-x cell) (- z)
+          (cell-cube-y cell) (- x)
+          (cell-cube-z cell) (- y))))
 
-;; (defun unit-rotate* (unit transform)
-;;   (bind ((pivot-row (cell-row (pivot unit)))
-;;          (pivot-col (cell-col (pivot unit)))
-;;          ;; Copy cells, normalize coordinates by pivot and update cubic coordinates
-;;          (cells (mapcar #'(lambda (cell)
-;;                             (cell-update-cube
-;;                              (make-cell :row (- (cell-row cell) pivot-row)
-;;                                         :col (- (cell-col cell) pivot-col))))
-;;                         (members unit))))
-;;     ;; Do rotation, move to offset coordinates and denormalize
-;;     (iter (for cell in cells)
-;;           (funcall transform cell)
-;;           (cell-update-offset cell)
-;;           (setf (cell-row cell) (+ pivot-row (cell-row cell))
-;;                 (cell-col cell) (+ pivot-row (cell-col cell))))
-;;     (make-instance 'unit
-;;                    :pivot (pivot unit)
-;;                    :members cells)))
+(defun unit-rotate-counter-clockwise-op (cell)
+  (bind ((x (cell-cube-x cell))
+         (y (cell-cube-y cell))
+         (z (cell-cube-z cell)))
+    (setf (cell-cube-x cell) (- y)
+          (cell-cube-y cell) (- z)
+          (cell-cube-z cell) (- x))))
 
-;; (defun unit-rotate-clockwise-op (cell)
-;;   (bind ((x (cell-cube-x cell))
-;;          (y (cell-cube-y cell))
-;;          (z (cell-cube-z cell)))
-;;     (setf (cell-cube-x cell) (- z)
-;;           (cell-cube-y cell) (- x)
-;;           (cell-cube-z cell) (- y))))
+(defun unit-rotate* (unit transform)
+  (make-instance 'unit
+                 :members (iter
+                            ;; Copy cells
+                            (for cell in (mapcar #'copy-cell (members unit)))
+                            ;; Transform coordinates
+                            (collect (funcall transform cell)))))
 
-;; (defun unit-rotate-counter-clockwise-op (cell)
-;;   (bind ((x (cell-cube-x cell))
-;;          (y (cell-cube-y cell))
-;;          (z (cell-cube-z cell)))
-;;     (setf (cell-cube-x cell) (- y)
-;;           (cell-cube-y cell) (- z)
-;;           (cell-cube-z cell) (- x))))
+
 
 ;; (defmethod unit-move ((map hextris-map) (unit unit) (direction (eql :w)))
 ;;   )
