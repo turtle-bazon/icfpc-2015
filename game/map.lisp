@@ -94,7 +94,10 @@
                                  (height original-map))))
 
 (defmethod clone-map ((original-map hextris-map))
-  (clone-map-with original-map (lambda (field width height) (copy-seq field))))
+  (clone-map-with original-map
+                  (lambda (field width height)
+                    (declare (ignore width height))
+                    (copy-seq field))))
 
 (defun field-burn-line (field widht height)
   (let ((new-field (copy-seq field)))
