@@ -66,7 +66,8 @@
    (field :initarg :field :accessor field)))
 
 (defmethod initialize-instance :after ((obj hextris-map) &key width height &allow-other-keys)
-  (setf (field obj) (make-array (* width height) :element-type 'bit))
+  (when (not (slot-boundp obj 'field))
+    (setf (field obj) (make-array (* width height) :element-type 'bit)))
   nil)
 
 (defmethod clone-map-with ((original-map hextris-map) field-modify-fn)
