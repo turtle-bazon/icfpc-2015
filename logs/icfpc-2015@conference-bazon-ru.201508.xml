@@ -822,4 +822,326 @@
  <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:38:57">(- x) </msg>
  <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:39:9">просто добавь скобочек =)</msg>
  <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 22:39:19">хм</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 22:41:11">Makefile доделал.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 22:41:16">Чем полезным можно заняться? :)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:42:8">сгорание ряда закодишь? </msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 22:42:28">ОК. Сейчас посмотрю. Отойду, правда, на полчаса.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:42:37">без проблем</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 22:44:7">helper'ов проверки cell'а на занятость у нас нет?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:44:27">есть, map-cell</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 22:44:54">как оно работает?%)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:45:0">возвращает во втором value «t» если занята, и nil если нет</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:45:3">ща покажу пример</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 22:45:16">тады я ее разрежу</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 22:45:28">мне не надо ячейку саму брать, тока проверить</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 22:45:33">сделаю чтоб и так и так мона было</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:46:36">короче как-то так:</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:46:45">(map-cell (game-map (parse-input-file #p&amp;quot;problem_0.json&amp;quot;)) (make-cell :row 0 :col 1))</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:47:54">мне ща пришла любопытная идея спорной полезности</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:48:15">можно мемберов фигуры представлять списком движений, а не координатами</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:48:34">типа (:nw :w) вместо (-1 -2), например</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:49:9">тогда можно пользоваться хелпером neighbour для трансляции на глобальные координаты, зная глобальные координаты pivot point :)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:49:45">но как их тогда вращать не очень понятно</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:49:56">хотя не, как раз понятно</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:50:23">поэкспериментировать чтоль в параллельной ветке =)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 22:51:53">брррр</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 22:51:56">поэксперементируй</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:52:34">попозже, там же сначала надо придумать, как конвертить координаты в эти списки движений =) </msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 22:52:58">Ага. :) Только хотел написать, что в инпуте то они коордианатми идут. :)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 22:59:8">так, на чем бы потестить вращение?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:59:39">можно реальные фигуры позагружать из самплов</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:59:46">загрузчик работает вроде</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:0:12">а результат через slime-inspect посмотреть глазами =)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 23:2:34">ну, чота вращает)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 23:3:21">закинул</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 23:3:37">но пока не тестированый код особо</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:3:40">круто, ща посмотрю минут через пять</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:3:49">ну езжай тогда домой</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:4:30">а у тебя там координаты мемберов нормализованы относительно pivot?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 23:4:43">и еще мелкий фикс</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 23:4:48">нет</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:4:51">в смысле, можно ли трансляцию в глобальные координаты просто сложением сделать?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 23:4:53">нормализуются по требованию</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 23:5:14">они там хранится должны в глобальных координатах. а тебе удобнее локальные?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:5:49">вот типа у меня есть глобальные координаты для pivot, а мне надо для заданной фигуры получить всех её мемберов тоже в глобальных координатах</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:6:16">если они нормализованы относительно pivot, то, по-идее, можно просто сложить все координаты </msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 23:6:20">еще раз - мой код исходит из того, что фигура хранится в глобальных координатах</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 23:6:34">все точки, не только пивот</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:6:41">хм</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 23:7:14">надо еще сдвиг напилить</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 23:7:33">но это по прибытию домой</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:7:33">не знаю, может, переписать на локальные? :)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 23:7:38">а зачем?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:8:1">просто если двигать фигуру, то проще было бы двигать пивот, а так придётся апдейтить всех мемберов</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 23:8:17">за сдвигом сразу пойдет проверка границ</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 23:8:27">так что эти вычисления в любом случае будут сделаны</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:8:51">ну хз подумаю ещё тогда</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 23:9:7">все, пошел греть двигло</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 23:9:13">увидимся на той стороне)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:9:16">давай</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:10:0">с инжектором греть двигло не надо было бы =)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 23:10:24">а один фиг покурить надо )</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:23:7">а в конфе кто-нибудь остался?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 23:23:30">Я остался.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 23:23:34">Точнее, вновь появился.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 23:23:41">Как там карта хранится? Как вектор?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:23:49">как битвектор</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:24:0">размера width * height</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 23:24:2">&amp;quot;Yes, it is allowed to reuse code from Internet resources if its license allows for such use.&amp;quot;</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 23:24:10">Народ, похоже, солверы где-то нашёл.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 23:24:36">&amp;quot;Specific information on evaluation hardware is unavailable. However, we are currently discussing multiple cores. Stay tuned.&amp;quot;</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:24:57">солверы как-то адаптировать надо</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 23:25:16">Не без этого.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 23:28:11">Что-то я не понял. Парсится вообще в какую-то сложную структуру, а не в битвектор.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:28:32">ну посмотри файлик map.lisp</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:28:45">там класс hextris-map</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:28:55">внутри у него битвектор и пара полей</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:28:58">и есть хелперы</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 23:31:0">Что за cube-x, cube-y и cube-z? Я что-то пропустил?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:31:15">это sectoid реализовал вращение</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:31:30">можешь глянуть по истории коммитов</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 23:31:47">Ладно, гляну тогда потом.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 23:32:5">Так у нас мутируемая карта что ли?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 23:32:19">Или нет?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:32:25">нет, мы её копируем</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 23:32:29">Как вообще модификацию делать? Создавать новый hextris-map?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:32:36">ага </msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:32:51">если нужны будут оптимизации — потом займёмся</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:32:57">пока важно чтобы что-то заработало</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 23:33:0">А где-нибудь уже есть копирование?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:33:20">самой карты — нет пока, сделай хелпер :)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:33:42">битвектор можно через copy-seq клонировать</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 23:34:15">А как доступ к битвектору ведётся?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 23:34:22">x*widht + y?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 23:34:32">Или y*height + x&amp;amp;</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 23:34:35">?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:35:1">там можешь глянуть в хелпер map-cell</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 23:35:31">Второе, получается.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 23:47:33">я доехал</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 23:47:40">но надо перекусить и вот это все</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:47:52">фига себе ты быстр</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 23:48:23">Полчаса. :)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:48:37">turtle, а ты сделал клонирование карты? можешь закоммитить, мне тоже ща понадобилось?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 23:49:23">татут всего 15км</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 23:49:28">так что не так и быстр</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 23:49:57">Клонирование вообще?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 23:50:22">Или со сдвигом?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:50:32">ну в смысле простую функцию типа я тебе карту hextris-map, а ты мне копию этой карты</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 23:50:42">ну чтобы мне не писать второй раз</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 23:50:54">Ага. Сек.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 23:53:58">Погоди. ПОмержиться надо. :)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 23:55:3">Забирай.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:1:23">А у нас так же - 0.0 - левый верхний угол?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:1:31">да вроде да</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:1:34">да</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:1:50">я тут бегаю-питаюсь</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:8:17">так</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:8:35">чёто опять хаос кругом :)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:9:3">значит, насчёт фигуры фиксируем: её pivot и координаты мемберов всегда в глобальных координатах — так?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:9:33">Да хз как правильно.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:9:40">В инпутах то в локальных.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:9:47">Как в слиме проинспектировать?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:10:1">ну вроде sectoid сделал в глобальных, и настаивает на этом</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:10:11">мне лично всё равно, но надо к единому стандарту привести</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:10:17">slime-inspect</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:10:26">или правой кнопкой мыши в репле на объекте</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:10:58">короче, допустим мы фиксируем, что координаты в фигуре везде глобальны</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:11:1">У меня мышь не работает. :)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:11:34">Как из инспекта выйти?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:12:3">q</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:12:23">или буфер убей, как удобней</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:12:31">C-x I</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:12:31">если что</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:12:36">итак, координаты</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:12:40">допустим они глобальны</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:12:49">но в инпуте они локальны</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:13:4">в каком инпуте?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:13:4">как их транслировать в глобальные?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:13:10">в json файле</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:13:19">&amp;quot;CLARIFICATION: There is no fixed constraint on board sizes. There is also no fixed constraint on unit sizes.&amp;quot;</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:13:32">Они в глобальные транслируются в момент установки на борду.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:13:37">вот</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:13:45">А говорили, не будет досок больше, чем в примерах.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:13:52">установки на борду еще не делал</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:14:2">&amp;quot;CHANGE: A command line flag has been added to indicate the number of cores available to a program, for teams that want to parallelize.&amp;quot;</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:14:5">Во! :)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:14:6">счас налью пуэра, выкурю сигарету и буду допинывать фигурки</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:14:22">&amp;quot;CLARIFICATION: We will not provide precise information about resource limits, but guarantee that teams can use their languages of choice.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:14:26">Подстава какая-то. :)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:14:44">может в зависимости от языка будут давать?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:14:48">null для очков наконец сделали.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:14:55">Да пока пофигу.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:15:27">еще бы борду пофиксили...</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:16:2">Как заполнить ячейку на борде?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:16:5">окей, тогда нужна функция для установки юнита на борду</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:16:7">И как её прочитать?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:16:15">turtle map-cell</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:16:21">А точнее?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:16:21">(setf map-cell)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:16:31">А ещё точнее? :)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:16:56">ну посмотри декларейшн, там же одна строчка кода :)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:17:3">мне дольше копипастить сюда</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:17:6">Установка юнита может завершиться и неудачей.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:17:20">если завершилась неудачей - все, конец фильма</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:18:26">(setf (map-cell *hm*) t (make-cell :row 0 :col 0))</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:18:28">Типа так?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:18:33">просто у меня есть код, где я пытаюсь подобрать брутфорсом самое удачное целевое положение фигуры, которое нам нужно добиться</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:18:34">ага</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:18:38">Так что-то не работает.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:18:46">не так</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:19:1">А как?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:19:6">(setf (map-cell *hm* (make-cell :row 0 :col 0)) t)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:19:13">сначала place, потом value</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:19:21">как в gethash</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:19:49">короче мне нужно уметь класть фигуру на поле в произвольных местах</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:20:6">и тут важно понять с координатами</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:20:33">я сначала прикидывал, что фигуры у нас _всегда_ в локальных координатах, причём нормализованных относительно pivot</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:21:0">тогда казалось бы задаёшь pivot фигуры в глобальных координатах, и фигура ложится на борду</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:21:33">если она в глобальных координатах, то как её положить в произвольном месте?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:22:56">блин</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:23:39">давайте, может, уберём нафиг поле pivot из класса, и нормализуем members относительно (0,0)?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:23:53">Пивот для вращения нужен.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:24:11">ну он (0,0)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:24:13">всегда</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:24:49">Нет.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:25:0">Написали, произволен.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:25:11">ну как нет, если мы его сдвигаем лично в (0,0)? :)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:25:17">почитай что я предлагаю</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:25:36">сдвигаем пивот и все остальные координаты мемберов</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:25:43">и пивот забываем</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:25:52">А как располагать будешь?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:26:1">ребята, чем вам не нравится текущее положение дел?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:26:3">Всё равно нужно будет по мемберам смотреть.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:26:50">sectoid мне нужно фигуру многократно и произвольно ставить в разные части доски, и я не понимаю, как это делать</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:26:58">swizard: а зачем ее располагать в произвольном месте? ну, т.е. если очень хочется - могу привинтить, но зачем?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:27:35">потому что у меня есть быдло-код, который должен найти оптимальное положение фигуры на доске, где она должна стать locked</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:27:50">у тебя он перебирает же ходы?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:28:19">почитай файлик overview в корне :)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:28:25">Блин, этот initialize-instance создаёт пустой field всегда?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:28:44">понял</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:28:48">ну а какой он должен создавать? :)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:28:57">счас, дайте подумать минутку</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:29:12">собсно пока фигура не размещена - у ней все в локальных координатах</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:29:29">размещена - забились значения координат</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:29:33">да</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:29:50">бтв чтобы вращать фигуру не обязательно её на борде располагать</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:30:36">не обязательно</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:30:43">более того - оно будет работать и без борды</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:30:59">моё предложение вкрадце было такое: вычитать фигуру из входных данных, пивот сдвинуть в (0, 0), соответствующим образом нормализовать остальные координаты мемберов, и после чего пивот выбросить </msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:31:18">чтобы вращать фигуру — этого достаточно</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:31:42">хорошо, тогда вопрос где хранить ее расположение</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:31:47">чтобы расположить на борде — достаточно сложить все координаты мемберов с заданной координатой</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:31:56">ммм</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:31:59">неплохая идея</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:32:20">принимается. готов отрефакторить</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:32:25">соответственно, есть чистая функция rotate unit -&amp;gt; unit</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:32:57">и есть функция place-on-board, которой задаётся координата, фигура и карта</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:33:16">она должна проверить, что так поставить фигуру можно</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:33:38">Так расположить же нужно будет не по 0 поивота, а по границам фигуры.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:33:48">тогда есть пара функций: place-on-board-possible-p и place-on-board</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:33:51">Решаемо, конечно.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:34:12">и функция lock-unit, которая делает новую карту, отмечая соответстующие клетки как занятые</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:34:44">turtle — да, но границы фигуры же у нас никуда не потерялись вроде</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:34:56">да, они остались</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:35:9">итак</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:35:35">я модифицирую парсер тогда, чтобы фигуры вычитывались в нормализованных координатах</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:35:43">и дропаю поле pivot, правильно?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:35:51">ты будешь все рефакторить?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:36:7">просто там по сути надо чтобы 1 человек сделал рефакторинг - и потом дописывать</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:36:15">да там в любом случае всё рефакторить, мы не так много кода успели написать</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:36:55">прост я готов поправить и фигуру, и вычитку</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:37:42">да давай я поправлю это, а ты лучше вращения пофиксь</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:37:56">ок. тогда давай правь, и тогда я буду править вращения</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:38:3">и сделай place-on-board-possible-p и place-on-board, если не сложно</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:38:15">хорошо</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:38:25">дай мне только новое определение class unit</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:38:31">ща сек</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:39:21">ща, помержится надо :(</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:41:16">запушилось</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:41:19">тупо убрал pivot</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:41:27">ща парсер пофикшу</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:43:26">парсер пофиксил</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:43:37">оок, правлю юнит</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:43:42">так, погодите, а не туплю ли я, давайте вместе подумаем</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:44:7">можно ли на нашем поле координаты преобразовывать сложением и вычитанием?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:44:16">ну по x точно можно, а по y?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:44:39">а почему нет?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:44:50">сетка-то гексагональная</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:44:50">Не всегда, наверное.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:45:9">Там вниз может сдвинуться как со сдвигом влево, так и нет.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:45:13">Ну или вправо.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:45:32">это отдельные команды</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:45:39">и там +1/+1</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:45:44">у нас нет чистого сдвига вниз</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:46:26">не, посмотри на картинку поля в самом начале  http://icfpcontest.org/spec.html</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:46:43">допустим у нас pivot в (1,1)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:46:53">и один мембер в (1,0)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:46:59">(как у них написано)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:47:17">если я из координат мембера вычту pivot</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:47:24">получися (0, -1)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:47:31">ии?)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:47:41">ха, действительно</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:47:56">я же потом обратно складываю, когда привожу к клобальным координатам</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:48:6">http://www.redblobgames.com/grids/hexagons/#coordinates</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:48:9">Вот наглядно.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:48:10">получается, что значит можно</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:48:12">я уже это постил)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:48:18">Да, получается, можно.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:48:28">ну окей, тогда продолжаем</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:48:38">Во всяком случае, если с рулесами так. Щас гляну.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:48:54">просто было бы обидно, если было нельзя :)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:49:32">а не, всё-таки походу нельзя</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:49:50">это же от чётности ряда зависит</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:49:59">там сдвиги SW/SE интересные по координатам</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:50:32">ну, четность проверить нетрудно</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:50:38">на фигуру это не влияет</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:50:40">по идее</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:51:27">ну просто хз как приводить pivot к (0,0) — получается, нельзя тупо вычесть из координат мемберов координату пивота</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:52:10">Почему нельзя?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:52:32">Можно же.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:52:35">посмотри на картинку http://icfpcontest.org/board_example.png</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:53:3">пивот допустим в (1,1), а мембер в (1,0)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:53:14">вычитаем, получается (0,-1)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:53:30">И что?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:54:1">теперь пробуем поставить в клетку с координатами (2,2)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:54:16">должно получиться (1,1), но получается-то (2,1)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:54:27">потому что там был нечётный ряд, а тут чётный</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:55:0">Ты что вычитаешь? Пивто то в (1, 1)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:55:12">*пивот</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:55:23">да, свиз, ты прав</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:55:32">turtle, смотри, по шагам</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:55:38">нам юнит приходит в json</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:55:41">Хотя не, да.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:55:53">понял? :) а то долго писать</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:56:10">Было бы нормально, если бы нечётные не вправло были сдвинуты, а влево. :)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:56:18">т.е. откатываем?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:56:33">погоди пока откатывать :) надо сначала придумать, как правильно</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:56:40">А с другой стороны, почему 1.1 то должно быть? :)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:57:34">смотри, фигура в json задана в локальных координатах — мембер в (0,0), пивот в (0,1)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:57:45">Да.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:58:1">мы её хотим поставить так, чтобы пивот оказался на борде в координатах (2,2) </msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:58:13">понятно, что мембер должен оказаться в (1,1)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 0:58:37">Ну понял что ты хочешь сказать.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 0:58:42">а если мы ставим так, чтобы пивот был в (1,1), то мембер должен быть в (0,1)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:58:44">а если мы сделаем просто поправку на 1ку?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:58:58">там не просто вычитать, а еще -1 по колонкам</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 0:59:9">сча, проверю</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 1:0:42">Не везде -1.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 1:0:46">не везде</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 1:0:54">На чётных одно правило, на нечётных другое.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 1:0:56">а вот если работать в кубических координатах - все збс</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 1:0:57">блин, какой-то тупняк на пустом месте :)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 1:1:50">Надо смотреть разницу в координатах между строками пивота и куда хотим поставить.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 1:1:54">swizard: http://www.redblobgames.com/grids/hexagons/#coordinates</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 1:2:9">ребята, на кой нам сдались те col/row?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 1:2:18">давайте вообще в кубических координатах жить?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 1:2:33">Я бы вообще всё графом сделал. :)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 1:2:51">свиз, взгляни по моей ссылке</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 1:3:4">turtle: тоже взгляни)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="8 1:3:8">нам всё равно нужны cols/rows потому что стакан тетриса всё равно работает в понятиях rows</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 1:3:11">Я смотрю.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 1:3:26">дык давай перейдем от rows/cols к кубическим?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 1:3:39">стакан будет еще удобнее работать в кубических</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="8 1:4:11">turtle: оффтопик - закоммить, плиз, логи</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="8 1:4:24">Свиз, по твоей идее с :nw и т.д. как соседи, было бы вообще в шоколаде. :)</msg>
 </kopete-history>
