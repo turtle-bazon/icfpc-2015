@@ -9,9 +9,10 @@
   :name "hextris"
   :version "0.1"
   :author "skobochka"
-  :depends-on (:iterate :metatilities :cl-json)
+  :depends-on (:iterate :metatilities :cl-json :drakma)
   :components ((:file "package")
                (:file "map" :depends-on ("package"))
+               (:file "remote" :depends-on ("package"))
                (:file "unit" :depends-on ("map"))
                (:file "game" :depends-on ("unit"))
                (:file "parser" :depends-on ("game"))))
