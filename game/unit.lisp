@@ -17,34 +17,29 @@
       (make-instance 'unit :members translated))))
 
 ;;;; TODO: to be fixed
-(defun unit-rotate-clockwise-op (cell)
+(defun cell-rotate-clockwise-op (cell)
   (bind ((x (cell-cube-x cell))
          (y (cell-cube-y cell))
          (z (cell-cube-z cell)))
-    (setf (cell-cube-x cell) (- z)
-          (cell-cube-y cell) (- x)
-          (cell-cube-z cell) (- y))))
+    (make-cell :cube-x (- z)
+               :cube-y (- x)
+               :cube-z (- y))))
 
-(defun unit-rotate-counter-clockwise-op (cell)
+(defun cell-rotate-counter-clockwise-op (cell)
   (bind ((x (cell-cube-x cell))
          (y (cell-cube-y cell))
          (z (cell-cube-z cell)))
-    (setf (cell-cube-x cell) (- y)
-          (cell-cube-y cell) (- z)
-          (cell-cube-z cell) (- x))))
+    (make-cell :cube-x (- y)
+               :cube-y (- z)
+               :cube-z (- x))))
 
 (defun unit-rotate* (unit transform)
-  (make-instance 'unit
-                 :members (iter
-                            ;; Copy cells
-                            (for cell in (mapcar #'copy-cell (members unit)))
-                            ;; Transform coordinates
-                            (collect (funcall transform cell)))))
+  (make-instance 'unit :members (mapcar transform (members unit))))
 
 (defun unit-rotate (unit direction)
   (ecase direction
-    (:rcw (unit-rotate* unit #'unit-rotate-clockwise-op))
-    (:rcc (unit-rotate* unit #'unit-rotate-counter-clockwise-op))))
+    (:rcw (unit-rotate* unit #'cell-rotate-clockwise-op))
+    (:rcc (unit-rotate* unit #'cell-rotate-counter-clockwise-op))))
 
 ;; (defmethod unit-move ((map hextris-map) (unit unit) (direction (eql :w)))
 ;;   )

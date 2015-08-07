@@ -1,7 +1,7 @@
 
 (in-package :hextris)
 
-(defparameter *a-star-moves* '(:w :sw :se :e :rotate-cw :rotate-ccw))
+(defparameter *a-star-moves* '(:w :sw :se :e :rcw :rcc))
 
 (defstruct unit-on-map
   (unit nil :type (or null unit))
@@ -28,10 +28,8 @@
         (ecase move
           ((:w :sw :se :e)
            (make-unit-on-map :unit (unit-on-map-unit obj) :coord (cell-move (unit-on-map-coord obj) move)))
-          (:rotate-cw
-           (make-unit-on-map :unit (unit-rotate* (unit-on-map-unit obj) #'unit-rotate-clockwise-op) :coord (unit-on-map-coord obj)))
-          (:rotate-ccw
-           (make-unit-on-map :unit (unit-rotate* (unit-on-map-unit obj) #'unit-rotate-counter-clockwise-op) :coord (unit-on-map-coord obj))))))
+          ((:rcw :rcc)
+           (make-unit-on-map :unit (unit-rotate (unit-on-map-unit obj) move) :coord (unit-on-map-coord obj))))))
 
 (defmethod position-better-p (end-pos)
   (lambda (pos-a pos-b)
