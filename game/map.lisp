@@ -87,6 +87,22 @@
   (setf (field obj) (make-array (* width height) :element-type 'bit))
   nil)
 
+(defmethod clone-map-with ((original-map hextris-map) field-modify-fn)
+  (make-instance 'hextris-map :width (width original-map) :height (height original-map)
+                 :field (funcall field-modify-fn (field original-map)
+                                 (width original-map)
+                                 (height original-map))))
+
+(defmethod clone-map ((original-map hextris-map))
+  (clone-map-with original-map (lambda (field width height) (copy-seq field))))
+
+(defun field-burn-line (field widht height)
+  (let ((new-field (copy-seq field)))
+    (iter (for x from 0 below width)
+          (iter (for y from 1 below height)
+                nil))
+    new-field))
+
 (defmethod map-cell-free-p ((obj hextris-map) (c cell))
   (not (zerop (elt (field obj) (+ (* (cell-row c) (height obj)) (cell-col c))))))
 
