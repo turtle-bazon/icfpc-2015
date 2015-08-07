@@ -11,5 +11,6 @@
   :author "skobochka"
   :depends-on (:iterate :metatilities :cl-json)
   :components ((:file "package")
-               (:file "map" :depends-on ("package"))))
+               (:file "map" :depends-on ("package"))
+               (:file "parser" :depends-on ("map"))))
 
