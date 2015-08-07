@@ -84,12 +84,14 @@
    (field :initarg :field :accessor field)))
 
 (defmethod initialize-instance :after ((obj hextris-map) &key width height &allow-other-keys)
-  (setf (field obj) (make-array (* width height) :element-type 'bit))
+  (when (not (field obj))
+    (setf (field obj) (make-array (* width height) :element-type 'bit)))
   nil)
 
 (defmethod clone-map-with ((original-map hextris-map) field-modify-fn)
   (make-instance 'hextris-map :width (width original-map) :height (height original-map)
-                 :field (funcall field-modify-fn (field original-map)
+                 :field (funcall field-modify-fn
+                                 (field original-map)
                                  (width original-map)
                                  (height original-map))))
 
@@ -105,9 +107,9 @@
 (defun field-burn-line (field width height)
   (let ((new-field (make-array (* width height) :element-type 'bit)))
     (iter (for col from 0 below width)
-          (iter (for row from 1 below height)
-                (setf (elt new-field (+ (* (1+ row) height) width))
-                      (elt field (+ (* row height) width)))))
+          (iter (for row from 0 below (1- height))
+                (setf (elt new-field (+ (* (1+ row) height) col))
+                      (elt field (+ (* row height) col)))))
     new-field))
 
 (defmethod map-cell-free-p ((obj hextris-map) (c cell))
