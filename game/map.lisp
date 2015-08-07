@@ -3,7 +3,71 @@
 
 (defstruct cell
   (row 0 :type fixnum)
-  (col 0 :type fixnum))
+  (col 0 :type fixnum)
+  (cube-x 0 :type fixnum)
+  (cube-y 0 :type fixnum)
+  (cube-z 0 :type fixnum))
+
+(defun cell-update-cube (cell)
+  "Update cube coordinates based on row/col"
+  ;; convert odd-r offset to cube
+  ;;   x = col - (row - (row&1)) / 2
+  ;;   z = row
+  ;;   y = -x-z
+  (bind ((col (cell-col cell))
+         (row (cell-row cell))
+         (cube-x (- col
+                    (/ (- row (mod row 2)) 2)))
+         (cube-z row)
+         (cube-y (- 0 cube-x cube-z)))
+
+    (setf (cell-cube-x cell) cube-x
+          (cell-cube-y cell) cube-y
+          (cell-cube-z cell) cube-z)
+    cell))
+
+(defun cell-update-offset (cell)
+  "Update row/col coordinates based on cube"
+  ;; convert cube to odd-r offset
+  ;;   col = x + (z - (z&1)) / 2
+  ;;   row = z
+  (bind ((cube-x (cell-cube-x cell))
+         ;; (cube-y (cell-cube-y cell))
+         (cube-z (cell-cube-z cell))
+         (col (+ cube-x (/ (- cube-z (mod cube-z 2)) 2)))
+         (row cube-z))
+    (setf (cell-row cell) row
+          (cell-col cell) col)
+    cell))
+
+(deftestsuite cell-tests () ())
+
+(defrandom-instance a-coord nil (- (random 200) 100))
+
+(addtest (cell-tests)
+  cell-cube-identity
+
+  (ensure-random-cases 100 ((row a-coord) (col a-coord))
+    (bind ((cell (make-cell :row row :col col))
+           (row* (cell-row cell))
+           (col* (cell-col cell)))
+      (cell-update-cube cell)
+      (cell-update-offset cell)
+      (ensure-same row (cell-row cell))
+      (ensure-same col (cell-col cell))))
+
+  (ensure-random-cases 100 ((x a-coord) (y a-coord) (z a-coord))
+    (bind ((cell (make-cell :cube-x x :cube-y y :cube-z z))
+           (x* (cell-cube-x cell))
+           (y* (cell-cube-y cell))
+           (z* (cell-cube-z cell)))
+
+      (cell-update-offset cell)
+      (cell-update-cube cell)
+      (ensure-same x* (cell-cube-x cell))
+      ;; This is not required to be same (as i understood)
+      ;; (ensure-same y* (cell-cube-y cell))
+      (ensure-same z* (cell-cube-z cell)))))
 
 (defun cell< (cell-a cell-b)
   (or (< (cell-row cell-a) (cell-row cell-b))
