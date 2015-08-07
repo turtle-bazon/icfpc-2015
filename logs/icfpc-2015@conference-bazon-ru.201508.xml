@@ -745,4 +745,81 @@
  <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 20:50:26">http://www.redblobgames.com/grids/hexagons/</msg>
  <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 20:50:28">хехехехе</msg>
  <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 20:50:45">Так, я тут. Чем нужно заняться?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 20:54:45">я вожусь с фигурками-юнитами</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 20:57:5">&amp;quot;RULES CLARIFICATION: A sequence of commands that continues after the game ends (the last piece has been played, or the starting position of the next piece would be invalid) is an error, and results in a score of 0 points.&amp;quot;</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 20:57:7">Это читали?</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 20:57:32">ха</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 20:57:40">там вот чем всем шкворц отрезали</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 20:57:42">:D</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 20:58:32">&amp;quot;We are enjoying watching contestants search for power phrases, but the Deep Ones discourage cutting &amp;amp; pasting from Wikipedia.&amp;quot;</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 20:59:18">ггг</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 21:0:54">Очки резко похудели.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 21:1:47">Я тогда сейчас бинарём займусь.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 21:8:42">Напомнили, что фразы не будут считаться в лайтнинге.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 21:11:25">тесты писать будем?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 21:11:55">давай потом :) после лайтнинга</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 21:12:8">ща цель максимально быстро хоть что-то работающее заговнокодить</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 21:12:15">оок</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 21:12:28">хотя... для фигурок таки сделаю</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 21:12:32">все-равно отлаживать</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 21:31:42">sectoid</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 21:31:51">есть чего-нибудь подзакоммитить? :)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 21:32:0">я б a* поотлаживал чуток</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 21:32:21">базовый алгоритм я там вроде изобразил</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 21:35:3">turtle, а нет желания спрограммировать сгорание нижних рядов, например? :)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 21:35:28">Ну Makefile доделать надо. :) Всё равно сабмитить придётся.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 21:35:44">а, окей</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 21:36:39">нам ещё до плюс-минус рабочего решения нужен какой-никакой компилятор команд в выходной формат, и алгоритм поиска оптимального места для фигуры на поле, куда её гнать нужно</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 21:37:37">а подсчёт очков можно пока отложить, наверно</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 21:41:0">ладно, раз такое дело, попробую какую-нибудь заглушку написать для алгоритма поиска места фигуры</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 21:42:34">пусть будет какая-нибудь простейшая эвристика, типа, лучшая позиция — это самая нижняя позиция, и при этом осталась дырка в нижнем ряду максимально возможной ширины</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 21:51:6">я. счас доделаю и закину</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 21:51:15">я тут отвлекаюсь иногда(</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 21:52:7">гони всех прочь, нам в этот раз выигрывать нужно =)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 21:54:29">гоню)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 21:54:32">Скажи, что ушёл в другую реальность и в этой тебя нет. :)</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 21:55:49">фиганул простенький рендерер гексагонального поля. приду домой - допилю до визуализатора положения доски</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 21:56:23">он на Tcl, но никаких внешний зависимостей нет, требуется только Tcl и Tk. сектоид предлагает портануть на лиспотк, так потом и сделаю</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 21:56:40">закоммитил? </msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 21:57:0">да</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 21:57:3">As of noon PST, we have 205 teams and over 20,000 submissions.  The Old Ones may take notice</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 21:57:39">интересно, сколько среди них штук нормальных решений, а не руками сконструированных :)</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 21:58:23">мало. насколько можно судить по борде, солверы есть у около 5 тим</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 21:58:47">ну или в 5 тимах очень усидчивые мануальные тестировщики :)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 21:59:50">надо подстегнуть)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 21:59:55">кто-то там пять фраз власти нашёл</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 22:0:7">ребят, кому делать нечего - можете глянуть на рендерер и попробовтаь портануть на ltk</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 22:0:33">он достаточно похож на tk, и пауль должен суметь его поддерживать-улучшать уже на ltk</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 22:0:44">а мы получим бонус в виде возможности дергать его в репле</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:1:48">запиши пока в план, мож ближе к ночи попробую</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:2:4">когда голова перестанет варить :)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 22:10:17">запушил вспомогательные функции. + новая зависимость -- lift</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 22:10:30">счас доделаю остальные функции и маякну</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 22:10:36">swizard: основные == те что ты просил</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:11:13">круто, tnx</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:16:55">я там предлагаю нормализовать локальную систему координат в фигуре относительно pivot point</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:17:27">ну типа чтобы pivot был всегда (0,0), а остальные координаты мемберов относительно него</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:18:17">теоретически, это можно сделать прямо на загрузке данных</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:18:40">и тогда pivot вообще не нужен будет</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:19:23">или нужен ещё для чего-то?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 22:26:34">ммм</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 22:26:45">там чуть сложнее. для поворота я буду как раз нормализовывать</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 22:27:18">мну пора бы переместиться домой из офиса. вам норм если я пропаду на часик?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:27:50">ну так-то норм</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 22:28:30">счас только допишу до точки)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:28:43">хотя, конечно, задача с движением и поворотом фигур у нас блокирующая, почти всё остальное на неё завязано :)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:29:30">но придумаем что-нибудь</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 22:29:54">&amp;quot;CLARIFICATION: Programs that are killed for violating resource limits (during final judging) will earn scores of 0 for their runs.&amp;quot;</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 22:30:7">&amp;quot;Scores on a problem leaderboard are _averages_ of the scores across all seeds for the problem.&amp;quot;</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 22:30:16">ТОже Clarification.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 22:32:31">пригодится</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 22:32:47">swizard: тогда допишу тебе функции и тогда потулю</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:33:55">да забей, не надо надрываться</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:34:4">дома в спокойной обстановке допишешь</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 22:38:4">та ладн, мне без разницы час туда, час сюда) жена - святая женщина, благословила меня на победу)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:38:28">ну окей тогда =)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 22:38:45">а как в лиспе писать -x ? (- 0 x) или есть сахарок?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:38:57">(- x) </msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 22:39:9">просто добавь скобочек =)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 22:39:19">хм</msg>
 </kopete-history>
