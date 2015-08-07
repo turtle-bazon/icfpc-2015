@@ -41,7 +41,10 @@
                             ;; Transform coordinates
                             (collect (funcall transform cell)))))
 
-
+(defun unit-rotate (unit direction)
+  (ecase direction
+    (:rcw (unit-rotate* unit #'unit-rotate-clockwise-op))
+    (:rcc (unit-rotate* unit #'unit-rotate-counter-clockwise-op))))
 
 ;; (defmethod unit-move ((map hextris-map) (unit unit) (direction (eql :w)))
 ;;   )
@@ -54,20 +57,6 @@
 
 ;; (defmethod unit-move ((map hextris-map) (unit unit) (direction (eql :se)))
 ;;   )
-
-;; (defmethod unit-rotate ((map hextris-map) (unit unit) (direction (eql :rcw)))
-;;   (bind ((rotated-unit (unit-rotate* unit #'unit-rotate-clockwise-op)))
-;;     (iter (for cell in (members rotated-unit))
-;;           (unless (map-cell-free-p map cell)
-;;             (return nil))
-;;           (finally (return cell)))))
-
-;; (defmethod unit-rotate ((map hextris-map) (unit unit) (direction (eql :rcc)))
-;;   (bind ((rotated-unit (unit-rotate* unit #'unit-rotate-counter-clockwise-op)))
-;;     (iter (for cell in (members rotated-unit))
-;;           (unless (map-cell-free-p map cell)
-;;             (return nil))
-;;           (finally (return cell)))))
 
 (defmethod unit-lock ((obj unit) (coord cell) (field hextris-map))
   (let ((translated-unit (place-on-map obj coord field))
