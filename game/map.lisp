@@ -84,7 +84,7 @@
    (field :initarg :field :accessor field)))
 
 (defmethod initialize-instance :after ((obj hextris-map) &key width height &allow-other-keys)
-  (setf (field obj) (make-array (* width height) :element-type 'bit))
+  (setf (field obj) (make-array (* width height) :element-type 'bit))g
   nil)
 
 (defmethod clone-map-with ((original-map hextris-map) field-modify-fn)
@@ -103,9 +103,12 @@
                 nil))
     new-field))
 
+(defmethod map-cell-free-p ((obj hextris-map) (c cell))
+  (not (zerop (elt (field obj) (+ (* (cell-row c) (height obj)) (cell-col c))))))
+
 (defmethod map-cell ((obj hextris-map) (c cell))
   (when (and (>= (cell-row c) 0) (< (cell-row c) (height obj)) (>= (cell-col c) 0) (< (cell-col c) (width obj)))
-    (values c (not (zerop (elt (field obj) (+ (* (cell-row c) (height obj)) (cell-col c))))))))
+    (values c (map-cell-free-p obj c))))
 
 (defmethod (setf map-cell) (value (obj hextris-map) (c cell))
   (setf (elt (field obj) (+ (* (cell-row c) (height obj)) (cell-col c)))
