@@ -26,7 +26,7 @@
                    :pivot (pivot unit)
                    :members cells)))
 
-(defun rotate-clockwise (cell)
+(defun unit-rotate-clockwise-op (cell)
   (bind ((x (cell-cube-x cell))
          (y (cell-cube-y cell))
          (z (cell-cube-z cell)))
@@ -34,7 +34,7 @@
           (cell-cube-y cell) (- x)
           (cell-cube-z cell) (- y))))
 
-(defun rotate-counter-clockwise (cell)
+(defun unit-rotate-counter-clockwise-op (cell)
   (bind ((x (cell-cube-x cell))
          (y (cell-cube-y cell))
          (z (cell-cube-z cell)))
@@ -55,14 +55,14 @@
   )
 
 (defmethod unit-rotate ((map hextris-map) (unit unit) (direction (eql :rcw)))
-  (bind ((rotated-unit (unit-rotate* unit #'rotate-clockwise)))
+  (bind ((rotated-unit (unit-rotate* unit #'unit-rotate-clockwise-op)))
     (iter (for cell in (members rotated-unit))
           (unless (map-cell-free-p map cell)
             (return nil))
           (finally (return cell)))))
 
 (defmethod unit-rotate ((map hextris-map) (unit unit) (direction (eql :rcc)))
-  (bind ((rotated-unit (unit-rotate* unit #'rotate-counter-clockwise)))
+  (bind ((rotated-unit (unit-rotate* unit #'unit-rotate-counter-clockwise-op)))
     (iter (for cell in (members rotated-unit))
           (unless (map-cell-free-p map cell)
             (return nil))
