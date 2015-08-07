@@ -17,36 +17,35 @@
           (+ (cell-cube-x cell)
              (truncate (- (cell-cube-z cell) (mod (cell-cube-z cell) 2)) 2))))
 
-;;;; TODO: fix tests later
 
-;; (deftestsuite cell-tests () ())
+(deftestsuite cell-tests () ())
 
-;; (defrandom-instance a-coord nil (- (random 200) 100))
+(defrandom-instance a-coord nil (- (random 200) 100))
 
-;; (addtest (cell-tests)
-;;   cell-cube-identity
+(addtest (cell-tests)
+  cell-cube-identity
 
-;;   (ensure-random-cases 100 ((row a-coord) (col a-coord))
-;;     (bind ((cell (make-cell :row row :col col))
-;;            (row* (cell-row cell))
-;;            (col* (cell-col cell)))
-;;       (cell-update-cube cell)
-;;       (cell-update-offset cell)
-;;       (ensure-same row (cell-row cell))
-;;       (ensure-same col (cell-col cell))))
+  (ensure-random-cases 100 ((row a-coord) (col a-coord))
+    (bind ((cell (make-cell-row-col row col))
+           ((:values row* col*) (cell-row-col cell)))
+      (ensure-same row row*)
+      (ensure-same col col*)))
 
-;;   (ensure-random-cases 100 ((x a-coord) (y a-coord) (z a-coord))
-;;     (bind ((cell (make-cell :cube-x x :cube-y y :cube-z z))
-;;            (x* (cell-cube-x cell))
-;;            (y* (cell-cube-y cell))
-;;            (z* (cell-cube-z cell)))
+  ;; TODO: Decide does we need this part at all?
 
-;;       (cell-update-offset cell)
-;;       (cell-update-cube cell)
-;;       (ensure-same x* (cell-cube-x cell))
-;;       ;; This is not required to be same (as i understood)
-;;       ;; (ensure-same y* (cell-cube-y cell))
-;;       (ensure-same z* (cell-cube-z cell)))))
+  ;; (ensure-random-cases 100 ((x a-coord) (y a-coord) (z a-coord))
+  ;;   (bind ((cell (make-cell :cube-x x :cube-y y :cube-z z))
+  ;;          (x* (cell-cube-x cell))
+  ;;          (y* (cell-cube-y cell))
+  ;;          (z* (cell-cube-z cell)))
+
+  ;;     (cell-update-offset cell)
+  ;;     (cell-update-cube cell)
+  ;;     (ensure-same x* (cell-cube-x cell))
+  ;;     ;; This is not required to be same (as i understood)
+  ;;     ;; (ensure-same y* (cell-cube-y cell))
+  ;;     (ensure-same z* (cell-cube-z cell))))
+  )
 
 (defun cell< (cell-a cell-b)
   (or (< (cell-cube-x cell-a) (cell-cube-x cell-b))
