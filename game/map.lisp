@@ -5,6 +5,15 @@
   (row 0 :type fixnum)
   (col 0 :type fixnum))
 
+(defun cell< (cell-a cell-b)
+  (or (< (cell-row cell-a) (cell-row cell-b))
+      (and (= (cell-row cell-a) (cell-row cell-b))
+           (< (cell-col cell-a) (cell-col cell-b)))))
+
+(defun cell= (cell-a cell-b)
+  (and (= (cell-row cell-a) (cell-row cell-b))
+       (= (cell-col cell-a) (cell-col cell-b))))
+
 (defclass hextris-map ()
   ((width :initarg :width :reader width)
    (height :initarg :height :reader height)
