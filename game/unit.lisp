@@ -12,7 +12,7 @@
                                          :cube-y (+ (cell-cube-y c) (cell-cube-y coord))
                                          :cube-z (+ (cell-cube-z c) (cell-cube-z coord))))
                             (members obj))))
-    (when (every (lambda (c) (multiple-value-bind (cell filled-p) (map-cell field c) (declare (ignore cell)) (not filled-p)))
+    (when (every (lambda (c) (multiple-value-bind (cell filled-p) (map-cell field c) (and cell (not filled-p))))
                  translated)
       (make-instance 'unit :members translated))))
 
