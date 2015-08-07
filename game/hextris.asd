@@ -12,6 +12,7 @@
   :depends-on (:iterate :metatilities :cl-json)
   :components ((:file "package")
                (:file "map" :depends-on ("package"))
-               (:file "game" :depends-on ("map"))
+               (:file "unit" :depends-on ("map"))
+               (:file "game" :depends-on ("unit"))
                (:file "parser" :depends-on ("game"))))
 
