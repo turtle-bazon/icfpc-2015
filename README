@@ -1,0 +1,5 @@
+For building sbcl need to be installed. On ubuntu systems you can do it using 'apt-get install sbcl'.
+After that building simple executing make in submission directory. After that should appear icfpc-2015.tar.gz archive.
+
+All questions related to building binary can be addressed to Azamat S. Kalimoulline <turtle@bazon.ru>, JID: turtle@bazon.ru, Skype: turtle_bazon
+
