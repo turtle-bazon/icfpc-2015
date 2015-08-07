@@ -315,4 +315,150 @@
  <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 14:46:36">да, и логи конфы тоже круто было бы периодически коммитить</msg>
  <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 14:47:17">У кого логи нормально ведутся?</msg>
  <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 14:47:27">Хотя, ладно, что-нибудь придумаю.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 14:51:54">а у тебя на серваке не ведуццо?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 14:52:10">Не помню, чтобы настраивал. :)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 14:52:13">настрой?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 14:52:18">ну или могу сделать долдона-ботика, который будет логать и коммитить </msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 14:52:20">Времени уже нет.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 14:52:27">Буду с этого компа сливать логи.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 14:52:31">Уже закоммитил что-то.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:1:17">Началось. :)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 15:3:36">понеслась!</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 15:4:19">о, в этом году будет борда!</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:5:56">Да, круто.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:6:20">Какой-то фильм же был, или будет, где к скайпу кто-то соединяется. Напомнило. :)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:7:30">Какие емейлы у нас?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 15:7:51">sectoid@gnolltech.org</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 15:8:9">psujkov@gmail.com &amp;lt;-- это jtootf, он скоро подтяниццо</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:16:26">&amp;quot;We intend to use this year's ICFP programming contest to find new operatives.&amp;quot;</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:16:28">Хохмари.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:18:4">&amp;quot;many ancient cultures had advanced computational capabilities, but something happened each time computer science was invented.&amp;quot;</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:18:10">Типа, глобальная катастрофа.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:18:18">Связанная с компами.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:20:51">Гугль зло, я правильно понял? :)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:25:30">&amp;quot;Russian computer scientists in the 1960s discovered a way to visually encode spells.&amp;quot;</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:25:39">И тут без Russian не обошлось. )</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:26:22">Хм. А кто у нас в 60-х что-то фигачил? Тем более, визуалли?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:30:39">В общем, пока понял, что какой-то тетрис. Гексагональный.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:31:27">&amp;quot;The purpose of the competition is to write a program that can play a game.&amp;quot;</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:31:34">Дальше правила надо читать. :)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:33:11">В общем, нужно написать как играть.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:33:18">И как я понял, несколько конфигураций стаканов.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:33:33">Думаю, нужно будет ещё и эмулятор этого тетриса написать. В общем, пока читаю.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 15:35:44">я еще читаю)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:37:57">Я тоже читаю. :)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:39:27">Короче, тетрис.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:43:33">Исходники в json - это ширина и высотя пчелиных сот и фид фигурок.</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 15:48:7">охаё</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 15:48:15">о, вот и пауль =)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:49:7">&amp;quot;The shortest phrase of power is the three character phrase &amp;quot;Ei!&amp;quot;. The longest phrase of power is of length fifty-one. The phrases of power can be found in contest artifacts, tweets, and background literature and media.&amp;quot;</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:49:9">Биля.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:49:10">Привет.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:49:23">Надо ещё где-то что-то читать и вычитывать.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:54:27">Блин, там ещё и ГСЧ свой. :)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:55:40">Что-то так и не понял как данные из фида вытаскиваются.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 15:56:54">turtle: АПИ для сабмита у каждого мембера свой. у меня команда подхватилась нормально</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:57:16">Не понял.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:58:7">Там ещё орги будут выставлять таймлими и меморилимит.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 15:58:13">sectoid: я не понял про что ты.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 16:2:59">turtle: я к закоммиченому API</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 16:3:16">sectoid: апи ключу?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 16:11:28">У тебя получилось солюшен запостить?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 16:23:13">хело</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 16:23:22">Привет.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 16:23:29">Садись, наливай чай. :)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 16:23:32">чё там вкрадце — совсем ад, или терпимо? :)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 16:24:13">чёто срочно надо уже делать, или я пока могу спокойно правила почитать? :)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 16:25:51">В общем, хекстрис.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 16:25:54">Непонятно ад или нет. :)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 16:26:0">Правила почитай.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 16:26:9">Я там вникнуть не могу когда ошибкой игра заканчивается.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 16:26:25">Тетрис на шестигранниках.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 16:30:36">ОХренеть, народ уже д еплоит решения. 6)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 16:34:23">Я тоже попробовал, но что-то результат не очень. :)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 16:47:24">я в корень положил файлик plan, который предлагается заполнять по мере чтения задания</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 16:47:39">по-идее, это должно нам помочь распределить силы</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 16:48:45">ГСЧ, может, и не нужно будет.</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 16:49:0">ошибкой игра заканчивается в двух случаях: если ты двигаешь тайл на невозможное место (занятое или за доской) или если ты повторяешь позицию тайла на доске</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 16:49:0">По вики если смотреть, то ГСЧ в glibc по тем же параметрам работает.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 16:49:12">я пока только до него дочитал, в вику ещё не смотрел :)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 16:49:40">Просто мои сабмишены ошибкой заканчиваются почему-то.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 16:49:46">тогда надо проверить, что стандартный гсч делает так же: «For example, here are the first 10 outputs for the sequence starting with seed 17: 0,24107,16552,12125,9427,13152,21440,3383,6873,16117.»</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 16:49:50">ага</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 16:49:54">Да, сейчас проверяю.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 16:50:7">Но если двигаешь на занятый, то тебя залочить же должно?</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 16:51:55">походу да</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 16:51:57">если пытаешься двинуть на недопустимую ячейку</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 16:52:12">тогда ошибка только по повторению позиции и по некорректному символу в строке</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 16:52:22">да</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 16:52:40">А в лиспе рандом стейт сидом нельзя что ли инициализировать?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 16:52:44">ад дичайший на самом-то деле. и будут аддоны</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 16:53:52">600313 - Unagi (Tetris Master Nyaruko)&lt;br />&lt;br />о бля&lt;br /></msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 16:54:0">ебануться. одна команда уже получила 600000 очков</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 16:54:3">ага</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 16:54:10">Да.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 16:54:33">может, они нашли где-то длинные слова власти?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 16:55:5">кстати</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 16:55:40">на лайтнинг они не учитываются. думаю у них просто есть тетрисодвижок, который они подкрутили к задаче</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 16:55:56">sectoid@nyarly:~$ echo -ne &amp;quot;Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn!&amp;quot; | wc -m&lt;br />51&lt;br /></msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 16:56:16">:D</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 16:56:18">шикарно</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 16:56:27">самая длинная фраза силы у нас есть</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 16:56:45">туда же пойдут всякие теккели-ли и иже с ними</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 16:56:47">осталось её собрать и проверить :)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 16:57:18">учитывая, что на лайтнинге нет фраз силы - предлагаю пока на них забить</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 16:57:46">вот только мне пока что кажется, что эффективно играть в тетрис без фраз силы куда как проще</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 16:57:52">за них не так много очков дают</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 16:58:0">Откуда ты эту фразу взял?</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 16:58:6">это из Лавкрафта</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 16:58:10">Ааа.</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 16:58:13">как и почти все отсылки в тексте</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 16:58:20">Ну это да.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 16:58:37">Как нашёл? Просто из популярного? Мимо меня это всё пронеслось. :)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 16:59:10">это из &amp;quot;Зова Ктулху&amp;quot;, заклятие его призыва. Собсно да, весьма популярное</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 17:2:21">да, это самая популярная фраза оттуда</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 17:2:35">там их вообще дофига, типа Iä! Shub-Niggurath! The Black Goat of the Woods with a Thousand Young!</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 17:2:37">вот еще немного ада: http://screen.ru/vadvad/Nekronom/nnmagic.htm</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="7 17:2:52">ааааааааа</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 17:3:14">ладно, все, я пока отложил оккультизм</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 17:3:49">весь смысл контеста исключительно в том, чтобы как можно больше народу начало одновременно призывать ктулху</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 17:3:57">чтобы гарантированно его пробудить</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 17:4:0">наоборот )</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 17:4:2">но идея хороша)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="7 17:4:32">отойду позавтракаю и врываюсь</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 17:6:3">какой план — будем топить к лайтнингу?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 17:6:40">Будем.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 17:11:58">а в текущем нашем сабмишне там щас что — только output в json, без бинаря и исходников?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 17:12:12">Да.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 17:12:16">Вручную писанный. :)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 17:14:37">Что-то ни фига не получается такой же список рандомов.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 17:14:44">Может, конечно, я что-то не то делаю.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 17:15:23">в кл может быть свой личный гсч</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 17:15:43">В кл как сид инициализирвоать?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 17:16:11">http://www.paste.org/79756</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 17:16:16">Я вот так на плусах делал.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 17:16:26">Хотя, сразу скажу, я в плусах не мастер. :)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 17:18:46">ну как-то так, судя по хелпу: (sb-ext:seed-random-state 17)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 17:20:39">только я не очень понимаю как этим воспользоваться, потому что в random нужно число передавать</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 17:21:0">ну ладно</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 17:21:8">(random 1.0 (sb-ext:seed-random-state 17))</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 17:21:12">Вот так, например.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 17:21:18">Не сходится.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 17:21:31">а с чего бы ему сходиться</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 17:21:40">ты же флоат даёшь</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 17:21:51">ну да ладно, давайте тогда посмотрим план</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 17:22:7">Так у них же флоаты же в примере.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 17:22:18">точнее вы посмотрите и напишите свои соображения</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 17:22:23">the first 10 outputs for the sequence starting with seed 17: 0,24107,16552,12125,9427,13152,21440,3383,6873,16117.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 17:22:26">Блин, нет. :)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 17:22:39">а я пока пойду кофе налью и кота покормлю</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 17:29:17">короче гсч похоже системный не подходит</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 17:29:31">(sb-alien:alien-funcall (sb-alien:extern-alien &amp;quot;srand&amp;quot; (sb-alien:function sb-alien:void sb-alien:unsigned-int)) 17)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 17:29:36">(sb-alien:alien-funcall (sb-alien:extern-alien &amp;quot;rand&amp;quot; (sb-alien:function sb-alien:int)))</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="7 17:29:51">результат 285719 на моей машине, а не 0</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 17:30:6">Да там никакой ГСЧ 0 не даёт.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 17:30:18">Вроде по алгоритму сделанное, первый раз даёт 24107.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 17:31:14">&lt;br />(defun make-rng (&amp;amp;key (seed 0))&lt;br />  #'(lambda () (ash (setf seed (mod (+ (* seed 1103515245) 12345) (expt 2 31))) -16)))&lt;br />&lt;br />(let ((rng (make-rng :seed 17))) (list (funcall rng) (funcall rng) (funcall rng) (funcall rng)))</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 17:31:20">Во, совпадает всё, к роме 0.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="7 17:31:45">Может, это отложенный? Типа, сначала 0, потом то, что посчиталось?</msg>
 </kopete-history>
