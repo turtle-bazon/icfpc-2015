@@ -16,5 +16,6 @@
                (:file "remote" :depends-on ("package"))
                (:file "unit" :depends-on ("map"))
                (:file "game" :depends-on ("unit"))
-               (:file "parser" :depends-on ("game"))))
+               (:file "parser" :depends-on ("game"))
+               (:file "a-star" :depends-on ("game"))))
 
