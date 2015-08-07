@@ -64,3 +64,15 @@
     (iter (for cell in (members translated-unit))
           (setf (map-cell field-copy cell) t))
     field-copy))
+
+(defmethod debug-draw ((obj unit) (coord cell) (field hextris-map))
+  (iter (with translated-unit = (place-on-map obj coord field))
+        (for row from 0 below (height field))
+        (when (oddp row)
+          (format t " "))
+        (iter (for col from 0 below (width field))
+              (multiple-value-bind (cell filled-p) (map-cell field (make-cell-row-col row col))
+                (format t "~a " (if (find cell (members translated-unit) :test #'cell=)
+                                    "o"
+                                    (if filled-p "x" ".")))))
+        (format t "~%")))
