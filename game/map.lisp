@@ -47,6 +47,70 @@
   ;;     (ensure-same z* (cell-cube-z cell))))
   )
 
+
+(defun cell-move* (cell direction &optional (step 1))
+  "Move cell destructively in direction (:e, :w, :se, :sw, :ne, :nw) by step cells"
+  (when (member direction '(:w :se :sw))
+    (setf step (- step)))
+  (ecase direction
+    ;; east/west(+/-N): (x, y, z) -> (x + N, y - N, z)
+    ((:e :w)
+     (incf (cell-cube-x cell) step)
+     (decf (cell-cube-y cell) step))
+
+    ;; north-west/south-east(+/-N): (x, y, z) -> (x, y + N, z - N)
+    ((:nw :se)
+     (incf (cell-cube-y cell) step)
+     (decf (cell-cube-z cell) step))
+
+    ;; north-east/south-west(+/-N): (x, y, z) -> (x + N, y, z - N)
+    ((:ne :sw)
+     (incf (cell-cube-x cell) step)
+     (decf (cell-cube-z cell) step)))
+  cell)
+
+(defun cell-move (cell direction &optional (step 1))
+  "Non-destructive version of cell-move*"
+  (cell-move* (copy-cell cell) direction step))
+
+(defrandom-instance a-coord-step-positive nil (random 100))
+
+(addtest (cell-tests)
+  cell-cube-move
+
+  (bind ((step 1)
+         (cell (make-cell :cube-x 0 :cube-y 0 :cube-z 0))
+         (e-cell (cell-move cell :e step))
+         (w-cell (cell-move cell :w step))
+         (nw-cell (cell-move cell :nw step))
+         (se-cell (cell-move cell :se step))
+         (ne-cell (cell-move cell :ne step))
+         (sw-cell (cell-move cell :sw step)))
+
+    (ensure-same (cell-cube-x e-cell) 1)
+    (ensure-same (cell-cube-y e-cell) -1)
+    (ensure-same (cell-cube-z e-cell) 0)
+
+    (ensure-same (cell-cube-x w-cell) -1)
+    (ensure-same (cell-cube-y w-cell) 1)
+    (ensure-same (cell-cube-z w-cell) 0)
+
+    (ensure-same (cell-cube-x nw-cell) 0)
+    (ensure-same (cell-cube-y nw-cell) 1)
+    (ensure-same (cell-cube-z nw-cell) -1)
+
+    (ensure-same (cell-cube-x se-cell) 0)
+    (ensure-same (cell-cube-y se-cell) -1)
+    (ensure-same (cell-cube-z se-cell) 1)
+
+    (ensure-same (cell-cube-x ne-cell) 1)
+    (ensure-same (cell-cube-y ne-cell) 0)
+    (ensure-same (cell-cube-z ne-cell) -1)
+
+    (ensure-same (cell-cube-x sw-cell) -1)
+    (ensure-same (cell-cube-y sw-cell) 0)
+    (ensure-same (cell-cube-z sw-cell) 1)))
+
 (defun cell< (cell-a cell-b)
   (or (< (cell-cube-x cell-a) (cell-cube-x cell-b))
       (and (= (cell-cube-x cell-a) (cell-cube-x cell-b))
