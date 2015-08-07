@@ -6,6 +6,16 @@
 (defclass unit ()
   ((members :initarg :members :accessor members)))
 
+(defmethod place-on-map ((obj unit) (coord cell) (field hextris-map))
+  (let ((translated (mapcar (lambda (c)
+                              (make-cell :cube-x (+ (cell-cube-x c) (cell-cube-x coord))
+                                         :cube-y (+ (cell-cube-y c) (cell-cube-y coord))
+                                         :cube-z (+ (cell-cube-z c) (cell-cube-z coord))))
+                            (members obj))))
+    (when (every (lambda (c) (multiple-value-bind (cell filled-p) (map-cell field c) (declare (ignore cell)) (not filled-p)))
+                 translated)
+      (make-instance 'unit :members translated))))
+
 ;;;; TODO: to be fixed
 
 ;; (defun unit-rotate* (unit transform)
