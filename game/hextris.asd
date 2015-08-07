@@ -11,6 +11,7 @@
   :author "skobochka"
   :depends-on (:iterate :metatilities :cl-json)
   :components ((:file "package")
+               (:file "power-phrases" :depends-on ("package"))
                (:file "map" :depends-on ("package"))
                (:file "unit" :depends-on ("map"))
                (:file "game" :depends-on ("unit"))
