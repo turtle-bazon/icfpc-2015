@@ -34,7 +34,7 @@
                                                                   :coord (make-cell :row row :col col)))
                          (repeat 6) ;;; rotate six times
                          (for translated-members = (translate-members installed-unit field))
-                         (when translate-members
+                         (when translated-members
                            (in outer-loop
                                (finding installed-unit minimizing (count-holes (unit-lock (unit-on-map-unit installed-unit) field)
                                                                                (1- (height field))))))
