@@ -1,3 +1,7 @@
+https://davar.icfpcontest.org/#/login
+
+
+
 Submit solutions to: https://davar.icfpcontest.org/teams/16/solutions
 Your API token is: M72G+E7hDY2E9yoKXtsalHDF7lQTFwJY7oX/NunZzBg=
 
