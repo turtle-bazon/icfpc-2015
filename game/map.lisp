@@ -24,6 +24,7 @@
   (map-cell obj c))
 
 (defparameter *moves* '(:nw :ne :e :se :sw :w))
+(defparameter *rotations* '(:rcw :rcc))
 
 (defmethod neighbour ((move (eql :nw)) (obj hextris-map) (c cell))
   (map-cell obj (make-cell :row (1- (cell-row c)) :col (if (evenp (cell-row c)) (1- (cell-col c)) (cell-col c)))))
