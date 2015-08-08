@@ -123,6 +123,21 @@
                :cube-z (- (cell-cube-z top-left-global-cell)
                           (cell-cube-z top-left-local-cell)))))
 
+(defmethod unit-initial-position-v2 ((obj unit) (field hextris-map))
+  (multiple-value-bind (top-most left-most right-most)
+      (iter (for cell in (members obj))
+            (for (values row col) = (cell-row-col cell))
+            (minimizing row into top-most)
+            (minimizing col into left-most)
+            (maximizing col into right-most)
+            (finally (return (values top-most left-most right-most))))
+    (let* ((unit-width (- (1+ right-most) left-most))
+           (result-col (- (truncate (- (width field) unit-width) 2) left-most))
+           (result-row (- 0 top-most))
+           (result-cell (make-cell-row-col result-row result-col)))
+      (when (place-on-map obj result-cell field)
+        result-cell))))
+
 (defmethod unit-position-possible-p ((obj unit) (position cell) (field hextris-map))
   (iter
     (for base-cell in (members obj))
