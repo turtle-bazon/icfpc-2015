@@ -1,5 +1,11 @@
 package require Tcl 8.5
 package require Tk
+package require json
+
+proc every {ms body} {
+    if 1 $body
+    after $ms [list after idle [info level 0]]
+}
 
 proc honeycomb {w letterpattern} {
     set basey 10
@@ -16,7 +22,7 @@ proc honeycomb {w letterpattern} {
 	incr basey 100
     }
 
-    bind $w <space> { global t; .c delete "all"; incr t; honeycomb .c $letterpattern }
+    $w scale "all" 0 0 0.5 0.5
 
     return $w
 }
@@ -61,13 +67,36 @@ proc leavehex {w ch} {
 }
 
 # Initial declarations of state variables
-set locked { 7.0 7.3 7.4 7.8 6.8 6.7 }
+set locked {}
 set tile { {0.3 0.5 1.4} {1.3 1.5 2.4} {2.3 2.5 3.4} {3.3 3.5 3.4} {3.4 3.6 3.5} {4.4 4.6 5.5} }
 set t 0
 
-set gh 8
-set gw 10
 set letterpattern {}
+
+proc setup {fd} {
+    global gh
+    global gw
+    global locked
+
+    set fp [open $fd r]
+    set file_data [read $fp]
+
+    set parsed [json::json2dict $file_data]
+
+    set gh [dict get $parsed "height"]
+    set gw [dict get $parsed "width"]
+    set locked_ [dict get $parsed "filled"]
+
+    puts [concat "height: " $gh]
+    puts [concat "width: " $gw]
+
+    foreach tile $locked_ {
+	puts [concat "filled: " $tile]
+	lappend locked "[lindex $tile 1].[lindex $tile 3]"
+    }
+
+    close $fp
+}
 
 proc init {width height} {
     global letterpattern
@@ -80,12 +109,24 @@ proc init {width height} {
     lappend letterpattern $row
     }
 }
- 
+
+proc move {} {
+    global t
+    global letterpattern
+
+    .c delete "all"
+    incr t
+    honeycomb .c $letterpattern
+}
+
 # Build the GUI
+setup [lindex $argv 0]
 init $gw $gh
 canvas .c
 pack [honeycomb .c $letterpattern] -fill both -expand true
 focus .c
+bind .c <space> "every 500 move"
+
 # Usually don't use this, but it's ideal for this interaction pattern
 tkwait window .c
 exit
