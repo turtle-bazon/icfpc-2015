@@ -3,12 +3,7 @@
 (defvar *remote-api-uri* "https://davar.icfpcontest.org/teams/16/solutions")
 (defvar *remote-api-key* "M72G+E7hDY2E9yoKXtsalHDF7lQTFwJY7oX/NunZzBg=")
 
-(defparameter *char-mapping* (list :w "p'!.03"
-                                   :e "bcefy2"
-                                   :sw "aghij4"
-                                   :se "lmno 5"
-                                   :rcw "dqrvz1"
-                                   :rcc "kstuwx"))
+
 
 (defun remote-submit-raw (task-id seed command &optional tag)
   (bind ((message `(:problem-id ,task-id :seed ,seed
