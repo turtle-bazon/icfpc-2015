@@ -8,19 +8,22 @@
   (coord nil :type (or null cell)))
 
 (defun position->vec (pos)
-  (sort (cons (unit-on-map-coord pos) (copy-seq (members (unit-on-map-unit pos)))) #'cell<))
+  (sort (copy-seq (members (unit-on-map-unit pos))) #'cell<))
 
 ;;; TODO: find out optimization (without sort)
-(defun positions= (pos-a pos-b) 
-  (every #'cell= (position->vec pos-a) (position->vec pos-b)))
+(defun positions= (pos-a pos-b)
+  (and (cell= (unit-on-map-coord pos-a) (unit-on-map-coord pos-b))
+       (every #'cell= (position->vec pos-a) (position->vec pos-b))))
 
 ;;; TODO: find out optimization (without sort)
 (defun positions< (pos-a pos-b)
-  (iter (for cell-a in (position->vec pos-a))
-        (for cell-b in (position->vec pos-b))
-        (cond ((cell< cell-a cell-b) (return-from positions< t))
-              ((cell= cell-a cell-b) (next-iteration))
-              (t (return-from positions< nil)))))
+  (or (cell< (unit-on-map-coord pos-a) (unit-on-map-coord pos-b))
+      (and (cell= (unit-on-map-coord pos-a) (unit-on-map-coord pos-b))
+           (iter (for cell-a in (position->vec pos-a))
+                 (for cell-b in (position->vec pos-b))
+                 (cond ((cell< cell-a cell-b) (return-from positions< t))
+                       ((cell= cell-a cell-b) (next-iteration))
+                       (t (return-from positions< nil)))))))
 
 ;;; TODO: implement actual movement
 (defmethod move-unit (move (obj unit-on-map) (field hextris-map))
