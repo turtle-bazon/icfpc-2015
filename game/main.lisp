@@ -19,5 +19,5 @@
   (destructuring-bind (files time-limit memory-limit phrases)
       (parse-args (rest args))
     (let ((solutions (iter (for fname in files)
-                           ) (collect nil)))
-      )))
+                           (collect (parse-input-json fname)))))
+      (format t "~a~&" solutions))))
