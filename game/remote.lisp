@@ -15,3 +15,6 @@
                   :basic-authorization `("" ,*remote-api-key*)
                   :content-type "application/json"
                   :content message-json)))
+
+(defun remote-submit (task-id seed command-adt &optional tag)
+  (remote-submit-raw task-id seed (power-phrase-encode-adt command-adt) tag))
