@@ -7,6 +7,13 @@
   (unit nil :type (or null unit))
   (coord nil :type (or null cell)))
 
+(defun cell->list (cell)
+  (list (cell-cube-x cell) (cell-cube-y cell) (cell-cube-z cell)))
+
+(defun position->points-list (pos)
+  (cons (cell->list (unit-on-map-coord pos))
+        (mapcar #'cell->list (position->vec pos))))
+
 (defun position->vec (pos)
   (sort (copy-seq (members (unit-on-map-unit pos))) #'cell<))
 
@@ -49,18 +56,19 @@
 (defmethod run-a-star ((field hextris-map) (start-pos unit-on-map) (end-pos unit-on-map))
   (declare (optimize (debug 3)))
   (let ((queue (make-instance 'basic-queue))
-        (visited (make-instance 'binary-search-tree :sorter #'positions< :test #'positions=)))
+        (visited (make-hash-table :test 'equal)))
     (enqueue queue (list start-pos '()))
-    (insert-item visited start-pos)
+    (setf (gethash (position->points-list start-pos) visited) t)
     (iter (until (empty-p queue))
           (for (current-pos commands) = (dequeue queue))
           (when (positions= current-pos end-pos)
             (return-from run-a-star (values t (reverse commands))))
           (for transitions = (remove-if-not #'identity (mapcar (lambda (move) (move-unit move current-pos field)) *a-star-moves*)))
           (iter (for (move . next-pos) in (sort transitions (position-better-p end-pos) :key #'cdr))
-                (unless (find-item visited next-pos)
+                (for hash-key = (position->points-list next-pos))
+                (unless (gethash hash-key visited)
                   (when (place-on-map (unit-on-map-unit next-pos) (unit-on-map-coord next-pos) field)
                     (enqueue queue (list next-pos (cons move (copy-seq commands))))
-                    (insert-item visited next-pos)))))))
+                    (setf (gethash hash-key visited) t)))))))
           
           
