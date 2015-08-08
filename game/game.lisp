@@ -8,3 +8,27 @@
    (units :initarg :units :reader units)
    (seeds :initarg :seeds :reader seeds)))
 
+(defmethod game-loop ((world game))
+  (declare (optimize (debug 3)))
+  (iter (for seed in (seeds world)) ;; play one game for each seed given
+        (for rng = (make-rng seed))
+        (for game-script =
+             (iter (with current-map = (game-map world))
+                   (repeat (source-length world)) ;; spawn as many units as given in source-length
+                   (for next-unit = (make-next-unit world rng))
+                   (for init-position = (unit-initial-position next-unit current-map))
+                   (multiple-value-bind (final-position moves-script)
+                       (locate-target current-map (make-unit-on-map :unit next-unit :coord init-position))
+                     (unless final-position ;; probably this is a stop condition?
+                       (terminate))
+                     (setf current-map
+                           (unit-lock (unit-on-map-unit final-position)
+                                      (unit-on-map-coord final-position)
+                                      current-map))
+                     (appending moves-script))))
+        (collecting (list :seed seed :script game-script))))
+              
+(defun make-next-unit (game rng)
+  (bind ((next-number (funcall rng))
+         (next-unit-number (mod next-number (length (units game)))))
+    (nth next-unit-number (units game))))
