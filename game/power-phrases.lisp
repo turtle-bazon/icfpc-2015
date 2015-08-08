@@ -7,10 +7,10 @@
     "Yuggoth"
     "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn!"))
 
-(defparameter *char-mapping* '((:w . "p'!.03")
-                               (:e . "bcefy2")
-                               (:sw . "aghij4")
-                               (:se . "lmno 5")
+(defparameter *char-mapping* '((:w .   "p'!.03")
+                               (:e .   "bcefy2")
+                               (:sw .  "aghij4")
+                               (:se .  "lmno 5")
                                (:rcw . "dqrvz1")
                                (:rcc . "kstuwx")))
 
