@@ -47,9 +47,10 @@
                                                (:seed . ,seed)
                                                (:solution . ,(power-phrase-encode-adt script))))))))
       (if publish
-          (http-request *publish-api-uri*
-                        :method :post
-                        :basic-authorization `("" ,*publish-api-key*)
-                        :content-type "application/json"
-                        :content result-string)
+          (format t "~a~&"
+                  (http-request *publish-api-uri*
+                                :method :post
+                                :basic-authorization `("" ,*publish-api-key*)
+                                :content-type "application/json"
+                                :content result-string))
           (format t "~a~&" result-string)))))
