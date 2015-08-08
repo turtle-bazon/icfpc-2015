@@ -25,7 +25,8 @@
                            (unit-lock (unit-on-map-unit final-position)
                                       (unit-on-map-coord final-position)
                                       current-map))
-                     (appending moves-script))))
+                     (for moves-script+freeze = (append moves-script (list :sw)))
+                     (appending moves-script+freeze))))
         (collecting (list :seed seed :script game-script))))
               
 (defun make-next-unit (game rng)
