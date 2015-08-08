@@ -71,25 +71,40 @@
   (let ((level-1-key (position-sxhash pos)))
     (values (gethash level-1-key (level-1 cache)) level-1-key)))
 
+(defstruct a*-st
+  pos
+  script
+  pws)
+
+(defmethod transition-better-p (end-pos)
+  (lambda (trans-a trans-b)
+    (funcall (position-better-p end-pos)
+             (a*-st-pos trans-a)
+             (a*-st-pos trans-b))))
+
 (defmethod run-a-star ((field hextris-map) (start-pos unit-on-map) (end-pos unit-on-map))
   (declare (optimize (debug 3)))
   (let ((queue (make-instance 'basic-queue))
         (visited (make-instance 'visited-cache)))
-    (enqueue queue (list start-pos '()))
+    (enqueue queue (make-a*-st :pos start-pos :script '() :pws '()))
     (mark-visited visited start-pos)
     (iter (until (empty-p queue))
-          (for (current-pos commands) = (dequeue queue))
-          (when (positions= current-pos end-pos)
-            (return-from run-a-star (values t (reverse commands))))
-          (for transitions = (remove-if-not #'identity
-                                            (mapcar (lambda (move) (cons move (move-unit move current-pos field)))
-                                                    *a-star-moves*)))
-          (iter (for (move . next-pos) in (sort transitions (position-better-p end-pos) :key #'cdr))
+          (for cur-state = (dequeue queue))
+          (when (positions= (a*-st-pos cur-state) end-pos)
+            (return-from run-a-star (values t (reverse (a*-st-script cur-state)))))
+          (for transitions = (iter (for move in *a-star-moves*)
+                                   (for moved-unit = (move-unit move (a*-st-pos cur-state) field))
+                                   (when moved-unit
+                                     (for trans = (make-a*-st :pos moved-unit
+                                                              :script (cons move (a*-st-script cur-state))
+                                                              :pws (a*-st-pws cur-state)))
+                                     (collect trans))))
+          (iter (for trans in (sort transitions (transition-better-p end-pos)))
                 (multiple-value-bind (visited-p level-1-key)
-                    (fast-check visited next-pos)
+                    (fast-check visited (a*-st-pos trans))
                   (unless visited-p
-                    (when (place-on-map (unit-on-map-unit next-pos) (unit-on-map-coord next-pos) field)
-                      (enqueue queue (list next-pos (cons move (copy-seq commands))))
-                      (mark-visited visited next-pos :level-1-key level-1-key))))))))
+                    (when (place-on-map (unit-on-map-unit (a*-st-pos trans)) (unit-on-map-coord (a*-st-pos trans)) field)
+                      (enqueue queue trans)
+                      (mark-visited visited (a*-st-pos trans) :level-1-key level-1-key))))))))
           
           
