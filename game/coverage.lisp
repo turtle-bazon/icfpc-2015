@@ -27,7 +27,7 @@
                          (for translated = (place-on-map (unit-on-map-unit installed-unit)
                                                          (unit-on-map-coord installed-unit)
                                                          field))
-                         (when translated
+                         (when (and translated (gen-freeze-move field installed-unit))
                            (for lowest-row = (iter (for m in (members (unit-on-map-unit installed-unit)))
                                                    (multiple-value-bind (row col) (cell-row-col m)
                                                      (declare (ignore col))
@@ -38,7 +38,7 @@
                                                                                 field)))
                            (collect (cons installed-unit total-free-cells)))
                          (setf installed-unit (move-unit :rcw installed-unit field))))
-              (iter (for (candidate-unit . free-cells) in (sort variants #'< :key #'cdr))
+              (iter (for (candidate-unit . free-cells) in (sort variants #'< :key #'cdr))                    
                     (multiple-value-bind (reachable-p move-script)
                         (run-a-star field initial-unit candidate-unit)
                       (when reachable-p

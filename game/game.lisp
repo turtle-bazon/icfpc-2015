@@ -27,14 +27,6 @@
                        (locate-target current-map init-position-on-map)
                      (unless final-position ;; probably this is a stop condition?
                        (terminate))
-
-                     ;; ;;; vizualize for the weaks
-                     ;;   (debug-draw (unit-on-map-unit final-position)
-                     ;;              (unit-on-map-coord final-position)
-                     ;;               current-map)
-                     ;;  (format t "~%")
-                      ;; (break)
-
                      ;;; record film
                      (for next-unit-frames =
                           (when record-film
@@ -55,7 +47,7 @@
 
                                   ;;; vizualize for the weaks
                                   (format t "~a~&" move)
-                                  (debug-draw (unit-on-map-unit actor) (unit-on-map-coord actor) current-map)
+                                  (debug-draw (unit-on-map-unit actor) (unit-on-map-coord actor) current-map :final-position final-position)
                                   (format t "~%")
                                   (debug-draw (unit-on-map-unit moved-actor) (unit-on-map-coord moved-actor) current-map)
                                   
