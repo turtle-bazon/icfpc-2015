@@ -103,9 +103,10 @@
           (members obj)))
 
 (defmethod unit-width ((obj unit))
-  (bind (((:values _ l-col) (cell-row-col (unit-left-most obj)))
-         ((:values _ r-col) (cell-row-col (unit-right-most obj))))
-    (1+ (abs (- r-col l-col)))))
+  (bind (((:values l-row l-col) (cell-row-col (unit-left-most obj)))
+         ((:values r-row r-col) (cell-row-col (unit-right-most obj))))
+    (1+ (abs (- r-col l-col (if (/= (mod l-row 2) (mod r-row 2))
+                                1 0))))))
 
 (defmethod unit-initial-position ((obj unit) (field hextris-map))
   (bind ((left-most (unit-left-most obj))
