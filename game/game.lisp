@@ -21,11 +21,11 @@
                        (locate-target current-map (make-unit-on-map :unit next-unit :coord init-position))
                      (unless final-position ;; probably this is a stop condition?
                        (terminate))
-                     (setf current-map
+                     (setf current-map ;; freeze fallen unit at it's final position
                            (unit-lock (unit-on-map-unit final-position)
                                       (unit-on-map-coord final-position)
                                       current-map))
-                     (setf current-map
+                     (setf current-map ;; maybe burn some rows if any
                            (map-burn-lines-v2 current-map))
                      (for moves-script+freeze = (append moves-script (list :sw)))
                      (appending moves-script+freeze))))
