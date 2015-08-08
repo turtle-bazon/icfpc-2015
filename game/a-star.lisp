@@ -22,17 +22,6 @@
   (and (cell= (unit-on-map-coord pos-a) (unit-on-map-coord pos-b))
        (every #'cell= (position->vec pos-a) (position->vec pos-b))))
 
-;;; TODO: find out optimization (without sort)
-(defun positions< (pos-a pos-b)
-  (or (cell< (unit-on-map-coord pos-a) (unit-on-map-coord pos-b))
-      (and (cell= (unit-on-map-coord pos-a) (unit-on-map-coord pos-b))
-           (iter (for cell-a in (position->vec pos-a))
-                 (for cell-b in (position->vec pos-b))
-                 (cond ((cell< cell-a cell-b) (return-from positions< t))
-                       ((cell= cell-a cell-b) (next-iteration))
-                       (t (return-from positions< nil)))))))
-
-;;; TODO: implement actual movement
 (defmethod move-unit (move (obj unit-on-map) (field hextris-map))
   (cons move
         (ecase move
@@ -53,23 +42,51 @@
   (lambda (pos-a pos-b)
     (< (sq-dist (unit-on-map-coord pos-a) (unit-on-map-coord end-pos))
        (sq-dist (unit-on-map-coord pos-b) (unit-on-map-coord end-pos)))))
-  
+
+(defclass visited-cache ()
+  ((level-1 :initform (make-hash-table :test 'eql) :reader level-1)))
+
+(defun cell-sxhash (cell)
+  (declare (optimize (speed 3) (safety 0) (debug 0))
+           (type cell cell))
+  (sxhash (list (cell-cube-x cell) (cell-cube-y cell) (cell-cube-z cell))))
+
+(defun position-sxhash (pos)
+  (declare (optimize (speed 3) (safety 0) (debug 0))
+           (type unit-on-map pos))
+  (let ((seed (cell-sxhash (unit-on-map-coord pos))))
+    (declare (type (unsigned-byte 62) seed))
+    (iter (declare (declare-variables))
+          (for cell in (members (unit-on-map-unit pos)))
+          (for (the (unsigned-byte 62) hash) = (cell-sxhash cell))
+          (setf seed (logxor seed hash)))
+    seed))
+
+(defmethod mark-visited ((cache visited-cache) (pos unit-on-map) &key level-1-key)
+  (let ((level-1-key (or level-1-key (position-sxhash pos))))
+    (setf (gethash level-1-key (level-1 cache)) t)))
+
+(defmethod fast-check ((cache visited-cache) (pos unit-on-map))
+  (let ((level-1-key (position-sxhash pos)))
+    (values (gethash level-1-key (level-1 cache)) level-1-key)))
+
 (defmethod run-a-star ((field hextris-map) (start-pos unit-on-map) (end-pos unit-on-map))
   (declare (optimize (debug 3)))
   (let ((queue (make-instance 'basic-queue))
-        (visited (make-hash-table :test 'equal)))
+        (visited (make-instance 'visited-cache)))
     (enqueue queue (list start-pos '()))
-    (setf (gethash (position->points-list start-pos) visited) t)
+    (mark-visited visited start-pos)
     (iter (until (empty-p queue))
           (for (current-pos commands) = (dequeue queue))
           (when (positions= current-pos end-pos)
             (return-from run-a-star (values t (reverse commands))))
           (for transitions = (remove-if-not #'identity (mapcar (lambda (move) (move-unit move current-pos field)) *a-star-moves*)))
           (iter (for (move . next-pos) in (sort transitions (position-better-p end-pos) :key #'cdr))
-                (for hash-key = (position->points-list next-pos))
-                (unless (gethash hash-key visited)
-                  (when (place-on-map (unit-on-map-unit next-pos) (unit-on-map-coord next-pos) field)
-                    (enqueue queue (list next-pos (cons move (copy-seq commands))))
-                    (setf (gethash hash-key visited) t)))))))
+                (multiple-value-bind (visited-p level-1-key)
+                    (fast-check visited next-pos)
+                  (unless visited-p
+                    (when (place-on-map (unit-on-map-unit next-pos) (unit-on-map-coord next-pos) field)
+                      (enqueue queue (list next-pos (cons move (copy-seq commands))))
+                      (mark-visited visited next-pos :level-1-key level-1-key))))))))
           
           
