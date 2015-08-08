@@ -42,7 +42,7 @@
                                                                    (multiple-value-bind (cell filled-p)
                                                                      (map-cell current-map (make-cell-row-col row col))
                                                                      (when (and cell filled-p)
-                                                                       (in outer (collect (list :y row :x col))))))))
+                                                                       (in outer (collect (list (cons :y row) (cons :x col)))))))))
                                   (with actor = init-position-on-map)
                                   (for move in moves-script)
                                   (for translated = (place-on-map (unit-on-map-unit actor)
@@ -51,10 +51,11 @@
                                   (assert translated)
                                   (for (copy-move . moved-actor) = (move-unit move actor current-map))
                                   (setf actor moved-actor)
-                                  (collect (list :filled board-filled
-                                                 :unit (list :members (iter (for cell in (members translated))
-                                                                            (for (values row col) = (cell-row-col cell))
-                                                                            (collect (list :y row :x col)))))))))
+                                  (collect (list (cons :filled (coerce board-filled 'vector))
+                                                 (cons :unit-members (coerce (iter (for cell in (members translated))
+                                                                                   (for (values row col) = (cell-row-col cell))
+                                                                                   (collect (list (cons :y row) (cons :x col))))
+                                                                             'vector)))))))
                           
                      ;;; update map
                      (setf current-map ;; freeze fallen unit at it's final position
