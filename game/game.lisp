@@ -31,7 +31,7 @@
                      (for moves-script+freeze = (append moves-script (list :sw)))
                      (appending moves-script+freeze))))
         (collecting (list :game world :seed seed :script game-script))))
-              
+
 (defun make-next-unit (game rng)
   (bind ((next-number (funcall rng))
          (next-unit-number (mod next-number (length (units game)))))
