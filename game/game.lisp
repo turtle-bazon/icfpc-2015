@@ -8,8 +8,9 @@
    (units :initarg :units :reader units)
    (seeds :initarg :seeds :reader seeds)))
 
-(defmethod game-loop ((world game))
-  (declare (optimize (debug 3)))
+(defmethod game-loop ((world game) &optional &key time-limit memory-limit number-cores phrases)
+  (declare (optimize (debug 3))
+           (ignore time-limit memory-limit number-cores phrases))
   (iter (for seed in (seeds world)) ;; play one game for each seed given
         (for rng = (make-rng seed))
         (for (values game-script film) =
@@ -64,7 +65,7 @@
                      (appending next-unit-frames into frames)
                      (finally (return (values script frames))))))
         (collecting (list :seed seed :script game-script :film film))))
-              
+
 (defun make-next-unit (game rng)
   (bind ((next-number (funcall rng))
          (next-unit-number (mod next-number (length (units game)))))
