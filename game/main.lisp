@@ -18,11 +18,13 @@
         (finally (return (list files time-limit memory-limit number-cores phrases)))))
 
 (defun run-game (game seed number-cores phrases)
+  (declare (ignore game seed number-cores phrases))
   1)
 
 (defun main (args)
   (destructuring-bind (files time-limit memory-limit number-cores phrases)
       (parse-args (rest args))
+    (declare (ignore memory-limit time-limit))
     (let ((solutions (iter (for fname in files)
                            (for game = (parse-input-file fname))
                            (appending
