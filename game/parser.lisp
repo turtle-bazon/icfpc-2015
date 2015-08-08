@@ -23,6 +23,8 @@
                                                                   :cube-z (- (cell-cube-z member-cell) (cell-cube-z pivot-cell))))))
                          (collect (make-instance 'unit :members members)))))
         (make-instance 'game
+                       :problem-id (field :id)
+                       :source-length (field :source-length)
                        :seeds (field :source-seeds)
                        :units units
                        :map parsed-map)))))
