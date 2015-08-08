@@ -2,8 +2,8 @@
 (in-package :hextris)
 
 (defparameter *power-phrases*
-  '("ei!"
-    "R'lyeh"
+  '("Ei!"
+    "Ia! Ia!"
     "Yuggoth"
     "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn!"))
 
