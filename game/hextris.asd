@@ -9,7 +9,7 @@
   :name "hextris"
   :version "0.1"
   :author "skobochka"
-  :depends-on (:iterate :metatilities :cl-json :drakma)
+  :depends-on (:iterate :metatilities :cl-json :drakma :priority-queue)
   :components ((:file "package")
                (:file "main" :depends-on ("package" "parser" "game"))
                (:file "power-phrases" :depends-on ("package"))
