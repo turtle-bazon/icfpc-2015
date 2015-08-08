@@ -1,5 +1,9 @@
 (in-package :hextris)
 
+(defvar *publish-api-uri* "https://davar.icfpcontest.org/teams/16/solutions")
+
+(defvar *publish-api-key* "M72G+E7hDY2E9yoKXtsalHDF7lQTFwJY7oX/NunZzBg=")
+
 (defun parse-args (args)
   (iter (initially (setq args-tail args))
         (for pname = (car args-tail))
@@ -7,18 +11,23 @@
         (for args-tail next (if (eq args-tail nil) (terminate) (rest (rest args-tail))))
         (when (string= "-f" (string-downcase pname))
           (collect pvalue into files))
-        (when (String= "-t" (string-downcase pname))
+        (when (string= "-t" (string-downcase pname))
           (for time-limit = (parse-integer pvalue)))
-        (when (String= "-m" (string-downcase pname))
+        (when (string= "-m" (string-downcase pname))
           (for memory-limit = (parse-integer pvalue)))
-        (when (String= "-c" (string-downcase pname))
+        (when (string= "-c" (string-downcase pname))
           (for number-cores = (parse-integer pvalue)))
         (when (string= "-p" (string-downcase pname))
           (collect pvalue into phrases))
-        (finally (return (list files time-limit memory-limit number-cores phrases)))))
+        (when (string= "-publish" (string-downcase pname))
+          (when (or (string= "t" (string-downcase pvalue))
+                    (string= "true" (string-downcase pvalue))
+                    (strinjg= "yes" (string-downcase pvalue)))
+            (for publish = t)))
+        (finally (return (list files time-limit memory-limit number-cores phrases publish)))))
 
 (defun main (args)
-  (destructuring-bind (files time-limit memory-limit number-cores phrases)
+  (destructuring-bind (files time-limit memory-limit number-cores phrases publish)
       (parse-args (rest args))
     (declare (ignore memory-limit time-limit))
     (let* ((solutions (iter (for fname in files)
@@ -37,4 +46,10 @@
                                  (collecting `((:problem-id . ,(problem-id game))
                                                (:seed . ,seed)
                                                (:solution . ,(power-phrase-encode-adt script))))))))
-      (format t "~a~&" result-string))))
+      (if publish
+          (http-request *publish-api-uri*
+                        :method :post
+                        :basic-authorization `("" ,*publish-api-key*)
+                        :content-type "application/json"
+                        :content result-string)
+          (format t "~a~&" result-string)))))
