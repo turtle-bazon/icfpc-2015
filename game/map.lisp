@@ -182,6 +182,9 @@
   (multiple-value-bind (row col) (cell-row-col c)
     (not (zerop (elt (field obj) (+ (* row (width obj)) col))))))
 
+(defmethod map-cell-free-p* ((obj hextris-map) row col)
+  (zerop (elt (field obj) (+ (* row (width obj)) col))))
+
 (defmethod map-cell ((obj hextris-map) (c cell))
   (multiple-value-bind (row col) (cell-row-col c)
     (when (and (>= row 0) (< row (height obj)) (>= col 0) (< col (width obj)))
@@ -192,6 +195,25 @@
     (setf (elt (field obj) (+ (* row (width obj)) col))
           (if value 1 0))
     (map-cell obj c)))
+
+(defmethod map-burn-lines-v3 ((original-map hextris-map))
+  (bind ((width (width original-map))
+         (height (height original-map))
+         (field (field original-map))
+         (new-field (make-array (* width height) :element-type 'bit))
+         (rows-deleted 0))
+    (iter (for row from (1- height) downto 0)
+          (for burn-p = (iter (for col from 0 below width)
+                              (never (map-cell-free-p* original-map col row))))
+
+          (if burn-p
+              (incf rows-deleted)
+              (iter (for col from 0 below width)
+                    (setf (elt new-field (+ (* row width) col))
+                          (elt field (+ (* (- row rows-deleted) height) col))))))
+
+    (values (make-instance 'hextris-map :width width :height height :field new-field)
+            rows-deleted)))
 
 (defparameter *moves* '(:nw :ne :e :se :sw :w))
 (defparameter *rotations* '(:rcw :rcc))
