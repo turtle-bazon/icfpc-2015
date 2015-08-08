@@ -137,7 +137,7 @@
   (make-instance 'hextris-map :width (width original-map) :height (height original-map)
                  :field (copy-seq (field original-map))))
 
-(defmethod map-burn-liens ((original-map hextris-map))
+(defmethod map-burn-lines ((original-map hextris-map))
   (let ((widht (width hextris-map))
         (height (height hextris-map))
         (field (field hextris-map)))
