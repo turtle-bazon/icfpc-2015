@@ -138,9 +138,9 @@
                  :field (copy-seq (field original-map))))
 
 (defmethod map-burn-lines ((original-map hextris-map))
-  (let ((widht (width hextris-map))
-        (height (height hextris-map))
-        (field (field hextris-map)))
+  (let ((width (width original-map))
+        (height (height original-map))
+        (field (field original-map)))
     (let* ((new-field (make-array (* width height) :element-type 'bit))
            (rows-deleted (iter (with row-cor = 0)
                                (for row from (1- height) to 0)
