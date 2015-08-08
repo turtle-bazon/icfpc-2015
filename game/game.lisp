@@ -8,7 +8,8 @@
    (units :initarg :units :reader units)
    (seeds :initarg :seeds :reader seeds)))
 
-(defmethod game-loop ((world game))
+(defmethod game-loop ((world game)
+                      &optional &key time-limit memory-limit number-cores phrases)
   (declare (optimize (debug 3)))
   (iter (for seed in (seeds world)) ;; play one game for each seed given
         (for rng = (make-rng seed))
@@ -29,7 +30,7 @@
                            (map-burn-lines-v2 current-map))
                      (for moves-script+freeze = (append moves-script (list :sw)))
                      (appending moves-script+freeze))))
-        (collecting (list :seed seed :script game-script))))
+        (collecting (list :game world :seed seed :script game-script))))
               
 (defun make-next-unit (game rng)
   (bind ((next-number (funcall rng))

@@ -11,7 +11,7 @@
   :author "skobochka"
   :depends-on (:iterate :metatilities :cl-json :drakma :lift)
   :components ((:file "package")
-               (:file "main" :depends-on ("package" "parser"))
+               (:file "main" :depends-on ("package" "parser" "game"))
                (:file "power-phrases" :depends-on ("package"))
                (:file "rng" :depends-on ("package"))
                (:file "remote" :depends-on ("power-phrases"))

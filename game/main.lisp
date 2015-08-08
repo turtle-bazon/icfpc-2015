@@ -17,17 +17,24 @@
           (collect pvalue into phrases))
         (finally (return (list files time-limit memory-limit number-cores phrases)))))
 
-(defun run-game (game seed number-cores phrases)
-  (declare (ignore game seed number-cores phrases))
-  1)
-
 (defun main (args)
   (destructuring-bind (files time-limit memory-limit number-cores phrases)
       (parse-args (rest args))
     (declare (ignore memory-limit time-limit))
-    (let ((solutions (iter (for fname in files)
-                           (for game = (parse-input-file fname))
-                           (appending
-                               (iter (for seed in (seeds game))
-                                     (collect (run-game game seed number-cores phrases)))))))
-      (format t "~a~&" solutions))))
+    (let* ((solutions (iter (for fname in files)
+                            (for game = (parse-input-file fname))
+                            (appending
+                             (game-loop game
+                                        :time-limit time-limit
+                                        :memory-limit memory-limit
+                                        :number-cores number-cores
+                                        :phrases phrases))))
+           (result-string (json:encode-json-to-string
+                           (iter (for s in solutions)
+                                 (for game = (getf s :game))
+                                 (for seed = (getf s :seed))
+                                 (for script = (getf s :script))
+                                 (collecting `((:problem-id . ,(problem-id game))
+                                               (:seed . ,seed)
+                                               (:solution . ,(power-phrase-encode-adt script))))))))
+      (format t "~a~&" result-string))))
