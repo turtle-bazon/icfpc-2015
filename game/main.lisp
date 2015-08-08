@@ -27,6 +27,15 @@
         (finally (return (list files time-limit memory-limit number-cores phrases publish)))))
 
 (defun main (args)
+  (in-package :hextris)
+  (sb-sys:enable-interrupt
+   sb-unix:sigint
+   (lambda (&rest args)
+     (declare (ignore args))
+     (sb-sys:invoke-interruption
+      (lambda ()
+        (sb-sys:with-interrupts
+          (sb-ext:exit)) ()))))
   (destructuring-bind (files time-limit memory-limit number-cores phrases publish)
       (parse-args (rest args))
     (declare (ignore memory-limit time-limit))
