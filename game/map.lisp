@@ -180,7 +180,7 @@
 
 (defmethod map-cell-free-p ((obj hextris-map) (c cell))
   (multiple-value-bind (row col) (cell-row-col c)
-    (not (zerop (elt (field obj) (+ (* row (height obj)) col))))))
+    (not (zerop (elt (field obj) (+ (* row (width obj)) col))))))
 
 (defmethod map-cell ((obj hextris-map) (c cell))
   (multiple-value-bind (row col) (cell-row-col c)
@@ -189,7 +189,7 @@
 
 (defmethod (setf map-cell) (value (obj hextris-map) (c cell))
   (multiple-value-bind (row col) (cell-row-col c)
-    (setf (elt (field obj) (+ (* row (height obj)) col))
+    (setf (elt (field obj) (+ (* row (width obj)) col))
           (if value 1 0))
     (map-cell obj c)))
 
