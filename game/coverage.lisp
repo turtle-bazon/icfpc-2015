@@ -48,4 +48,4 @@
                                                                                 field))))))
                          (setf installed-unit (cdr (move-unit :rcw installed-unit field)))))
               (when best-choice
-                (return-from locate-target best-choice)))))
+                (return-from locate-target (values-list best-choice))))))
