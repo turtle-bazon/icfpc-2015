@@ -8,3 +8,10 @@
    (units :initarg :units :reader units)
    (seeds :initarg :seeds :reader seeds)))
 
+(defmethod game-loop ((world game))
+  (iter (for seed in (seeds world)) ;; play one game for each seed given
+        (for rng = (make-rng seed))
+        (iter (repeat (source-length world)) ;; spawn as many units as given in source-length
+
+              )))
+              
