@@ -15,3 +15,7 @@
 
               )))
               
+(defun make-next-unit (game rng)
+  (bind ((next-number (funcall rng))
+         (next-unit-number (mod next-number (length (units game)))))
+    (nth next-unit-number (units game))))
