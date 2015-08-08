@@ -31,6 +31,8 @@
            (make-unit-on-map :unit (unit-rotate (unit-on-map-unit obj) move) :coord (unit-on-map-coord obj))))))
 
 (defun sq-dist (cell-a cell-b)
+  (declare (optimize (speed 3))
+           (type cell cell-a cell-b))
   (+ (* (- (cell-cube-x cell-b) (cell-cube-x cell-a))
         (- (cell-cube-x cell-b) (cell-cube-x cell-a)))
      (* (- (cell-cube-y cell-b) (cell-cube-y cell-a))
