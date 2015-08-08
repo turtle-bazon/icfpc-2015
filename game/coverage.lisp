@@ -37,7 +37,7 @@
                                                                                 (unit-on-map-coord installed-unit)
                                                                                 field)))
                            (collect (cons installed-unit total-free-cells)))
-                         (setf installed-unit (cdr (move-unit :rcw installed-unit field)))))
+                         (setf installed-unit (move-unit :rcw installed-unit field))))
               (iter (for (candidate-unit . free-cells) in (sort variants #'< :key #'cdr))
                     (multiple-value-bind (reachable-p move-script)
                         (run-a-star field initial-unit candidate-unit)

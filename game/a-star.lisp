@@ -23,12 +23,11 @@
        (every #'cell= (position->vec pos-a) (position->vec pos-b))))
 
 (defmethod move-unit (move (obj unit-on-map) (field hextris-map))
-  (cons move
-        (ecase move
-          ((:w :sw :se :e)
-           (make-unit-on-map :unit (unit-on-map-unit obj) :coord (cell-move (unit-on-map-coord obj) move)))
-          ((:rcw :rcc)
-           (make-unit-on-map :unit (unit-rotate (unit-on-map-unit obj) move) :coord (unit-on-map-coord obj))))))
+  (ecase move
+    ((:w :sw :se :e)
+     (make-unit-on-map :unit (unit-on-map-unit obj) :coord (cell-move (unit-on-map-coord obj) move)))
+    ((:rcw :rcc)
+     (make-unit-on-map :unit (unit-rotate (unit-on-map-unit obj) move) :coord (unit-on-map-coord obj)))))
 
 (defun sq-dist (cell-a cell-b)
   (declare (optimize (speed 3))
@@ -82,7 +81,9 @@
           (for (current-pos commands) = (dequeue queue))
           (when (positions= current-pos end-pos)
             (return-from run-a-star (values t (reverse commands))))
-          (for transitions = (remove-if-not #'identity (mapcar (lambda (move) (move-unit move current-pos field)) *a-star-moves*)))
+          (for transitions = (remove-if-not #'identity
+                                            (mapcar (lambda (move) (cons move (move-unit move current-pos field)))
+                                                    *a-star-moves*)))
           (iter (for (move . next-pos) in (sort transitions (position-better-p end-pos) :key #'cdr))
                 (multiple-value-bind (visited-p level-1-key)
                     (fast-check visited next-pos)

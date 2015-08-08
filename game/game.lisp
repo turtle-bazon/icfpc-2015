@@ -51,10 +51,10 @@
                                                                   (unit-on-map-coord actor)
                                                                   current-map))
                                   (assert translated)
-                                  (for (copy-move . moved-actor) = (move-unit move actor current-map))
+                                  (for moved-actor = (move-unit move actor current-map))
 
                                   ;;; vizualize for the weaks
-                                  (format t "~a~&" copy-move)
+                                  (format t "~a~&" move)
                                   (debug-draw (unit-on-map-unit actor) (unit-on-map-coord actor) current-map)
                                   (format t "~%")
                                   (debug-draw (unit-on-map-unit moved-actor) (unit-on-map-coord moved-actor) current-map)
