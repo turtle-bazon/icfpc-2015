@@ -18,34 +18,34 @@
              (truncate (- (cell-cube-z cell) (mod (cell-cube-z cell) 2)) 2))))
 
 
-(deftestsuite cell-tests () ())
+;; (deftestsuite cell-tests () ())
 
-(defrandom-instance a-coord nil (- (random 200) 100))
+;; (defrandom-instance a-coord nil (- (random 200) 100))
 
-(addtest (cell-tests)
-  cell-cube-identity
+;; (addtest (cell-tests)
+;;   cell-cube-identity
 
-  (ensure-random-cases 100 ((row a-coord) (col a-coord))
-    (bind ((cell (make-cell-row-col row col))
-           ((:values row* col*) (cell-row-col cell)))
-      (ensure-same row row*)
-      (ensure-same col col*)))
+;;   (ensure-random-cases 100 ((row a-coord) (col a-coord))
+;;     (bind ((cell (make-cell-row-col row col))
+;;            ((:values row* col*) (cell-row-col cell)))
+;;       (ensure-same row row*)
+;;       (ensure-same col col*)))
 
-  ;; TODO: Decide does we need this part at all?
+;;   ;; TODO: Decide does we need this part at all?
 
-  ;; (ensure-random-cases 100 ((x a-coord) (y a-coord) (z a-coord))
-  ;;   (bind ((cell (make-cell :cube-x x :cube-y y :cube-z z))
-  ;;          (x* (cell-cube-x cell))
-  ;;          (y* (cell-cube-y cell))
-  ;;          (z* (cell-cube-z cell)))
+;;   ;; (ensure-random-cases 100 ((x a-coord) (y a-coord) (z a-coord))
+;;   ;;   (bind ((cell (make-cell :cube-x x :cube-y y :cube-z z))
+;;   ;;          (x* (cell-cube-x cell))
+;;   ;;          (y* (cell-cube-y cell))
+;;   ;;          (z* (cell-cube-z cell)))
 
-  ;;     (cell-update-offset cell)
-  ;;     (cell-update-cube cell)
-  ;;     (ensure-same x* (cell-cube-x cell))
-  ;;     ;; This is not required to be same (as i understood)
-  ;;     ;; (ensure-same y* (cell-cube-y cell))
-  ;;     (ensure-same z* (cell-cube-z cell))))
-  )
+;;   ;;     (cell-update-offset cell)
+;;   ;;     (cell-update-cube cell)
+;;   ;;     (ensure-same x* (cell-cube-x cell))
+;;   ;;     ;; This is not required to be same (as i understood)
+;;   ;;     ;; (ensure-same y* (cell-cube-y cell))
+;;   ;;     (ensure-same z* (cell-cube-z cell))))
+;;   )
 
 
 (defun cell-move* (cell direction &optional (step 1))
@@ -73,43 +73,43 @@
   "Non-destructive version of cell-move*"
   (cell-move* (copy-cell cell) direction step))
 
-(defrandom-instance a-coord-step-positive nil (random 100))
+;; (defrandom-instance a-coord-step-positive nil (random 100))
 
-(addtest (cell-tests)
-  cell-cube-move
+;; (addtest (cell-tests)
+;;   cell-cube-move
 
-  (bind ((step 1)
-         (cell (make-cell :cube-x 0 :cube-y 0 :cube-z 0))
-         (e-cell (cell-move cell :e step))
-         (w-cell (cell-move cell :w step))
-         (nw-cell (cell-move cell :nw step))
-         (se-cell (cell-move cell :se step))
-         (ne-cell (cell-move cell :ne step))
-         (sw-cell (cell-move cell :sw step)))
+;;   (bind ((step 1)
+;;          (cell (make-cell :cube-x 0 :cube-y 0 :cube-z 0))
+;;          (e-cell (cell-move cell :e step))
+;;          (w-cell (cell-move cell :w step))
+;;          (nw-cell (cell-move cell :nw step))
+;;          (se-cell (cell-move cell :se step))
+;;          (ne-cell (cell-move cell :ne step))
+;;          (sw-cell (cell-move cell :sw step)))
 
-    (ensure-same (cell-cube-x e-cell) 1)
-    (ensure-same (cell-cube-y e-cell) -1)
-    (ensure-same (cell-cube-z e-cell) 0)
+;;     (ensure-same (cell-cube-x e-cell) 1)
+;;     (ensure-same (cell-cube-y e-cell) -1)
+;;     (ensure-same (cell-cube-z e-cell) 0)
 
-    (ensure-same (cell-cube-x w-cell) -1)
-    (ensure-same (cell-cube-y w-cell) 1)
-    (ensure-same (cell-cube-z w-cell) 0)
+;;     (ensure-same (cell-cube-x w-cell) -1)
+;;     (ensure-same (cell-cube-y w-cell) 1)
+;;     (ensure-same (cell-cube-z w-cell) 0)
 
-    (ensure-same (cell-cube-x nw-cell) 0)
-    (ensure-same (cell-cube-y nw-cell) 1)
-    (ensure-same (cell-cube-z nw-cell) -1)
+;;     (ensure-same (cell-cube-x nw-cell) 0)
+;;     (ensure-same (cell-cube-y nw-cell) 1)
+;;     (ensure-same (cell-cube-z nw-cell) -1)
 
-    (ensure-same (cell-cube-x se-cell) 0)
-    (ensure-same (cell-cube-y se-cell) -1)
-    (ensure-same (cell-cube-z se-cell) 1)
+;;     (ensure-same (cell-cube-x se-cell) 0)
+;;     (ensure-same (cell-cube-y se-cell) -1)
+;;     (ensure-same (cell-cube-z se-cell) 1)
 
-    (ensure-same (cell-cube-x ne-cell) 1)
-    (ensure-same (cell-cube-y ne-cell) 0)
-    (ensure-same (cell-cube-z ne-cell) -1)
+;;     (ensure-same (cell-cube-x ne-cell) 1)
+;;     (ensure-same (cell-cube-y ne-cell) 0)
+;;     (ensure-same (cell-cube-z ne-cell) -1)
 
-    (ensure-same (cell-cube-x sw-cell) -1)
-    (ensure-same (cell-cube-y sw-cell) 0)
-    (ensure-same (cell-cube-z sw-cell) 1)))
+;;     (ensure-same (cell-cube-x sw-cell) -1)
+;;     (ensure-same (cell-cube-y sw-cell) 0)
+;;     (ensure-same (cell-cube-z sw-cell) 1)))
 
 (defun cell< (cell-a cell-b)
   (or (< (cell-cube-x cell-a) (cell-cube-x cell-b))
