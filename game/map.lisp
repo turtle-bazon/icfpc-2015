@@ -133,34 +133,14 @@
     (setf (field obj) (make-array (* width height) :element-type 'bit)))
   nil)
 
-(defmethod clone-map-with ((original-map hextris-map) field-modify-fn)
-  (make-instance 'hextris-map :width (width original-map) :height (height original-map)
-                 :field (funcall field-modify-fn
-                                 (field original-map)
-                                 (width original-map)
-                                 (height original-map))))
-
 (defmethod clone-map ((original-map hextris-map))
-  (clone-map-with original-map (lambda (field width height)
-                                 (declare (ignore width height))
-                                 (copy-seq field))))
+  (make-instance 'hextris-map :width (width original-map) :height (height original-map)
+                 :field (copy-seq (field original-map))))
 
-(defun field-copy ()
-  (lambda (field width height)
-    (declare (ignore width height))
-    (copy-seq field)))
-
-(defun field-burn-line (fields)
-  (lambda (field width height)
-    (let ((new-field (make-array (* width height) :element-type 'bit)))
-      (iter (for col from 0 below width)
-            (iter (for row from 0 below (- height fields))
-                  (setf (elt new-field (+ (* (+ fields row) height) col))
-                        (elt field (+ (* row height) col)))))
-      new-field)))
-
-(defun field-burn-lines ()
-  (lambda (field width height)
+(defmethod map-burn-liens ((original-map hextris-map))
+  (let ((widht (width hextris-map))
+        (height (height hextris-map))
+        (field (field hextris-map)))
     (let* ((new-field (make-array (* width height) :element-type 'bit))
            (rows-deleted (iter (with row-cor = 0)
                                (for row from (1- height) to 0)
@@ -173,9 +153,9 @@
                                (iter (for col from 0 below width)
                                      (setf (elt new-field (+ (* row height) col))
                                            (elt field (+ (* (- row row-cor) height) col))))
-                               (finally (return row-cor)))))
-      
-      (values new-field rows-deleted))))
+                               (finally (return row-cor)))))      
+      (values (make-instance 'hextris-map :width width :height height :field new-field)
+              rows-deleted))))
 
 (defmethod map-cell-free-p ((obj hextris-map) (c cell))
   (multiple-value-bind (row col) (cell-row-col c)
