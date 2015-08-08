@@ -52,11 +52,11 @@
     (iter (until (empty-p queue))
           (for (current-pos commands) = (dequeue queue))
           (when (positions= current-pos end-pos)
-            (return-from run-a-star (values t (nreverse commands))))
+            (return-from run-a-star (values t (reverse commands))))
           (for transitions = (remove-if-not #'identity (mapcar (lambda (move) (move-unit move current-pos field)) *a-star-moves*)))
           (iter (for (move . next-pos) in (sort transitions (position-better-p end-pos) :key #'cdr))
                 (unless (find-item visited next-pos)
-                  (enqueue queue (list next-pos (cons move commands)))
+                  (enqueue queue (list next-pos (cons move (copy-seq commands))))
                   (insert-item visited next-pos))))))
           
           
