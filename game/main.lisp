@@ -22,7 +22,7 @@
         (when (string= "-publish" (string-downcase pname))
           (when (or (string= "t" (string-downcase pvalue))
                     (string= "true" (string-downcase pvalue))
-                    (strinjg= "yes" (string-downcase pvalue)))
+                    (string= "yes" (string-downcase pvalue)))
             (for publish = t)))
         (finally (return (list files time-limit memory-limit number-cores phrases publish)))))
 

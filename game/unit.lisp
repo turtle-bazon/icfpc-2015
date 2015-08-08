@@ -123,3 +123,15 @@
                           (cell-cube-y top-left-local-cell))
                :cube-z (- (cell-cube-z top-left-global-cell)
                           (cell-cube-z top-left-local-cell)))))
+
+(defmethod unit-position-possible-p ((obj unit) (position cell) (field hextris-map))
+  (iter
+    (for base-cell in (members obj))
+    (for real-cell = (make-cell :cube-x (+ (cell-cube-x base-cell)
+                                           (cell-cube-x position))
+                                :cube-y (+ (cell-cube-y base-cell)
+                                           (cell-cube-y position))
+                                :cube-z (+ (cell-cube-z base-cell)
+                                           (cell-cube-z position))))
+    (always (map-cell-free-p** field real-cell))))
+
