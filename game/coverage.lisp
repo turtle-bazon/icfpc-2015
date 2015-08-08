@@ -16,12 +16,6 @@
                 (:filled (incf holes-count) (setf switch :hole))
                 (:hole))))
         (finally (return holes-count))))
-
-(defmethod count-free-cells (row (field hextris-map))
-  (iter (for col from 0 below (width field))
-        (for cell = (make-cell-row-col row col))
-        (counting (multiple-value-bind (cell filled-p) (map-cell field cell)
-                    (and cell (not filled-p))))))
   
 (defmethod locate-target ((field hextris-map) (initial-unit unit-on-map))
   (iter (for row from (1- (height field)) downto 0)
