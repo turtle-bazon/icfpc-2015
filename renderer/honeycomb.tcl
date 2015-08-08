@@ -8,6 +8,8 @@ proc every {ms body} {
 }
 
 proc honeycomb {w letterpattern} {
+    global scale
+
     set basex 10
     foreach row $letterpattern {
 	set basey 10
@@ -22,8 +24,7 @@ proc honeycomb {w letterpattern} {
 	incr basex 100
     }
 
-    $w scale "all" 0 0 0.5 0.5
-
+    $w scale "all" 0 0 $scale $scale
     return $w
 }
 
@@ -121,6 +122,7 @@ proc move {} {
 }
 
 # Build the GUI
+set scale [lindex $argv 1]
 setup [lindex $argv 0]
 init $gw $gh
 canvas .c
