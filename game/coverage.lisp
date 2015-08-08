@@ -20,7 +20,7 @@
 (defmethod locate-target ((field hextris-map) (initial-unit unit-on-map))
   (iter (for row from (1- (height field)) downto 0)
         (iter (for col from 0 below (width field))
-              (for best-choice =
+              (for variants =
                    (iter (with installed-unit = (make-unit-on-map :unit (unit-on-map-unit initial-unit)
                                                                   :coord (make-cell-row-col row col)))
                          (repeat 6) ;;; rotate six times
@@ -28,18 +28,18 @@
                                                          (unit-on-map-coord installed-unit)
                                                          field))
                          (when translated
-                           (multiple-value-bind (reachable-p move-script)
-                               (run-a-star field initial-unit installed-unit)
-                             (when reachable-p
-                               (for lowest-row = (iter (for m in (members (unit-on-map-unit installed-unit)))
-                                                       (multiple-value-bind (row col) (cell-row-col m)
-                                                         (declare (ignore col))
-                                                         (minimizing row))))
-                               (finding (list installed-unit move-script)
-                                        minimizing (count-free-cells lowest-row
+                           (for lowest-row = (iter (for m in (members (unit-on-map-unit installed-unit)))
+                                                   (multiple-value-bind (row col) (cell-row-col m)
+                                                     (declare (ignore col))
+                                                     (minimizing row))))
+                           (for total-free-cells = (count-free-cells lowest-row
                                                                      (unit-lock (unit-on-map-unit installed-unit)
                                                                                 (unit-on-map-coord installed-unit)
-                                                                                field))))))
+                                                                                field)))
+                           (collect (cons installed-unit total-free-cells)))
                          (setf installed-unit (cdr (move-unit :rcw installed-unit field)))))
-              (when best-choice
-                (return-from locate-target (values-list best-choice))))))
+              (iter (for (candidate-unit . free-cells) in (sort variants #'< :key #'cdr))
+                    (multiple-value-bind (reachable-p move-script)
+                        (run-a-star field initial-unit candidate-unit)
+                      (when reachable-p
+                        (return-from locate-target (values candidate-unit move-script))))))))
