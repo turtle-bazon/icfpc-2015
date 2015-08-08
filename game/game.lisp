@@ -17,7 +17,7 @@
              (iter (with current-map = (game-map world))
                    (repeat (source-length world)) ;; spawn as many units as given in source-length
                    (for next-unit = (make-next-unit world rng))
-                   (for init-position = (unit-initial-position-v2 next-unit current-map))
+                   (for init-position = (unit-initial-position-v3 next-unit current-map))
                    (unless init-position
                      (terminate))
                    (for init-position-on-map = (make-unit-on-map :unit next-unit :coord init-position))

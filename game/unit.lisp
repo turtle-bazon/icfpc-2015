@@ -89,7 +89,7 @@
                 (cond
                   ((> l-col r-col) l)
                   ((and (= l-col r-col)
-                        (evenp l-row)) l)
+                        (oddp l-row)) l)
                   (t r))))
           (members obj)))
 
@@ -103,10 +103,9 @@
           (members obj)))
 
 (defmethod unit-width ((obj unit))
-  (bind (((:values l-row l-col) (cell-row-col (unit-left-most obj)))
-         ((:values r-row r-col) (cell-row-col (unit-right-most obj))))
-    (1+ (abs (- r-col l-col (if (/= (mod l-row 2) (mod r-row 2))
-                                1 0))))))
+  (bind (((:values _ l-col) (cell-row-col (unit-left-most obj)))
+         ((:values _ r-col) (cell-row-col (unit-right-most obj))))
+    (1+ (abs (- r-col l-col)))))
 
 (defmethod unit-initial-position ((obj unit) (field hextris-map))
   (bind ((left-most (unit-left-most obj))
@@ -153,6 +152,43 @@
               (setf best (list row col))
               (setf best-dist (cons min-left-sq-dist min-right-sq-dist))))
           (finally (return (when best (make-cell-row-col (first best) (second best))))))))
+
+(defmethod unit-initial-position-v3 ((obj unit) (field hextris-map))
+  (bind ((left-most (unit-left-most obj))
+         (right-most (unit-right-most obj))
+         (top-most (unit-top-most obj))
+         ((:values _ col) (cell-row-col left-most))
+         ((:values row _) (cell-row-col top-most))
+         (unit-width (unit-width obj))
+         (top-left-local-cell (make-cell-row-col row col))
+         (top-left-global-col (floor (/ (- (width field) unit-width) 2)))
+         (top-left-global-cell (make-cell-row-col 0 top-left-global-col))
+         (pivot-candidate (make-cell :cube-x (- (cell-cube-x top-left-global-cell)
+                                                (cell-cube-x top-left-local-cell))
+                                     :cube-y (- (cell-cube-y top-left-global-cell)
+                                                (cell-cube-y top-left-local-cell))
+                                     :cube-z (- (cell-cube-z top-left-global-cell)
+                                                (cell-cube-z top-left-local-cell))))
+         (left-most-candidate (make-cell :cube-x (+ (cell-cube-x left-most)
+                                                    (cell-cube-x pivot-candidate))
+                                         :cube-y (+ (cell-cube-y left-most)
+                                                    (cell-cube-y pivot-candidate))
+                                         :cube-z (+ (cell-cube-z left-most)
+                                                    (cell-cube-z pivot-candidate))))
+         (right-most-candidate (make-cell :cube-x (+ (cell-cube-x right-most)
+                                                     (cell-cube-x pivot-candidate))
+                                          :cube-y (+ (cell-cube-y right-most)
+                                                     (cell-cube-y pivot-candidate))
+                                          :cube-z (+ (cell-cube-z right-most)
+                                                     (cell-cube-z pivot-candidate))))
+         ((:values _ left-most-col) (cell-row-col left-most-candidate))
+         ((:values _ right-most-col) (cell-row-col right-most-candidate)))
+
+    ;; Now need to check left-right margins
+    (when (< (1+ left-most-col) (- (width field) right-most-col 1))
+      (cell-move* pivot-candidate :e))
+
+    pivot-candidate))
 
 (defmethod unit-position-possible-p ((obj unit) (position cell) (field hextris-map))
   (iter
