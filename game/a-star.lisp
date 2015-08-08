@@ -8,7 +8,7 @@
   (coord nil :type (or null cell)))
 
 (defun position->vec (pos)
-  (sort (cons (unit-on-map-coord pos) (members (unit-on-map-unit pos))) #'cell<))
+  (sort (cons (unit-on-map-coord pos) (copy-seq (members (unit-on-map-unit pos)))) #'cell<))
 
 ;;; TODO: find out optimization (without sort)
 (defun positions= (pos-a pos-b) 
@@ -56,7 +56,8 @@
           (for transitions = (remove-if-not #'identity (mapcar (lambda (move) (move-unit move current-pos field)) *a-star-moves*)))
           (iter (for (move . next-pos) in (sort transitions (position-better-p end-pos) :key #'cdr))
                 (unless (find-item visited next-pos)
-                  (enqueue queue (list next-pos (cons move (copy-seq commands))))
-                  (insert-item visited next-pos))))))
+                  (when (place-on-map (unit-on-map-unit next-pos) (unit-on-map-coord next-pos) field)
+                    (enqueue queue (list next-pos (cons move (copy-seq commands))))
+                    (insert-item visited next-pos)))))))
           
           
