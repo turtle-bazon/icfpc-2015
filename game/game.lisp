@@ -8,7 +8,7 @@
    (units :initarg :units :reader units)
    (seeds :initarg :seeds :reader seeds)))
 
-(defmethod game-loop ((world game) &optional &key time-limit memory-limit number-cores phrases)
+(defmethod game-loop ((world game) &optional &key record-film time-limit memory-limit number-cores phrases)
   (declare (optimize (debug 3))
            (ignore time-limit memory-limit number-cores phrases))
   (iter (for seed in (seeds world)) ;; play one game for each seed given
@@ -33,26 +33,27 @@
 
                      ;;; record film
                      (for next-unit-frames =
-                          (iter (with board-filled = (iter outer
-                                                           (for row from 0 below (height current-map))
-                                                           (iter (for col from 0 below (width current-map))
-                                                                 (multiple-value-bind (cell filled-p)
+                          (when record-film
+                            (iter (with board-filled = (iter outer
+                                                             (for row from 0 below (height current-map))
+                                                             (iter (for col from 0 below (width current-map))
+                                                                   (multiple-value-bind (cell filled-p)
                                                                      (map-cell current-map (make-cell-row-col row col))
-                                                                   (when (and cell filled-p)
-                                                                     (in outer (collect (list :y row :x col))))))))
-                                (with actor = init-position-on-map)
-                                (for move in moves-script)
-                                (for translated = (place-on-map (unit-on-map-unit actor)
-                                                                (unit-on-map-coord actor)
-                                                                current-map))
-                                (assert translated)
-                                (for (copy-move . moved-actor) = (move-unit move actor current-map))
-                                (setf actor moved-actor)
-                                (collect (list :filled board-filled
-                                               :unit (list :members (iter (for cell in (members translated))
-                                                                          (for (values row col) = (cell-row-col cell))
-                                                                          (collect (list :y row :x col))))))))
-
+                                                                     (when (and cell filled-p)
+                                                                       (in outer (collect (list :y row :x col))))))))
+                                  (with actor = init-position-on-map)
+                                  (for move in moves-script)
+                                  (for translated = (place-on-map (unit-on-map-unit actor)
+                                                                  (unit-on-map-coord actor)
+                                                                  current-map))
+                                  (assert translated)
+                                  (for (copy-move . moved-actor) = (move-unit move actor current-map))
+                                  (setf actor moved-actor)
+                                  (collect (list :filled board-filled
+                                                 :unit (list :members (iter (for cell in (members translated))
+                                                                            (for (values row col) = (cell-row-col cell))
+                                                                            (collect (list :y row :x col)))))))))
+                          
                      ;;; update map
                      (setf current-map ;; freeze fallen unit at it's final position
                            (unit-lock (unit-on-map-unit final-position)
