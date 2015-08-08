@@ -152,7 +152,7 @@
                            (< min-left-sq-dist min-right-sq-dist)))
               (setf best (list row col))
               (setf best-dist (cons min-left-sq-dist min-right-sq-dist))))
-          (finally (return (make-cell-row-col (first best) (second best)))))))
+          (finally (return (when best (make-cell-row-col (first best) (second best))))))))
 
 (defmethod unit-position-possible-p ((obj unit) (position cell) (field hextris-map))
   (iter
