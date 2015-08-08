@@ -26,12 +26,12 @@
                      (unless final-position ;; probably this is a stop condition?
                        (terminate))
 
-                     ;;; vizualize for the weaks
-                     ;; (debug-draw (unit-on-map-unit final-position)
-                     ;;             (unit-on-map-coord final-position)
-                     ;;             current-map)
-                     ;; (format t "~%")
-                     ;; (break)
+                     ;; ;;; vizualize for the weaks
+                     ;;   (debug-draw (unit-on-map-unit final-position)
+                     ;;              (unit-on-map-coord final-position)
+                     ;;               current-map)
+                     ;;  (format t "~%")
+                      ;; (break)
 
                      ;;; record film
                      (for next-unit-frames =
@@ -50,6 +50,15 @@
                                                                   current-map))
                                   (assert translated)
                                   (for (copy-move . moved-actor) = (move-unit move actor current-map))
+
+                                  ;;; vizualize for the weaks
+                                  (format t "~a~&" copy-move)
+                                  (debug-draw (unit-on-map-unit actor) (unit-on-map-coord actor) current-map)
+                                  (format t "~%")
+                                  (debug-draw (unit-on-map-unit moved-actor) (unit-on-map-coord moved-actor) current-map)
+                                  
+                                  (format t "---------------------~%")
+                                  (break)
                                   (setf actor moved-actor)
                                   (collect (list (cons :filled (coerce board-filled 'vector))
                                                  (cons :unit-members (coerce (iter (for cell in (members translated))
@@ -68,7 +77,7 @@
                      (appending moves-script+freeze into script)
                      (appending next-unit-frames into frames)
                      (finally (return (values script frames))))))
-        (collecting (list :seed seed :script game-script :film film))))
+        (collecting (list :game world :seed seed :script game-script :film film))))
 
 (defun make-next-unit (game rng)
   (bind ((next-number (funcall rng))
