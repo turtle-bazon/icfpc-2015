@@ -25,6 +25,8 @@
                            (unit-lock (unit-on-map-unit final-position)
                                       (unit-on-map-coord final-position)
                                       current-map))
+                     (setf current-map
+                           (map-burn-lines-v2 current-map))
                      (for moves-script+freeze = (append moves-script (list :sw)))
                      (appending moves-script+freeze))))
         (collecting (list :seed seed :script game-script))))
