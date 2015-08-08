@@ -12,6 +12,7 @@
   (remote-make-solution-json task-id seed (power-phrase-encode-adt command-adt) tag))
 
 (defun remote-submit-raw (task-id seed command &optional tag)
+  (format t "Submitting task ~a (~a) with seed ~a: ~a~%" task-id tag seed command)
   (http-request *remote-api-uri*
                 :method :post
                 :basic-authorization `("" ,*remote-api-key*)
@@ -20,9 +21,10 @@
 
 (defun remote-submit (game-loop-result task-id &optional tag)
   (iter (for solution in game-loop-result)
-        (remote-submit* task-id (getf solution :seed)
-                        (getf solution :script)
-                        (when tag (gensym tag)))))
+        (format t "Server response ~a~%"
+                (remote-submit* task-id (getf solution :seed)
+                                (getf solution :script)
+                                (when tag (symbol-name (gensym tag)))))))
 
 (defun remote-submit* (task-id seed command-adt &optional tag)
   (remote-submit-raw task-id seed (power-phrase-encode-adt command-adt) tag))
