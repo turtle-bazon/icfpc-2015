@@ -33,11 +33,13 @@ proc drawhex {w x y ch dx dy} {
     global locked
     global tile
     global t
+    global n
 
     set fillcolor white
 
     if {$ch in $locked} { set fillcolor yellow }
-    if {$ch in [lindex $tile $t] }  { set fillcolor skyblue }
+
+    if {$ch in [lindex [lindex $tile $n] $t] }  { set fillcolor skyblue }
 
     $w create polygon \
 	[- $x $dy] [- $y $dx 4] $x [- $y $dy 11] [+ $x $dy] [- $y $dx 4] \
@@ -46,6 +48,8 @@ proc drawhex {w x y ch dx dy} {
 
     $w bind hex$ch <Enter> [list enterhex $w $ch]
     $w bind hex$ch <Leave> [list leavehex $w $ch]
+
+#    $w create text $x $y -text $ch -fill black -tags [list hex$ch txt$ch] -font {Arial 16 bold}
 }
 
 # Callbacks for various bindings
@@ -69,8 +73,10 @@ proc leavehex {w ch} {
 
 # Initial declarations of state variables
 set locked {}
-# set tile { {0.3 0.5 1.4} {1.3 1.5 2.4} {2.3 2.5 3.4} {3.3 3.5 3.4} {3.4 3.6 3.5} {4.4 4.6 5.5} }
-set tile {}
+set tile { {{0.3 0.5 1.4} {1.3 1.5 2.4} {2.3 2.5 3.4} {3.3 3.5 3.4} {3.4 3.6 3.5} {4.4 4.6 5.5}} {{3.3 3.5 4.4} {3.3 3.5 5.4} {5.3 5.5 6.4} {7.3 7.5 4.4} {5.4 5.6 5.5} {4.4 5.6 6.5}} }
+# set tile {}
+
+set n 0
 set t 0
 
 set letterpattern {}
@@ -103,9 +109,9 @@ proc setup {fd} {
 proc init {width height} {
     global letterpattern
 
-    for {set i 0} {$i < $height} {incr i} {
+    for {set i 0} {$i < $width} {incr i} {
 	set row {}
-	for {set j 0} {$j < $width} {incr j} {
+	for {set j 0} {$j < $height} {incr j} {
 	    lappend row $i.$j
 	}
     lappend letterpattern $row
@@ -113,11 +119,35 @@ proc init {width height} {
 }
 
 proc move {} {
+    global n
     global t
+    global tile
+    global locked
     global letterpattern
 
     .c delete "all"
-    incr t
+
+    if {[incr t] == [llength [lindex $tile $n]]} {
+	set t 0
+
+	set new_locked_ [lindex $tile $n]
+
+
+	set new_locked_tile [lindex $new_locked_ [- [llength $new_locked_] 1]]
+
+	foreach new_locked_tile_piece $new_locked_tile {
+	    lappend new_locked $new_locked_tile_piece
+	}
+
+
+	set locked [concat $locked $new_locked]
+
+	puts [concat "new locked: " $new_locked]
+	puts [concat "all locked: " $locked]
+
+	incr n
+    }
+
     honeycomb .c $letterpattern
 }
 
