@@ -1,5 +1,5 @@
 (defpackage #:hextris
-  (:use :cl :iterate :metatilities :drakma :lift)
+  (:use :cl :iterate :metatilities :drakma)
   (:shadowing-import-from :metatilities minimize finish)
   (:export
     #:main))

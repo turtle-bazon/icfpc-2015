@@ -1,7 +1,6 @@
-
 (in-package :hextris)
 
-(deftestsuite unit-tests () ())
+;; (deftestsuite unit-tests () ())
 
 (defclass unit ()
   ((members :initarg :members :accessor members)))
