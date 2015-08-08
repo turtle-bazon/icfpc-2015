@@ -38,7 +38,6 @@
           (sb-ext:exit)) ()))))
   (destructuring-bind (files time-limit memory-limit number-cores phrases publish)
       (parse-args (rest args))
-    (declare (ignore memory-limit time-limit))
     (let* ((solutions (iter (for fname in files)
                             (for game = (parse-input-file fname))
                             (appending
