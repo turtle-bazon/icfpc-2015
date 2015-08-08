@@ -185,6 +185,11 @@
 (defmethod map-cell-free-p* ((obj hextris-map) row col)
   (zerop (elt (field obj) (+ (* row (width obj)) col))))
 
+(defmethod map-cell-free-p** ((obj hextris-map) (c cell))
+  (multiple-value-bind (row col) (cell-row-col c)
+    (map-cell-free-p* obj row col)))
+
+
 (defmethod map-cell ((obj hextris-map) (c cell))
   (multiple-value-bind (row col) (cell-row-col c)
     (when (and (>= row 0) (< row (height obj)) (>= col 0) (< col (width obj)))

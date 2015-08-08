@@ -19,6 +19,8 @@
                    (for next-unit = (make-next-unit world rng))
                    (for init-position = (unit-initial-position next-unit current-map))
                    (for init-position-on-map = (make-unit-on-map :unit next-unit :coord init-position))
+                   (unless (unit-position-possible-p next-unit init-position current-map)
+                     (terminate))
                    (multiple-value-bind (final-position moves-script)
                        (locate-target current-map init-position-on-map)
                      (unless final-position ;; probably this is a stop condition?
