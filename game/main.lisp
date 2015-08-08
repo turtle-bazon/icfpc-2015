@@ -15,9 +15,15 @@
           (collect pvalue into phrases))
         (finally (return (list files time-limit memory-limit phrases)))))
 
+(defun run-game (game seed phrases)
+  1)
+
 (defun main (args)
   (destructuring-bind (files time-limit memory-limit phrases)
       (parse-args (rest args))
     (let ((solutions (iter (for fname in files)
-                           (collect (parse-input-file fname)))))
+                           (for game = (parse-input-file fname))
+                           (appending
+                               (iter (for seed in (seeds game))
+                                     (collect (run-game game seed phrases)))))))
       (format t "~a~&" solutions))))
