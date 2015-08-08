@@ -67,7 +67,9 @@
                                                                                    (for (values row col) = (cell-row-col cell))
                                                                                    (collect (list (cons :y row) (cons :x col))))
                                                                              'vector)))))))
-                          
+
+                     ;;; generate freeze move
+                     (for freeze-move = (gen-freeze-move current-map final-position))
                      ;;; update map
                      (setf current-map ;; freeze fallen unit at it's final position
                            (unit-lock (unit-on-map-unit final-position)
@@ -75,7 +77,7 @@
                                       current-map))
                      (setf current-map ;; maybe burn some rows if any
                            (map-burn-lines-v2 current-map))
-                     (for moves-script+freeze = (append moves-script (list :sw)))
+                     (for moves-script+freeze = (append moves-script (list freeze-move)))
                      (appending moves-script+freeze into script)
                      (appending next-unit-frames into frames)
                      (finally (return (values script frames))))))

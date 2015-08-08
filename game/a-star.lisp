@@ -29,6 +29,15 @@
     ((:rcw :rcc)
      (make-unit-on-map :unit (unit-rotate (unit-on-map-unit obj) move) :coord (unit-on-map-coord obj)))))
 
+
+(defmethod gen-freeze-move ((field hextris-map) (final-position unit-on-map))
+  (iter (for move in *a-star-moves*)
+        (for moved-unit = (move-unit move final-position field))
+        (unless moved-unit
+          (return-from gen-freeze-move move))
+        (unless (place-on-map (unit-on-map-unit moved-unit) (unit-on-map-coord moved-unit) field)
+          (return-from gen-freeze-move move))))
+
 (defun sq-dist (cell-a cell-b)
   (declare (optimize (speed 3))
            (type cell cell-a cell-b))
@@ -139,7 +148,7 @@
                 (multiple-value-bind (visited-p level-1-key)
                     (fast-check visited (a*-st-pos trans))
                   (unless visited-p
-                    (when (place-on-map (unit-on-map-unit (a*-st-pos trans)) (unit-on-map-coord (a*-st-pos trans)) field)                      
+                    (when (place-on-map (unit-on-map-unit (a*-st-pos trans)) (unit-on-map-coord (a*-st-pos trans)) field)
                       (priority-queue:pqueue-push t trans queue)
                       (mark-visited visited (a*-st-pos trans) :level-1-key level-1-key))))))))
           

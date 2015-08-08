@@ -15,8 +15,8 @@
               (ecase switch
                 (:filled (incf holes-count) (setf switch :hole))
                 (:hole))))
-        (finally (return holes-count))))
-  
+        (finally (return holes-count))))  
+
 (defmethod locate-target ((field hextris-map) (initial-unit unit-on-map))
   (iter (for row from (1- (height field)) downto 0)
         (iter (for col from 0 below (width field))
