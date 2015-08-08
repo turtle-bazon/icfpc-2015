@@ -143,7 +143,7 @@
         (field (field original-map)))
     (let* ((new-field (make-array (* width height) :element-type 'bit))
            (rows-deleted (iter (with row-cor = 0)
-                               (for row from (1- height) to 0)
+                               (for row from (1- height) downto 0)
                                (let ((fullness (iter (for col from 0 below width)
                                                      (sum (elt field (+ (* row height) col))))))
                                  (when (= fullness width)
