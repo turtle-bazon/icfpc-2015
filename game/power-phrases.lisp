@@ -7,6 +7,7 @@
     "Yuggoth"
     "R'lyeh"
     "Yogsothoth"
+    "Tsathoggua"
     "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn!"))
 
 (defparameter *char-mapping* '((:w .   "p'!.03")
