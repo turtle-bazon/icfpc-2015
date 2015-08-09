@@ -116,7 +116,11 @@
     (not (zerop (elt (field obj) (+ (* row (width obj)) col))))))
 
 (defmethod map-cell-free-p* ((obj hextris-map) row col)
-  (zerop (elt (field obj) (+ (* row (width obj)) col))))
+  (let ((index (+ (* row (width obj)) col)))
+    (if (or (< index 0)
+            (>= index (length (field obj))))
+        t
+        (zerop (elt (field obj) index)))))
 
 (defmethod map-cell-free-p** ((obj hextris-map) (c cell))
   (multiple-value-bind (row col) (cell-row-col c)
