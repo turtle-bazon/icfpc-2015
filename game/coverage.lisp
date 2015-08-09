@@ -7,7 +7,7 @@
         (iter (for col from 0 below (width field))
               (for installed-unit = (make-unit-on-map :unit (unit-on-map-unit initial-unit)
                                                       :coord (make-cell-row-col row col)))
-              (iter (repeat 6) ;;; rotate six times
+              (iter (repeat 5) ;;; rotate five times
                     (for translated = (place-on-map (unit-on-map-unit installed-unit)
                                                     (unit-on-map-coord installed-unit)
                                                     field))
