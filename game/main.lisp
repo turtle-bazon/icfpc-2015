@@ -52,7 +52,6 @@
           (executions (execution-plan files)))
       (thread-pool:start-pool tpool)
       (iter (for (game seed) in executions)
-            (format t "~a,~a~&" (problem-id game) seed)
             (let ((current-game game)
                   (current-seed seed))
               (thread-pool:execute tpool
