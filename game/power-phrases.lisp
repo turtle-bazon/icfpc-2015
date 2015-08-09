@@ -1,7 +1,7 @@
 
 (in-package :hextris)
 
-(defparameter *power-phrases*    
+(defparameter *power-phrases*
   '("Ei!"
     "Ia! Ia!"
     "Yuggoth"
