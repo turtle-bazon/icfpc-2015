@@ -26,6 +26,13 @@
             (for publish = t)))
         (finally (return (list files time-limit memory-limit number-cores phrases publish)))))
 
+(defun execution-plan (files)
+  (iter (for fname in files)
+        (for game = (parse-input-file fname))
+        (appending
+         (iter (for seed in (seeds game))
+               (collecting (list game seed))))))
+
 (defun main (args)
   (in-package :hextris)
   (sb-sys:enable-interrupt
@@ -38,27 +45,36 @@
           (sb-ext:exit)) ()))))
   (destructuring-bind (files time-limit memory-limit number-cores phrases publish)
       (parse-args (rest args))
-    (let* ((solutions (iter (for fname in files)
-                            (for game = (parse-input-file fname))
-                            (appending
-                             (game-loop game
-                                        :time-limit time-limit
-                                        :memory-limit memory-limit
-                                        :number-cores number-cores
-                                        :phrases phrases))))
-           (result-string (json:encode-json-to-string
-                           (iter (for s in solutions)
-                                 (for game = (getf s :game))
-                                 (for seed = (getf s :seed))
-                                 (for script = (getf s :script))
-                                 (collecting `((:problem-id . ,(problem-id game))
-                                               (:seed . ,seed)
-                                               (:solution . ,(power-phrase-encode-adt script))))))))
-      (if publish
-          (format t "~a~&"
-                  (http-request *publish-api-uri*
-                                :method :post
-                                :basic-authorization `("" ,*publish-api-key*)
-                                :content-type "application/json"
-                                :content result-string))
-          (format t "~a~&" result-string)))))
+    (let ((solutions '())
+          (solutions-lock (bordeaux-threads:make-lock "solutions"))
+          (tpool (thread-pool:make-fixed-thread-pool "main-game"
+                                                     :size (or number-cores 1)))
+          (executions (execution-plan files)))
+      (thread-pool:start-pool tpool)
+      (iter (for (game seed) in executions)
+            (thread-pool:execute tpool
+                                 (lambda ()
+                                   (let ((result (single-game-loop game seed
+                                                                   :time-limit time-limit
+                                                                   :memory-limit memory-limit
+                                                                   :number-cores number-cores
+                                                                   :phrases phrases)))
+                                     (bordeaux-threads:with-lock-held (solutions-lock)
+                                       (push result solutions))))))
+      (thread-pool:stop-pool tpool)
+      (let ((result-string (json:encode-json-to-string
+                            (iter (for s in solutions)
+                                  (for game = (getf s :game))
+                                  (for seed = (getf s :seed))
+                                  (for script = (getf s :script))
+                                  (collecting `((:problem-id . ,(problem-id game))
+                                                (:seed . ,seed)
+                                                (:solution . ,(power-phrase-encode-adt script))))))))
+        (if publish
+            (format t "~a~&"
+                    (http-request *publish-api-uri*
+                                  :method :post
+                                  :basic-authorization `("" ,*publish-api-key*)
+                                  :content-type "application/json"
+                                  :content result-string))
+            (format t "~a~&" result-string))))))
