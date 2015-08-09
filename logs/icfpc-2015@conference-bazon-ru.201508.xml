@@ -3013,4 +3013,489 @@
  <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:25:19">сосбтно в логах последнее сообщение моё перед тем, как я спать пошёл</msg>
  <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:25:55">&lt;br />[05:33:22] &amp;lt;swizard&amp;gt; самые перспективные направления сейчас: разработка нормального тетрисного алгоритма&lt;br />[05:33:35] &amp;lt;swizard&amp;gt; обязательно нужен хороший солвер&lt;br />[05:34:01] &amp;lt;swizard&amp;gt; и да, надо искать оставшиеся power words&lt;br />[05:34:08] &amp;lt;swizard&amp;gt; у jabber.ru их уже 5 :(</msg>
  <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:26:3">а чуть-чуть подробнее?)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:27:38">Логи ушли.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:27:50">спасибо</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:28:24">а R'lyeh точно не powerword, ты уверен?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:28:31">как ты вообще их проверяешь?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:28:56">R'lyeh счас перепроверю еще разок</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:29:1">я их сабмичу на 24 карту</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:29:3">как решение</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:29:24">если оно power word - то результат не 0</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:29:58">по-моему, там какая-то ошибка — вчера ночью у меня было решение c R'lyeh, ei! и Yuggoth для всех карт, и лидерборд писал мне 3 слова использованных</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:30:9">не обновленные у нас счас 14 и 24</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:30:40">и кстати 0-я карта у нас дороже была на 2000 очков</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:30:41">Лидерборд нам 3 и пишет.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:30:50">[13:30:40] &amp;lt;swizard&amp;gt; и кстати 0-я карта у нас дороже была на 2000 очков&lt;br />&lt;br />ночью?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:30:53">А нет, 4.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:30:53">интересно</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:31:8">turtle, sectoid убрал рльех и добавил эй</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:31:19">тоесть ya</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:31:20">А не, power 3 на 0 задаче.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:32:0">короче надо возвращать рльех</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:32:12">счас проверю р'льех</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:32:20">если работает - то у меня есть вопросы)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:32:25">и походу по 24-ой задаче ненадёжно power-words проверять</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:33:2">почему?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:33:47">потому что если логи почитать, я вчера сначала сделал решение только с одним yuggoth, и лидерборд нам зачёл 0 powerwords</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:34:7">странно</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:34:16">а когда с yuggoth, ei! и r’lheh он нам все три зачёл</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:34:36">там то ли надо со скорингом разобраться, то ли там баг какой-то</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:34:40">может оно слоупочило?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:34:47">ты таги сверял?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:34:53">нет, оно мой таг показывало</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:35:0">оно вчера мне над одним сабмитом думало 3 часа</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:36:0">а какая эвристика у тебя определяет какое слово выбрать?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:36:46">в посчете очков длина слово и кол-во - равноправные множители</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:38:12">swizard: ты пытаешься сделать так, чтобы у тебя слова власти повторялись?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:38:27">нет</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:38:49">&amp;quot;RULES CLARIFICATION: Each occurrence of a phrase of power—even if that occurrence overlaps with another occurrence of the same phrase of power—is counted. For example, if &amp;quot;cthulhu cthulhu&amp;quot; is a phrase of power, then the sequence of commands &amp;quot;cthulhu cthulhu cthulhu&amp;quot; contains two occurrences.&amp;quot;</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:38:51">Вот это прочитай.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:38:56">И ещё скоринг по словам силы.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:39:5">но я всегда делаю ход самым возможно длинным словом власти, если есть возможность</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:39:9">это хорошо если в слове есть одинаковые части.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:39:13">и тут рулит Ia! Ia!</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:39:31">Там скор умножается на количество повторений предыдущих слов фраз.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:39:52">повторений имеется в виду не подряд, а вообще в скрипте</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:40:31">Вообще, да.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:40:32">R'lyeh не слово</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:40:39">счас засабмитил и дало 0</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:40:52">Просто, может, имеет смысл сначала самым длинным закодировать движения, потом словами короче и т.д.?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:41:1">Потому что ещё умножается на длину слова.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:41:1">swizard:  где у тебя оно было посчитано, как ты помнишь?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:41:27">turtle, так и делается</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:42:1">sectoid, давай я ща эксперимент проведу и пойду позавтракаю</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:42:13">верну рльех и засабмичу нулевую карту</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:42:20">если покажет 4, то это оно</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:42:41">давай</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:43:19">а я еще поиграю со словами чуть-чуть на 24й</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:44:2">блин а кто сломал game-loop</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:44:30">там turtle делал параллельность</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:44:33">Я, наверное.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:44:38">А что там с game-loop?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:44:43">Я его постарался оставить таким же.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:44:59">turtle, а можешь в отдельной ветке пока программировать, а не по-живому?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:45:13">ну что б смержить когда точно будет работать</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:45:13">Я там разделил game-loop и single-game-loop.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:45:16">Что там не работает?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:45:22">Я пока параллельность не делал.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:45:23">single-game-loop требует seed</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:45:28">Т.е не коммитил.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:45:31">ничего не работает :)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:45:33">single - да.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:45:39">А обычный game-loop же не требует.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:46:23">game-loop перестал возвращать значения</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:46:55">ну блин, уже мы же с гитом работаем, не надо в мастере ломать ничего :)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:47:17">давайте ветвиться, уже ведь много кода написано</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:47:31">Бля. Забыл дописать. :)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:47:33">давайте</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:47:37">Ветвиться плохо. :)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:47:48">почему? ветвиться как раз замечательно</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:48:21">swizard: у нас могло быть больше очков на 0 при r'lyeh если солвер переусердствует с набором слов силы</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:48:33">swizard: забирай.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:48:39">Ветвиться плохо - мержиться потом надо. :)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:48:52">turtle: ты так говоришь, будто мержиться трудно</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:48:55">Ну в данном случае смысл нет ветвиться.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:49:4">sectoid: Очень турндо. :)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:49:37">swizard: забрал?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:50:43">да</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:50:52">Работает?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:50:57">вроде </msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:51:4">Я эту часть не буду трогать.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:51:5">засабмитил нулевое задание</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:51:13">Я в main.lisp только добавлю параллелизм.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:51:18">Ну, может, потмо в remote тоже.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:51:42">Так что смысла ветвиться не вижу.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:52:16">ну короче я всё равно предлагаю ветвиться, если затрагиваешь заметно чужой код</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:52:32">просто мы кучу времени потеряем иначе на отлов багов</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:52:34">swizard: расскажи как счас работает солвер? выбирает место и идет туда через a* ?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:53:5">как ты туда впилил phrase of power?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:53:42">sectoid, солвера как такового нет, есть брутфорсный перебор — он весь в coverage.lisp, функция locate-target</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:53:56">phrase of power я сделал через A*</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:54:12">брутфорсный перебор позиций?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:54:25">мест &amp;quot;куда идти&amp;quot;?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 13:54:42">swizard: если, то да, конечно. Я про данный случай.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:54:42">просто расширил пространство состояний с 6 (:w :sw :se :e :rcw :rcc) до 6 + движения словами власти</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:54:53">и переписал эвристики</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:55:20">а. хитро</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:55:24">соответственно, A* пытается сначала сделать ход словом власти, если такое есть, и только потом обычным ходом</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:55:39">но плохо то, что если слово власти не влезет в 1 итарцию - мы его не построим</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:55:41">и в эвристиках добавилась длина слова власти</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:55:48">почему?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:55:58">у тебя же a* работает в рамках 1 фигуры?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:56:17">ну да, двигает фигуру из стартовой позиции к конечной</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:56:49">вот</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:56:50">короче смотрите 0 задачу в лидерборде</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:56:55">у нас 4 слова</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:56:58">там багу какую-то починили</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:57:3">в борде</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:57:25">sectoid, возвращай рльех и ставь ресабмит</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:57:38">а твой способ проверки слов власти походу не работает</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:57:42">не знаю почему </msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:57:57">при этом моя проверка сработала на Yuggoth</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:58:3">но не сработала на R'lyeh</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:58:6">надо понять почему</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:58:13">я еще немного помучаю 0ю</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:58:24">ну короче предлагаю тогда проверять нулевой задачей пока</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:58:28">да</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:59:2">так, я отойду тогда позавтракать</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 13:59:11">ок. пока не трогайте _0 плз</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:59:20">а у нас сегодня самая главная цель — научиться играть в тетрис </msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 13:59:42">если помимо слов власти мы ещё и ходы правильные делать будем, то порвём всех однозначно</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:0:39">а еще надо подумать как начать смотреть не в рамках 1 фигуры, а дальше</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:3:13">так вот R'lyeh опять не сработал</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:3:20">на 0 задаче</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:3:36">sectoid да, я же тебе про это писал</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:3:49">у меня тоже не работал отдельно yuggoth</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:3:59">а в комбинации с остальными заработал</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:4:18">я предлагаю проверять не по-отдельности, а в комбинации с остальными</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:4:23">зашарашил в 0ю Yuggoth</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:4:29">счас посмотрю</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:4:43">тоже не должен</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:5:2">надо группировать</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:5:42">короче вот эти: &amp;quot;Ei!&amp;quot; &amp;quot;Ia! Ia!&amp;quot; &amp;quot;Yuggoth&amp;quot; &amp;quot;R'lyeh&amp;quot; точно слова власти</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:6:3">&amp;quot;Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn!&amp;quot; у меня тоже работал</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:6:23">походу просто орги как-то попортили возможность подбирать слова власти по-одному</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:6:29">можно на 2й проверить</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:6:39">тупо чтобы брутфорс с источником из википедии не написали, наверно</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:6:47">нужна очень большая карта</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:6:51">брутфорс не взлетит</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:6:57">ибо борда чудовищно тормозит</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:7:14">да там слов-то не так чтоб много</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:7:19">за ночь добежит</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:7:26">но факт в том, что так всё равно не работает</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:7:34">поэтому слова надо все вместе проверять</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:7:44">бля, реально не сработал Yuggoth на 0й</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:7:48">так</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:7:51">это очень плохо</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:8:4">sectoid</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:8:9">предлагаю делать так:</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:8:22">берёшь что-то типа точно известных нам 4 слова</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:8:33">и по-одному добавляешь туда кандидатов</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:8:39">если стало 5 на борде — бинго</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:8:53">только надо проверять в скрипте, что это слово реально сконструировалось</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:9:7">еще бы сделать верификатор, который будет говорить что там нет гейм-овера раньше времени</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:9:23">а, ты предлагаешь добавлять в допустимые?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:9:29">да</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:9:41">и солвить с ними</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:9:43">чо, мона</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:9:52">счас сделаю ток чуть-чуть правок</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:10:5">и я хочу взвести сервак для запуска солвера на сабмит</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:10:14">чтобы у меня repl занят не был пока идет сабмит</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:10:49">(2015-08-09 11:00 UTC) ALERT: A bug which caused the leaderboard to sometimes report unexpectedly high scores—possibly related to including two solutions for a single problem and seed in a single submission—has been fixed. Rankings have been adjusted.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:12:3">Запускай, кстати, бинарём нашим.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:12:8">ага, так и хочу</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:12:11">Заодно будем проверять, что бинарь собирается. :)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:12:15">и выхлоп буду затуливать на curl</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:12:22">гы</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:12:28">мона ж и словами тогда так же играться</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:12:39">Зачем на curl? Только чтобы продебажить.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:12:45">так то там -publish t можно добавить.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:12:49">И он сразу будет деплоить.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:13:8">не, мне надо еще верифицировать, что слово появилось (это если мучать слова им же)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:13:20">а мона и publish</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:14:10">счас отбегу по семейным на полчаса и вернусь к поиску слов</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:19:21">Закоммитил параллелизм.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:19:32">Чере -c укажешь количество своих ядер, sectoid.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 14:20:52">оок</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:24:2">такс</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:24:13">ладно, слова словами, но нужен солвер</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:24:18">солвер солвер солвер</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:25:11">как его делать</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:25:56">А что больше всего профилировщик показывает?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:26:51">(sb-sprof:with-profiling (:report :flat :sample-interval 0.0001)&lt;br />           (game-loop (parse-input-file #p&amp;quot;/media/psf/Home/devel/cl/icfpc-2015/task/problems/problem_2.json&amp;quot;)))</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:27:10">он тебе по функциям распишет</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:28:23">А у тебя есть данные?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:28:26">6 слов власти максимум у народа</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:28:36">9</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:28:38">turtle какие данные?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:28:45">По профилированию.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:29:3">ну я же тебе написал команду</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:29:7">она тебе всё покажет</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:29:21">Ну я спрашивал не запуская есть что-нибудь? :)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:29:52">в смысле, ты предлагаешь запустить её мне, и скопипастить тебе вывод? :)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:30:40">Я спрашиваю запускал ли ты и есть ли уже вывод?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:31:0">ну конечно запускал, и конечно был</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:31:11">щас уже давно репл новый переоткрыт</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:31:17">ОК.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:31:38">блин, turtle, это 6.8 секунд времени запустить команду :)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:31:46">мы с тобой уже минут пять болтаем</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:31:58">Что-то у меня нет этого sb-proof.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:32:9">(ql:quickload :sb-sprof)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:33:0">Не найден. :-\</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:33:30">Ты откуда берёшь такие пакеты? :)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:33:50">это вообще не пакет, а часть sbcl</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:34:21">ну попробуй (require :sb-sprof)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:34:31">http://www.sbcl.org/1.0/manual/Statistical-Profiler.html</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:34:47">Тоже не хочет.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:35:55">Захотел.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:39:53">Так он там только по количеству вызовов что ли?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:40:31">он статистический: по процентам от общего времени работы </msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:40:38">так ладно</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:41:6">раз никто не внял моим призывам про солвер, я пойду делать простейший скоринговый хотя бы для начала</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:41:16">такой например: https://luckytoilet.wordpress.com/2011/05/27/coding-a-tetris-ai-using-a-genetic-algorithm/</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:42:13">А в чём у нас проблема? Долго считает куда расположиться?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:42:16">Или долго идёт?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:42:43">суммарно</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:43:10">a-star 80% времени съедает, насколько я помню</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:44:3">ТАк a-star это и есть эвристика.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:44:9">Или я чего-то не понимаю?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:46:44">А ты как делаешь - ставишь фигуру и делаешь a-star до неё?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:47:7">Ладно, пошёл смотреть locate-target. :)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:47:13">а ты чего хочешь сделать-то в итоге?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:47:19">я просто не очень понимаю</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:47:47">если соптимизировать производительность, то тебе надо просто на результаты статистического профайлера смотреть</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:48:3">и оптимизировать снизу вверх</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:48:38">Я сейчас хочу понять где у нас затык.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:48:47">Чтобы там посмотреть и думать в эту сторону.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:49:14">в каком смысле затык</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:49:47">Ты говорил, солвер нам нужен. Что ты имел в виду?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:50:14">я имел в виду, что нужно научить наш проект хорошо играть в тетрис</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:50:29">нужно придумать или найти алгоритм и запрограммировать его</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:50:30">В общем я понял.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:50:40">А что плохого в текущем алгоритме?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:50:55">тем, что он очень плохо играет в тетрис</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:51:3">:) Я угадал твой ответ. :)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:51:4">и зарабатывает очень мало очков</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:51:40">Как он сейчас решает куда поставиться? Какое условие для выбора?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:52:24">посмотри, пожалуйста, по логам, я это писал уже трижды :(</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:52:36">последний раз в четыре ночи сегодня</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:52:42">Блин.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:55:26">&amp;quot;мой «солвер» сейчас вообще знаешь как работает? :) в троекратно вложенном цикле примеряет фигуру слева снизу направо вверх, вращая её шесть раз по часовой стрелке, и выбирает место, где минимизируется количество занятых клеток на нижнем уровне &lt;br />короче вообще решение от балды и на коленке, которое мы вчера пытались к лайтнингу набросать&lt;br />мы даже не используем сейчас тот факт, что все фигуры на игру заранее известны&amp;quot;</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:55:28">Это?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:55:36">да</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:55:47">coverage.lisp, функция locate-target.lisp</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:55:57">если что, её не надо как-то улучшать</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 14:55:58">Наконец-то я из тебя это вытащил. :)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:56:2">её надо выкинуть нафиг</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 14:56:11">и написать нормальное</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="9 15:6:23">доброе утро</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:6:31">привет!</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="9 15:6:41">или даже фхтагн, культисты</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:6:43">jtootf: хай</msg>
+ <msg nick="jtootf" in="1" from="icfpc-2015@conference.bazon.ru/jtootf" time="9 15:6:44">читаю логи</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:6:53">я вернулся</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 15:7:42">jtootf: привет.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 15:8:47"> . . . . . . . . . . . . . . .                                                                                                                                                               &lt;br />. . . . . . . . # . . . . . .                                                                                                                                                                &lt;br /> x x x . . . . . # # x x x . .                                                                                                                                                               &lt;br />x x x x x x x # # . . x x x .                                                                                                                                                                &lt;br /> x x x x x x x x x x x x x x .                                                                                                                                                               </msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 15:8:51">Блин. Сек.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:9:26">пока выходил придумал дополнение к a-star. после прохода очередной фигуры, запоминать последовательность ходов предыдущей итерации. и при построении пути пытаться достраивать слово силы от предыдущей итерации</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 15:10:11">swizard: http://i.imgur.com/wP8UAQe.png - вот тут смотри, фигура установивишь, запирает две клетки.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:10:25">sectoid, интересная идея, тока к ней уточнение, что «freezing move» тоже нужно соответствующе подбирать тогда</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 15:10:36">По идее, надо бы смотреть, нет ли таких клеток, до которых нет хода самой простой фигурой.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:10:46">swizard: да, хорошая мысль. </msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:11:13">еще думаю о замене locate-target на что-то, что будет строить оптимальные положения _всех_ фигур последовательности на поле</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:11:19">turtle, ты лучше 10-ю карту поотлаживай</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:11:26">она маленькая, но показательная</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:11:27">и потом предлагать a-star'у выполнить это построение просто</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 15:11:34">ОК, щас гляну.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:11:50">sectoid, идея правильная, но вопрос в реализации =)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:12:5">swizard: собираюсь покумекать на эту тему</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:12:5">я просто хз как это делать</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:12:39">нужно мб через какое-то время брейншторм устроить на эту тему</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:12:54">я пока простенький солвер делаю как здесь: https://luckytoilet.wordpress.com/2011/05/27/coding-a-tetris-ai-using-a-genetic-algorithm/</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:13:5">чтобы хоть что-то было не такое тупое как сейчас</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:13:10">солвером ты что называешь? a-star или locate-target?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:13:29">locate-target</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:13:33">хорошо</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:13:34">solver — это решатель</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:13:38">аще идея оттеда мне нравится</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:13:45">a* всего лишь пути генерирует</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:13:48">погонять генетический - и может интересное вылезти</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:14:11">попробуем, но я бы на это не расчитывал</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:15:2">параллельность юзаем пока только для распараллеливания seed'ов?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:15:23">в смысле хотим юзать</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 15:16:52">Да.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 15:16:55">Сидов и файлов.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 15:18:47">Fatal SIMPLE-ERROR:&lt;br />  Compilation failed: Derived type of&lt;br />                      (* (FIND-OUT-SUM-OF-HEIGHTS FIELD)&lt;br />                         *SUM-OF-HEIGHTS-FACTOR*)&lt;br />                      is&lt;br />                        (VALUES NULL &amp;amp;OPTIONAL),&lt;br />                      conflicting with its asserted type&lt;br />                        NUMBER.&lt;br /></msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 15:18:50">Перестал собираться.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:20:58">пофиксил</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 15:24:42">swizard: на 10-карте для первого же элемента выбирается странная позиция.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:25:1">вот то-то и оно</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:25:16">а надо чтобы выбиралась хорошая</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 15:25:31">Ты когда эелмент располагаешь и вращаешь, ты вращаешь его вокруг его пивота?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 15:25:40">Ну в смысле место примеряешькогда.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:25:54">ну да, он только вокруг пивота и умеет вращаться</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 15:26:19">Ну это когда ходит.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 15:26:32">А когда мы располагаем его, то нам нужно его как-нибудь поставить.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 15:26:51">Т.е. выбираем мы нижнюю левую клетку, допустим.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:27:5">ребят, еще немного инфы: для поиска фраз силы нам нужна тулза. Мы ей даем префикс, она его строит, а потом доигрывает без фраз силы вообще.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 15:27:25">Ты на этой клетке как пытаешься расположить? Прямо как есть?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 15:27:28">Или транслируешь пивот?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 15:27:52">Если так, то надо бы тогда начинать не от 0, а от -x, где x - количество клеток от пивота до фигуры.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 15:28:13">sectoid: не понял идеи.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:28:39">хотя можно лучше)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:28:42">я придумал)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:29:44">еще момент - я насетапил на серваке наш environment, и запускать сабмит можно на мега-монстре</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 15:34:11">Круто.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 15:34:15">Попробуй пока что-нибудь запусти.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 15:34:21">У меня там херня какая-то, похоже.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 15:34:24">Но всё равно запусти.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:34:44">я тут еще приблуду делаю для исследования фраз силы</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:35:14">есть некоторое желание выдать ее jtootf чтобы он, параллельно с раздумиями над алгоритмами солвера, исследовал слова</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:37:8">закинул проверку R'lyeh</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:37:27">я мучаю _0 задачу. ее кто-то еще тыкает на борде?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:38:6">нет, вроде</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:38:34">R'lyeh точно слово силы</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:38:56">я два раза сабмитил — без него было 3 pw, с ним стало 4</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:39:2">да, слово силы</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:39:8">короче 4 штуки точно есть</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:39:20">итого у нас их 5, но одно мы не можем построить в рамках 1 фигуры</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:40:33">ну да и чёрт с ним пока я считаю — 8 раз повторить R'lyeh намного проще, чем фразу из 51 символа, а очков столько же</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:40:45">не стоит возиться, имхо</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:40:45">пока да</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:40:49">но может еще есть слова</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:41:1">хотя опять-таки, в реальном скоре нам их все дадут</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:41:4">однозначно есть, их 18 штук вроде обещают</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:41:52">мне кажется, что их не дадут в параметрах все</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:42:4">иначе не имеет смысла искать их</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:42:16">я думаю, что будут давать только выборочно — какие-то</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:42:20">допустим, штук пять</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:42:32">during judging (except for the lightning division), the program will be passed all the phrases of power.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:42:40">а, ну окей тогда</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:42:53">но тогда непонятно зачем их искать сейчас</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 15:43:7">Чтобы глюки отладить.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:43:7">разве что - чтобы поисследовать их какие-то свойства</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:45:16">sectoid, слушай, вопрос есть</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:45:27">вот у нас есть cell, он в кубических координатах</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:45:36">и есть карта</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:45:56">я же могу проверить всех соседей этой клетки на предмет занятости?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:46:58">а, понял, надо просто сделать cell-move по всем шести направлениям и посмотреть</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:47:4">всё, вопрос снимаю</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:47:17">можно даже быстрее в принципе</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 15:47:42">не порождая пачку объектов, а просто на координатах</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:48:9">а как, мне же всё равно смотреть в карту?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 15:48:22">да ладно, забей пока, потом ускорим если надо будет</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:1:59">sectoid: ты засетапил сабмит сервер?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:2:56">вот счас буду проверять его</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:3:22">turtle: </msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:8:16">turtle: может добавить ключ, который будет тег назначать?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:16:50">добавляю</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:18:19">sectoid: да, добавь.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:18:52">sectoid: ты уже добавил или мне добавить?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:19:53">sectoid: сколько у тебя там ядер на твоём хеоне?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:20:56">добавил</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:20:57">4</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:21:4">А что так мало? :)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:21:13">так встали звезды</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:21:20">но зато у меня таких сервака 3шт</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:21:27">плюс мой десктпо (8 ядер)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:23:3">А ты как хочешь распараллелить по сервакам?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:24:0">не знаю еще. например позадачно</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:24:8">у нас 14 и 24 считаются целую вечность</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:25:10">у тебя вообще работал main?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:25:33">Да.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:25:35">А что?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:25:50">Какой-то вопрос?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:26:57">json ругается</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:26:59">счас отлажу</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:27:9">У 14, вроде, 1 сид только.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:27:16">наверно мое дополнение кривое</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:27:45">Потом померяемся. :) Я тут тоже на хеоне одном засетапил.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:28:29">о, работает</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:28:37">счас засабмичу еще для проверки</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:30:5">сделал estimator </msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:30:21">у кого есть пять минут времени чтобы мы вместе проверили его?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:30:29">и если ок, буду солвер доделывать</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:30:44">У меня есть.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:30:49">отлично</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:30:50">Что нужно посмотреть?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:30:52">ща сек</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:31:21">(let ((*info-printer* (lambda (field &amp;amp;key current-position &amp;amp;allow-other-keys)&lt;br />                                 (format t &amp;quot; ;; estimate = ~a~%&amp;quot;&lt;br />                                         (estimate (make-instance 'hedonistic-solver) field current-position)))))&lt;br />           (game-loop (parse-input-file #p&amp;quot;/Users/swizard/devel/cl/icfpc-2015/task/problems/problem_0.json&amp;quot;) :record-film t))</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:31:33">после git pull у тебя должна заработать такая конструкция</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:31:50">и в визуализаторе должно писать цифры — общая оценка позиции</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:32:19">надо погонять на разных картах и решить, разумный ли скор выдаётся для позиций или есть лажа</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:33:21">А что никто не использует относительные пути? :)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:33:34">у меня они автодополняются сами</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:33:40">аналогично</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:33:44">У меня тоже.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:33:56">Но начинаю я с относительного.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:34:9">Ладно, на первом же шаге два estimate скора.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:34:16">Это почему?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:34:27">потому что две разных позиции у тебя нарисовано</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:34:33">одна откуда и другая куда</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:35:3">estimate для конечной позиции выдаётся?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:35:12">И как лучше? Меньше или больше?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:35:23">estimate выдаётся ровно для той позиции, которая нарисована на экране</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:35:25">лучше больше</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:35:28">максимизируем</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:35:48">кстати если будет энтузиазм, можно покрутить параметры в hedonistic.lisp</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:35:56">Для конечной?</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:36:2">Тогда всё равно не понял почему два.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:36:10">для обеих</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:36:20">estimate считается внутри debug-draw</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:36:27">Ну с шагом же меняется скор.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:36:30">два раза вызвал — два раза посчиталось</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:36:33">Т.е. не для позиций.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:36:40">для картинки на экране</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:36:57">вот как нарисовано, эта конфигурация и оценивается</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:37:14">А, кажис, понял.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:37:16">конечная позиция не считается вообще</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:37:22">Т.е. оценивается насколько интересно заполнение.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:37:23">она по старому алгоритму выбирается</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:37:41">И если после расположения у нас будет давать максимальный скор?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:37:55">скор надо максимизировать будет</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:37:58">ребят, в репе счас нормальный солвер? мне хочется прогнать сабмит и оценить полное время</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:38:9">в репе старый солвер</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:38:10">Обычный солвер там, как я понял.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:38:14">отлично</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:38:19">нового нет ещё если что :)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:38:29">надо estimate утвердить сначала</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:39:12">пустил на сабмит</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:39:42">понял что лучше его в скрине пускать</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:39:45">перезапуск)</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:40:12">поехало</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:41:44">swizard: http://i.imgur.com/Lwwj21r.png</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:42:8">Мне кажется, у верхней позиции должен быть больший балл, ибо нижняя блокирует одну соту.</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:42:25">а что значат # # ?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:42:41"># — это конечная позиция, к которой фигура едет</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:42:57">круть</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:43:23">turtle — спорно, на самом деле: непонятно, как потом в образовавшуюся дырку запихивать другую фигуру </msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:43:55">можно погонять на более сложных картах</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:43:56">Ну если не бояться дырок, то непонятно как сжигать строки.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:44:8">за дырки тоже штраф</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:44:21">А запихать то можно - фигуры разные бывают, и линия, и точка.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:44:29">штрафы настраиваются в hedonistic.lisp</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:44:29">Хотя, конечно, можно список фигур посмотреть.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:44:46">И избегать образования дырок, куда ни одну запихнуть нельзя.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:46:35">Вообще, можно сравнивать с тем, какие фигуры будут следующими. В будущем.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:46:40">А так пока, вроде, норм.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:46:45">Щас на 10-й карте погоняю.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:49:30">swizard: http://i.imgur.com/2LxWxst.png</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:49:39">Самая верхняя и самая нижняя из выделенного.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:49:52">У нижней, в теории, должен быть больший скор.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:50:6">Просто потому что она ниже.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:50:14">А других причин не вижу.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:52:10">там есть эвристика про то, что фигура касается занятых клеток на карте</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:52:18">за это даётся небольшой бонус</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:52:37">смысл в том, чтобы она посередине стакана не сыпала, а старалась покучнее</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:53:8">swizard: может, не давать бонус за то, что касается верхними краями?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:53:55">да я бы оставил пока, могут быть разные конфигурации</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:54:3">например нависать крыша может</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 16:54:29">в любом случае две твоих указанных позиции не попадут в солвер, потому что из них нельзя сгенерировать freeze move</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:56:20">я за вашим полетом мысли не успеваю</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 16:56:39">ковыряю пока a-star, пытаюсь его заставить генерировать больше слов</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:57:23">swizard: ну тогда вставляй его.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:57:35">Вроде норм, в целом, кажется.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:57:46">А там посмотрим. :)</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 16:59:53">swizard: про запирание клеток я неправ был. Туда же можно прити поворотом хитрой фигурой с хитрым пивотов.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 17:1:56">а что за enhanced-thread-pool</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 17:2:7">у меня нет такого пакета</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 17:2:48">Он в самом проекте.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 17:2:54">В каталоге src.</msg>
+ <msg nick="turtle" in="0" from="icfpc-2015@conference.bazon.ru/turtle" time="9 17:3:1">Это для параллелизма.</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 17:4:48">понял</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 17:4:51">так, короче</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 17:4:54">смотрите</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 17:5:4">бранч hedonistic-solver</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 17:5:14">синхронизируетесь с ним</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 17:5:23">и можно смотреть игру вот так: </msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 17:5:30">(debug-locate-visualize #p&amp;quot;/Users/swizard/devel/cl/icfpc-2015/task/problems/problem_10.json&amp;quot;)</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 17:6:5">соответственно, я щас по-быстрому сделал солвер, который очень тупо все возможные варианты перебирает, максимизирует estimate, и гонит фигуру туда</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 17:6:19">погоняйте пока на разных картах и сообщите своё мнение</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 17:6:24">а я пойду пообедаю быстро</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 17:6:44">если вдруг окажется очень круто (вряд ли, но неисключено), можно попробовать засабмитить</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 17:7:44">и вмержить в мастер</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 17:8:28">а считалки скора игры у нас все еще нет?</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 17:8:30">может сделать?</msg>
+ <msg nick="swizard" in="1" from="icfpc-2015@conference.bazon.ru/swizard" time="9 17:8:57">ну смотря зачем</msg>
+ <msg nick="sectoid" in="1" from="icfpc-2015@conference.bazon.ru/sectoid" time="9 17:9:19">например чтобы оценивать наши концепты не ожидая бездну времени на сабмите</msg>
 </kopete-history>
