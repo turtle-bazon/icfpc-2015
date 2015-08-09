@@ -1,22 +1,6 @@
 
 (in-package :hextris)
 
-(defmethod count-holes ((field hextris-map) row)
-  (iter (with holes-count = 0)
-        (with switch = :filled)
-        (for col from 0 below (width field))
-        (multiple-value-bind (cell filled-p)
-            (map-cell field (make-cell-row-col row col))
-          (declare (ignore cell))
-          (if filled-p
-              (ecase switch
-                (:hole (setf switch :filled))
-                (:filled))
-              (ecase switch
-                (:filled (incf holes-count) (setf switch :hole))
-                (:hole))))
-        (finally (return holes-count))))  
-
 (defmethod locate-target ((field hextris-map) (initial-unit unit-on-map) &key (solver (make-instance 'hedonistic-solver)))
   (iter outermost
         (for row from 0 below (height field))
