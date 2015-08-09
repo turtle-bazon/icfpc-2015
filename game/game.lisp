@@ -12,11 +12,13 @@
   (declare (optimize (debug 3))
            (ignore time-limit memory-limit number-cores))
   (let ((rng (make-rng seed))
-        (*power-phrases* phrases))
+        (*power-phrases* phrases)
+        (power-phrases-alist (power-phrases-alist *power-phrases*)))
     (multiple-value-bind (game-script film move-score power-score)
         (iter (with current-map = (game-map world))
               (with move-score = 0)
               (with power-score = 0)
+              (with power-phrases-used = (make-hash-table :test #'equal))
               (for ls = 0)
               (for ls-old initially 0 then ls)
               (repeat (source-length world)) ;; spawn as many units as given in source-length
@@ -97,11 +99,31 @@
                                                  10))
                                        0)))
                   (incf move-score (+ points line-bonus)))
+;; calculate power score
+;; power_scorep = 2 * lenp * repsp + power_bonusp
+;;   where
+;;   power_bonusp = if repsp > 0
+;;                  then 300
+;;                  else 0
+                (iter
+                  (for (phrase-script . _) in power-phrases-alist)
+                  (iter
+                    (for pos
+                         initially (search phrase-script moves-script+freeze)
+                         then (search phrase-script moves-script+freeze :start2 (1+ pos)))
+                    (unless pos
+                      (terminate))
+                    (incf power-score (* 2 (length phrase-script)))
+                    (unless (gethash phrase-script power-phrases-used)
+                      (incf power-score 300)
+                      (setf (gethash phrase-script power-phrases-used) t))))
                 (appending next-unit-frames into frames)
                 (finally (return (values script frames move-score power-score)))))
       (list :game world :seed seed :script game-script :film film :move-score move-score :power-score power-score :score (+ move-score power-score)))))
 
-(defmethod game-loop ((world game) &optional &key record-film time-limit memory-limit number-cores phrases)
+(defmethod game-loop ((world game) &optional &key record-film time-limit memory-limit number-cores (phrases nil phrases-p))
+  (unless phrases-p
+    (setf phrases *power-phrases*))
   (iter (for seed in (seeds world))
         (for rng = (make-rng seed))
         (for (values game-script film) =
