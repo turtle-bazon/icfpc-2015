@@ -71,11 +71,13 @@
           (format t " "))
         (iter (for col from 0 below (width field))
               (multiple-value-bind (cell filled-p) (map-cell field (make-cell-row-col row col))
-                (format t "~a " (if (and translated-current (find cell (members translated-current) :test #'cell=))
-                                    "o"
-                                    (if (and translated-final (find cell (members translated-final) :test #'cell=))
-                                        "#"
-                                        (if filled-p "x" "."))))))
+                (format t "~a " (if (and current-position (cell= cell (unit-on-map-coord current-position)))
+                                    "*"
+                                    (if (and translated-current (find cell (members translated-current) :test #'cell=))
+                                        "o"
+                                        (if (and translated-final (find cell (members translated-final) :test #'cell=))
+                                            "#"
+                                            (if filled-p "x" ".")))))))
         (format t "~%")
         (finally
          (when (and (boundp '*info-printer*) (functionp *info-printer*))
