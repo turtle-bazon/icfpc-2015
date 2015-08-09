@@ -11,6 +11,7 @@
 (ql:quickload "metatilities")
 (ql:quickload "cl-json")
 (ql:quickload "drakma")
+(ql:quickload "priority-queue")
 
 (push (merge-pathnames "buildapp-1.5.5/" (format nil "~a/" (sb-posix:getcwd))) asdf:*central-registry*)
 (asdf:load-system "buildapp")
