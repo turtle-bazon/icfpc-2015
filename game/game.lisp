@@ -67,7 +67,10 @@
                                                                         'vector)))))))
 
 ;;; generate freeze move
-                (for freeze-move = (gen-freeze-move current-map final-position))
+                (for freeze-move = (gen-freeze-move current-map final-position :script (append script moves-script)))
+;;; record script                
+                (for moves-script+freeze = (append moves-script (list freeze-move)))
+                (appending moves-script+freeze into script)
 ;;; update map
                 (setf current-map ;; freeze fallen unit at it's final position
                       (unit-lock (unit-on-map-unit final-position)
@@ -94,8 +97,6 @@
                                                  10))
                                        0)))
                   (incf move-score (+ points line-bonus)))
-                (for moves-script+freeze = (append moves-script (list freeze-move)))
-                (appending moves-script+freeze into script)
                 (appending next-unit-frames into frames)
                 (finally (return (values script frames move-score power-score)))))
       (list :game world :seed seed :script game-script :film film :move-score move-score :power-score power-score :score (+ move-score power-score)))))
