@@ -17,8 +17,6 @@
           (for memory-limit = (parse-integer pvalue)))
         (when (string= "-c" (string-downcase pname))
           (for number-cores = (parse-integer pvalue)))
-        (when (string= "-tag" (string-downcase pname))
-          (for tag = (string-downcase pname)))
         (when (string= "-p" (string-downcase pname))
           (collect pvalue into phrases))
         (when (string= "-publish" (string-downcase pname))
@@ -26,6 +24,8 @@
                     (string= "true" (string-downcase pvalue))
                     (string= "yes" (string-downcase pvalue)))
             (for publish = t)))
+        (when (string= "-tag" (string-downcase pname))
+          (for tag = (string-downcase pvalue)))
         (finally (return (list files time-limit memory-limit number-cores phrases publish tag)))))
 
 (defun execution-plan (files)
@@ -75,10 +75,10 @@
                                   (collecting `((:problem-id . ,(problem-id game))
                                                 (:seed . ,seed)
                                                 (:solution . ,(power-phrase-encode-adt script))
-                                                ,@(when tag `(:tag ,(format nil "~a-~a-~a"
-                                                                            tag
-                                                                            (problem-id game)
-                                                                            (get-internal-real-time))))))))))
+                                                ,@(when tag `((:tag . ,(format nil "~a-~a-~a"
+                                                                              tag
+                                                                              (problem-id game)
+                                                                              (get-internal-real-time)))))))))))
         (if publish
             (format t "~a~&"
                     (http-request *publish-api-uri*
