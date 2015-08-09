@@ -10,8 +10,9 @@
 
 (defmethod single-game-loop ((world game) seed &optional &key record-film time-limit memory-limit number-cores phrases)
   (declare (optimize (debug 3))
-           (ignore time-limit memory-limit number-cores phrases))
-  (let ((rng (make-rng seed)))
+           (ignore time-limit memory-limit number-cores))
+  (let ((rng (make-rng seed))
+        (*power-phrases* phrases))
     (multiple-value-bind (game-script film move-score power-score)
         (iter (with current-map = (game-map world))
               (with move-score = 0)
