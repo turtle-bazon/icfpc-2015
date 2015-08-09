@@ -21,12 +21,21 @@
         (finally (return heights))))
 
 (defun find-out-burned-rows-count (field)
-  ;; TODO
-  0)
+  (multiple-value-bind (map-with-burned-rows burned-rows-count)
+      (map-burn-lines-v2 field)
+    (declare (ignore map-with-burned-rows))
+    burned-rows-count))
 
 (defun find-out-blockades-count (field)
-  ;; TODO
-  0)
+  (iter (with blockades-count = 0)
+        (for col from 0 below (width field))
+        (iter (with blocked-p = nil)
+              (for row from 0 below (height field))
+              (if (map-cell-free-p* field row col)
+                  (setf blocked-p t)
+                  (when blocked-p
+                    (incf blockades-count))))
+        (finally (return blockades-count))))
 
 (defun members-touching-something-count (pos field)
   ;; TODO
