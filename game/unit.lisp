@@ -76,7 +76,14 @@
                                     (if (and translated-final (find cell (members translated-final) :test #'cell=))
                                         "#"
                                         (if filled-p "x" "."))))))
-        (format t "~%")))
+        (format t "~%")
+        (finally
+         (when (and (boundp '*info-printer*) (functionp *info-printer*))
+           (funcall *info-printer* field
+                    :current-position current-position
+                    :final-position final-position
+                    :translated-current translated-current
+                    :translated-final translated-final)))))
 
 (defmethod unit-left-most ((obj unit))
   (reduce #'(lambda (l r)

@@ -6,5 +6,5 @@
 
 (in-package :hextris)
 
-
+(defvar *info-printer*)
 
