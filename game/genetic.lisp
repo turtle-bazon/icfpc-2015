@@ -69,13 +69,13 @@
     (thread-pool:start-pool tpool)
 
     (iter (for (_ chromosome) in population)
-          (for the-world = world)
-          (for the-chromosome = chromosome)
-          (thread-pool:execute tpool
+          (bind ((the-world world)
+                 (the-chromosome chromosome))
+            (thread-pool:execute tpool
                                (lambda ()
                                  (bind ((result (list (genetic-fitness the-world the-chromosome) the-chromosome)))
                                    (bordeaux-threads:with-lock-held (population-lock)
-                                     (push result new-population))))))
+                                     (push result new-population)))))))
     (thread-pool:stop-pool tpool)
 
     (sort new-population #'> :key #'first)))
