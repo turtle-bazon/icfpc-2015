@@ -76,5 +76,5 @@
                                   :method :post
                                   :basic-authorization `("" ,*publish-api-key*)
                                   :content-type "application/json"
-                                  :content result-string))
-            (format t "~a~&" result-string))))))
+                                  :content result-string)))
+        (format t "~a~&" result-string)))))
