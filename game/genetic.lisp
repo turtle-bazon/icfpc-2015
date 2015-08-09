@@ -15,9 +15,9 @@
                       *chromosome-keys*))
        ,@body)))
 
-(defun genetic-fitness (world chromosome number-of-cores)
+(defun genetic-fitness (world chromosome)
   (with-chromosome (chromosome)
-    (iter (for seed-result in (game-loop world :number-cores number-of-cores))
+    (iter (for seed-result in (game-loop world))
           (sum (getf seed-result :move-score)))))
 
 (defun genetic-make-random-property (&optional (stretch 10.0))
@@ -61,22 +61,36 @@
 
 
 (defun genetic-fit-population (world population number-of-cores)
-  (sort (iter (for (_ chromosome) in population)
-              (collect (list (genetic-fitness world chromosome number-of-cores) chromosome)))
-        #'>
-        :key #'first))
+  (bind ((tpool (thread-pool:make-fixed-thread-pool "genetic-ai-improver"
+                                                    :size number-of-cores))
+         (new-population (list))
+         (population-lock (bordeaux-threads:make-lock "population")))
 
-(defun genetic-run (world number-of-generations 
+    (thread-pool:start-pool tpool)
+
+    (iter (for (_ chromosome) in population)
+          (for the-world = world)
+          (for the-chromosome = chromosome)
+          (thread-pool:execute tpool
+                               (lambda ()
+                                 (bind ((result (list (genetic-fitness the-world the-chromosome) the-chromosome)))
+                                   (bordeaux-threads:with-lock-held (population-lock)
+                                     (push result new-population))))))
+    (thread-pool:stop-pool tpool)
+
+    (sort new-population #'> :key #'first)))
+
+
+(defun genetic-run (world number-of-generations
                     &key (population nil) (population-size 10) (extinction-factor 0.5)
                       (breed-op #'genetic-breed-pair-random) (number-of-cores 1))
-  
+
   (unless population
     (setf population (genetic-make-random-population population-size)))
+
   (iter (for gen from 0 to number-of-generations)
         (format t "Generation ~a...~%" gen)
         (setf population (genetic-fit-population world population number-of-cores))
         (format t "Population: ~a~%" population)
         (setf population (genetic-next-population population extinction-factor breed-op))
         (finally (return population))))
-
-
