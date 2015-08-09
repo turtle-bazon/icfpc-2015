@@ -47,7 +47,8 @@
           (sb-ext:exit)) ()))))
   (destructuring-bind (files time-limit memory-limit number-cores phrases publish tag)
       (parse-args (rest args))
-    (let ((solutions '())
+    (let ((*power-phrases* phrases)
+          (solutions '())
           (solutions-lock (bordeaux-threads:make-lock "solutions"))
           (tpool (thread-pool:make-fixed-thread-pool "main-game"
                                                      :size (or number-cores 1)))
