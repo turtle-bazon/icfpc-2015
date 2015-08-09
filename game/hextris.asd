@@ -20,6 +20,7 @@
                (:file "game" :depends-on ("unit" "rng"))
                (:file "parser" :depends-on ("game"))
                (:file "a-star" :depends-on ("game" "power-phrases"))
-               (:file "hedonistic" :depends-on ("a-star"))
+               (:file "solver" :depends-on ("a-star"))
+               (:file "hedonistic" :depends-on ("solver"))
                (:file "coverage" :depends-on ("hedonistic"))))
 
