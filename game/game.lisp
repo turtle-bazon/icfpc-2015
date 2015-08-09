@@ -78,12 +78,13 @@
   (iter (for seed in (seeds world))
         (for rng = (make-rng seed))
         (for (values game-script film) =
-             (single-game-loop world seed
-                               :record-film record-film
-                               :time-limit time-limit
-                               :memory-limit memory-limit
-                               :number-cores number-cores
-                               :phrases phrases))))
+             (collect
+                 (single-game-loop world seed
+                                   :record-film record-film
+                                   :time-limit time-limit
+                                   :memory-limit memory-limit
+                                   :number-cores number-cores
+                                   :phrases phrases)))))
 
 (defun make-next-unit (game rng)
   (bind ((next-number (funcall rng))
