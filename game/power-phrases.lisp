@@ -52,3 +52,13 @@
                                          (elt (cdr (assoc x *char-mapping*)) 0)
                                          x))
                                  adt))))
+
+(defparameter *power-phrase-check-solution-counter* 0)
+
+(defun power-phrase-check-solution (input phrase &optional submit)
+  (bind ((*power-phrases* (list phrase))
+         (solution (power-phrase-encode-adt (getf (car (game-loop (parse-input-file input)))
+                                                  :script))))
+    (if submit
+        (remote-submit-raw 0 0 solution (format nil "alterator-~a" (incf *power-phrase-check-solution-counter*)))
+        solution)))
