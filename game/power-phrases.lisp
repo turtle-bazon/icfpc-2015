@@ -36,6 +36,8 @@
 (defun power-phrase-encode-adt (adt)
   "Translate adt to string representation using as many power phases as itit possible"
   (bind ((phrase-map (power-phrases-alist *power-phrases*))
+         ;; (phrase-map (sort phrase-map #'> :key #'(lambda (x)
+         ;;                                           (length (cdr x)))))
          (adt (copy-seq adt)))
     (iter
       (for continue = nil)

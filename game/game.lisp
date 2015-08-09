@@ -99,26 +99,34 @@
                                                  10))
                                        0)))
                   (incf move-score (+ points line-bonus)))
+
+                (appending next-unit-frames into frames)
+
+                (finally
+
 ;; calculate power score
 ;; power_scorep = 2 * lenp * repsp + power_bonusp
 ;;   where
 ;;   power_bonusp = if repsp > 0
 ;;                  then 300
 ;;                  else 0
-                (iter
-                  (for (phrase-script . _) in power-phrases-alist)
-                  (iter
-                    (for pos
-                         initially (search phrase-script moves-script+freeze)
-                         then (search phrase-script moves-script+freeze :start2 (1+ pos)))
-                    (unless pos
-                      (terminate))
-                    (incf power-score (* 2 (length phrase-script)))
-                    (unless (gethash phrase-script power-phrases-used)
-                      (incf power-score 300)
-                      (setf (gethash phrase-script power-phrases-used) t))))
-                (appending next-unit-frames into frames)
-                (finally (return (values script frames move-score power-score)))))
+                 (bind ((script-copy (copy-seq script)))
+                   (iter
+                     (for (phrase-script . phrase-text) in power-phrases-alist)
+                     (for phrase-length = (length phrase-script))
+                     (iter
+                       (for pos
+                            initially (search phrase-script script-copy)
+                            then (search phrase-script script-copy :start2 (+ pos phrase-length)))
+                       (unless pos
+                         (terminate))
+                       (replace script-copy (make-list phrase-length) :start1 pos :end1 (+ pos phrase-length))
+                       (incf power-score (* 2 phrase-length))
+                       (unless (gethash phrase-script power-phrases-used)
+                         (incf power-score 300)
+                         (setf (gethash phrase-script power-phrases-used) t)))))
+
+                 (return (values script frames move-score power-score)))))
       (list :game world :seed seed :script game-script :film film :move-score move-score :power-score power-score :score (+ move-score power-score)))))
 
 (defmethod game-loop ((world game) &optional &key record-film time-limit memory-limit number-cores (phrases nil phrases-p))
