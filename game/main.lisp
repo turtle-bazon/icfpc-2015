@@ -17,6 +17,8 @@
           (for memory-limit = (parse-integer pvalue)))
         (when (string= "-c" (string-downcase pname))
           (for number-cores = (parse-integer pvalue)))
+        (when (string= "-tag" (string-downcase pname))
+          (for tag = (string-downcase pname)))
         (when (string= "-p" (string-downcase pname))
           (collect pvalue into phrases))
         (when (string= "-publish" (string-downcase pname))
@@ -24,7 +26,7 @@
                     (string= "true" (string-downcase pvalue))
                     (string= "yes" (string-downcase pvalue)))
             (for publish = t)))
-        (finally (return (list files time-limit memory-limit number-cores phrases publish)))))
+        (finally (return (list files time-limit memory-limit number-cores phrases publish tag)))))
 
 (defun execution-plan (files)
   (iter (for fname in files)
@@ -43,7 +45,7 @@
       (lambda ()
         (sb-sys:with-interrupts
           (sb-ext:exit)) ()))))
-  (destructuring-bind (files time-limit memory-limit number-cores phrases publish)
+  (destructuring-bind (files time-limit memory-limit number-cores phrases publish tag)
       (parse-args (rest args))
     (let ((solutions '())
           (solutions-lock (bordeaux-threads:make-lock "solutions"))
@@ -52,15 +54,18 @@
           (executions (execution-plan files)))
       (thread-pool:start-pool tpool)
       (iter (for (game seed) in executions)
-            (thread-pool:execute tpool
-                                 (lambda ()
-                                   (let ((result (single-game-loop game seed
-                                                                   :time-limit time-limit
-                                                                   :memory-limit memory-limit
-                                                                   :number-cores number-cores
-                                                                   :phrases phrases)))
-                                     (bordeaux-threads:with-lock-held (solutions-lock)
-                                       (push result solutions))))))
+            (let ((current-game game)
+                  (current-seed seed))
+              (thread-pool:execute tpool
+                                   (lambda ()
+                                     (let ((result
+                                            (single-game-loop current-game current-seed
+                                                              :time-limit time-limit
+                                                              :memory-limit memory-limit
+                                                              :number-cores number-cores
+                                                              :phrases phrases)))
+                                       (bordeaux-threads:with-lock-held (solutions-lock)
+                                         (push result solutions)))))))
       (thread-pool:stop-pool tpool)
       (let ((result-string (json:encode-json-to-string
                             (iter (for s in solutions)
@@ -69,7 +74,11 @@
                                   (for script = (getf s :script))
                                   (collecting `((:problem-id . ,(problem-id game))
                                                 (:seed . ,seed)
-                                                (:solution . ,(power-phrase-encode-adt script))))))))
+                                                (:solution . ,(power-phrase-encode-adt script))
+                                                ,@(when tag `(:tag ,(format nil "~a-~a-~a"
+                                                                            tag
+                                                                            (problem-id game)
+                                                                            (get-internal-real-time))))))))))
         (if publish
             (format t "~a~&"
                     (http-request *publish-api-uri*
