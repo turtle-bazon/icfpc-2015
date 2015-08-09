@@ -1,11 +1,12 @@
 (in-package :hextris)
 
-(defparameter *chromosome-keys* '(*sum-of-heights-factor*
-                                  *row-burn-factor*
-                                  *blockade-factor*
-                                  *touching-something-factor*
-                                  *touching-wall-factor*
-                                  *touching-floor-factor*))
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (defparameter *chromosome-keys* '(*sum-of-heights-factor*
+                                    *row-burn-factor*
+                                    *blockade-factor*
+                                    *touching-something-factor*
+                                    *touching-wall-factor*
+                                    *touching-floor-factor*)))
 
 (defmacro with-chromosome ((chromosome) &body body)
   (bind ((var (gensym)))
