@@ -100,7 +100,9 @@
                 (finally (return (values script frames move-score power-score)))))
       (list :game world :seed seed :script game-script :film film :move-score move-score :power-score power-score :score (+ move-score power-score)))))
 
-(defmethod game-loop ((world game) &optional &key record-film time-limit memory-limit number-cores phrases)
+(defmethod game-loop ((world game) &optional &key record-film time-limit memory-limit number-cores (phrases nil phrases-p))
+  (unless phrases-p
+    (setf phrases *power-phrases*))
   (iter (for seed in (seeds world))
         (for rng = (make-rng seed))
         (for (values game-script film) =
