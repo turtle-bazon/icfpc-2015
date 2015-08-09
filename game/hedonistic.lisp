@@ -10,6 +10,17 @@
 (defparameter *touching-something-factor* 3.0)
 (defparameter *touching-wall-factor* 2.5)
 (defparameter *touching-floor-factor* 5.0)
+(defparameter *row-fill-factor* 1)
+
+(defun count-rows-fill (field)
+  (iter (for row from 0 below (height field))
+        (for row-sum = (iter (for col from 0 below (width field))
+                             (when (not (map-cell-free-p* field row col))
+                               (sum 1))))
+        (sum (* (expt row-sum row)
+                (if (= row-sum (width field))
+                    *row-burn-factor*
+                    1)))))
 
 (defun find-out-sum-of-heights (field)
   (iter (with heights = 0)
