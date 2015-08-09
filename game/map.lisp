@@ -97,7 +97,8 @@
                     (and cell (not filled-p))))))
 
 (defmethod map-burn-lines-v2 ((field hextris-map))
-  (let ((current-map (clone-map field)))
+  (let ((current-map (clone-map field))
+        (rows-burned 0))
     (iter (for lowest-row from (1- (height current-map)) downto 1)
           (when (zerop (count-free-cells lowest-row current-map))
             (iter (for row from lowest-row downto 1)
@@ -106,8 +107,9 @@
                               (map-cell-free-p current-map (make-cell-row-col (1- row) col)))))
             (iter (for col from 0 below (width current-map))
                   (setf (map-cell current-map (make-cell-row-col 0 col)) nil))
-            (incf lowest-row)))
-    current-map))
+            (incf lowest-row)
+            (incf rows-burned)))
+    (values current-map rows-burned)))
 
 (defmethod map-cell-free-p ((obj hextris-map) (c cell))
   (multiple-value-bind (row col) (cell-row-col c)
