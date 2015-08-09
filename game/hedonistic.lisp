@@ -12,35 +12,41 @@
 (defparameter *touching-floor-factor* 5.0)
 
 (defun find-out-sum-of-heights (field)
-  ;; TODO
-  )
+  (iter (with heights = 0)
+        (for col from 0 below (width field))
+        (iter (for row from 0 below (height field))
+              (unless (map-cell-free-p* field row col)
+                (incf heights (- (height field) row))
+                (terminate)))
+        (finally (return heights))))
 
 (defun find-out-burned-rows-count (field)
   ;; TODO
-  )
+  0)
 
 (defun find-out-blockades-count (field)
   ;; TODO
-  )
+  0)
 
 (defun members-touching-something-count (pos field)
   ;; TODO
-  )
+  0)
 
 (defun members-touching-wall-count (pos field)
   ;; TODO
-  )
+  0)
 
 (defun members-touching-floor-count (pos field)
   ;; TODO
-  )
+  0)
 
 (defmethod estimate ((solver hedonistic-solver) (field hextris-map) (checking-pos unit-on-map))
-  (+ (* (find-out-sum-of-heights field) *sum-of-heights-factor*)
-     (* (find-out-burned-rows-count field) *row-burn-factor*)
-     (* (find-out-blockades-count field) *blockade-factor*)
-     (* (members-touching-something-count checking-pos field) *touching-something-factor*)
-     (* (members-touching-wall-count checking-pos field) *touching-wall-factor*)
-     (* (members-touching-floor-count checking-pos field) *touching-floor-factor*)))
+  (let ((locked-field (unit-lock (unit-on-map-unit checking-pos) (unit-on-map-coord checking-pos) field)))
+    (+ (* (find-out-sum-of-heights locked-field) *sum-of-heights-factor*)
+       (* (find-out-burned-rows-count locked-field) *row-burn-factor*)
+       (* (find-out-blockades-count locked-field) *blockade-factor*)
+       (* (members-touching-something-count checking-pos field) *touching-something-factor*)
+       (* (members-touching-wall-count checking-pos field) *touching-wall-factor*)
+       (* (members-touching-floor-count checking-pos field) *touching-floor-factor*))))
 
   
