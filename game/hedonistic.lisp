@@ -78,9 +78,9 @@
        (declare (ignore col))
        (>= row (height field))))))
 
-(defmethod estimate ((solver hedonistic-solver) (field hextris-map) (checking-pos unit-on-map))
+(defmethod estimate ((solver hedonistic-solver) (field hextris-map) (checking-pos unit-on-map) &key translated-pos)
   (let ((locked-field (unit-lock (unit-on-map-unit checking-pos) (unit-on-map-coord checking-pos) field))
-        (translated-pos (place-on-map (unit-on-map-unit checking-pos) (unit-on-map-coord checking-pos) field)))
+        (translated-pos (or translated-pos (place-on-map (unit-on-map-unit checking-pos) (unit-on-map-coord checking-pos) field))))
     (+ (* (find-out-sum-of-heights locked-field) *sum-of-heights-factor*)
        (* (find-out-burned-rows-count locked-field) *row-burn-factor*)
        (* (find-out-blockades-count locked-field) *blockade-factor*)
