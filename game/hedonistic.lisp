@@ -42,25 +42,41 @@
 
 (defparameter *cell-neighbours* '(:w :sw :se :e :ne :nw))
 
-(defun member-touching-something (mem field)
-  (iter (for direction in *cell-neighbours*)
-        (for neighbour = (cell-move mem direction))
-        (multiple-value-bind (cell filled-p)
-            (map-cell field neighbour)
-          (when (and cell filled-p)
-            (return-from member-touching-something t)))))
+(defun members-matches-counter (pos field predicate)
+  (iter (with matches-count = 0)
+        (for mem in (members pos))
+        (iter (for direction in *cell-neighbours*)
+              (for neighbour = (cell-move mem direction))
+              (multiple-value-bind (cell filled-p)
+                  (map-cell field neighbour)
+                (when (funcall predicate neighbour cell filled-p)
+                  (incf matches-count))))
+        (finally (return matches-count))))
 
 (defun members-touching-something-count (pos field)
-  (iter (for mem in (members pos))
-        (counting (member-touching-something mem field))))
+  (members-matches-counter
+   pos field
+   (lambda (neighbour cell filled-p)
+     (declare (ignore neighbour))
+     (and cell filled-p))))
 
 (defun members-touching-wall-count (pos field)
-  ;; TODO
-  0)
+  (members-matches-counter
+   pos field
+   (lambda (neighbour cell filled-p)
+     (declare (ignore cell filled-p))
+     (multiple-value-bind (row col) (cell-row-col neighbour)
+       (declare (ignore row))
+       (or (< col 0) (>= col (width field)))))))
 
 (defun members-touching-floor-count (pos field)
-  ;; TODO
-  0)
+  (members-matches-counter
+   pos field
+   (lambda (neighbour cell filled-p)
+     (declare (ignore cell filled-p))
+     (multiple-value-bind (row col) (cell-row-col neighbour)
+       (declare (ignore col))
+       (>= row (height field))))))
 
 (defmethod estimate ((solver hedonistic-solver) (field hextris-map) (checking-pos unit-on-map))
   (let ((locked-field (unit-lock (unit-on-map-unit checking-pos) (unit-on-map-coord checking-pos) field))
