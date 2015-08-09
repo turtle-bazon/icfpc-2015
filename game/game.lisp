@@ -12,8 +12,12 @@
   (declare (optimize (debug 3))
            (ignore time-limit memory-limit number-cores phrases))
   (let ((rng (make-rng seed)))
-    (multiple-value-bind (game-script film)
+    (multiple-value-bind (game-script film move-score power-score)
         (iter (with current-map = (game-map world))
+              (with move-score = 0)
+              (with power-score = 0)
+              (for ls = 0)
+              (for ls-old initially 0 then ls)
               (repeat (source-length world)) ;; spawn as many units as given in source-length
               (for next-unit = (make-next-unit world rng))
               (for init-position = (unit-initial-position-v3 next-unit current-map))
@@ -51,6 +55,8 @@
                              (debug-draw current-map :current-position moved-actor)
                              
                              (format t "---------------------~%")
+                             (format t "move score: ~a power score: ~a~%SCORE: ~a~%" move-score power-score (+ move-score
+                                                                                                               power-score))
                              (break)
                              (setf actor moved-actor)
                              (collect (list (cons :filled (coerce board-filled 'vector))
@@ -66,13 +72,32 @@
                       (unit-lock (unit-on-map-unit final-position)
                                  (unit-on-map-coord final-position)
                                  current-map))
-                (setf current-map ;; maybe burn some rows if any
-                      (map-burn-lines-v2 current-map))
+                (multiple-value-bind (map rows-burned)
+                    (map-burn-lines-v2 current-map) ;; maybe burn some rows if any
+                    (setf current-map map
+                          ls rows-burned))
+;; calculate move score
+;; move_score = points + line_bonus
+;;   where
+;;   points = size + 100 * (1 + ls) * ls / 2
+;;   line_bonus  = if ls_old > 1
+;;                 then floor ((ls_old - 1) * points / 10)
+;;                 else 0
+                (bind ((points (+ (length (members next-unit))
+                                  (/ (* 100 (1+ ls)
+                                        ls)
+                                     2)))
+                       (line-bonus (if (> ls-old 1)
+                                       (floor (/ (* (1- ls-old)
+                                                    points)
+                                                 10))
+                                       0)))
+                  (incf move-score (+ points line-bonus)))
                 (for moves-script+freeze = (append moves-script (list freeze-move)))
                 (appending moves-script+freeze into script)
                 (appending next-unit-frames into frames)
-                (finally (return (values script frames)))))
-      (list :game world :seed seed :script game-script :film film))))
+                (finally (return (values script frames move-score power-score)))))
+      (list :game world :seed seed :script game-script :film film :move-score move-score :power-score power-score :score (+ move-score power-score)))))
 
 (defmethod game-loop ((world game) &optional &key record-film time-limit memory-limit number-cores phrases)
   (iter (for seed in (seeds world))
