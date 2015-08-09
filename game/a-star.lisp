@@ -82,74 +82,55 @@
 
 (defstruct a*-st
   pos
-  script
-  pws)
-
-(defun pw-track> (pw-track-a pw-track-b)
-  (or (and pw-track-a (not pw-track-b))
-      (and (and pw-track-a pw-track-b)
-           (or (> (car pw-track-a) (car pw-track-b))
-               (and (= (car pw-track-a) (car pw-track-b))
-                    (> (length (cdr pw-track-a)) (length (cdr pw-track-b))))))))
-
-(defun pw-track= (pw-track-a pw-track-b)
-  (or (and (not pw-track-a) (not pw-track-b))
-      (and (and pw-track-a pw-track-b)
-           (= (car pw-track-a) (car pw-track-b))
-           (= (length (cdr pw-track-a)) (length (cdr pw-track-b))))))
-
-(defun best-pw-track (pw-tracks)
-  (iter (with best = nil)
-        (for pw-track in pw-tracks)
-        (when (pw-track> pw-track best)
-          (setf best pw-track))
-        (finally (return best))))
+  script)
 
 (defmethod transition-better-p (end-pos)
   (lambda (trans-a trans-b)
-    (let ((pw-track-a (best-pw-track (a*-st-pws trans-a)))
-          (pw-track-b (best-pw-track (a*-st-pws trans-b))))
-      (or (pw-track> pw-track-a pw-track-b)
-          (and (pw-track= pw-track-a pw-track-b)
-               (funcall (position-better-p end-pos)
-                        (a*-st-pos trans-a)
-                        (a*-st-pos trans-b)))))))
+    (or (> (length (car (a*-st-script trans-a)))
+           (length (car (a*-st-script trans-b))))
+        (and (= (length (car (a*-st-script trans-a)))
+                (length (car (a*-st-script trans-b))))
+             (funcall (position-better-p end-pos)
+                      (a*-st-pos trans-a)
+                      (a*-st-pos trans-b))))))
+
+(defun a*-moves-w/power-words ()
+  (append (mapcar 'list *a-star-moves*)
+          (mapcar #'car (power-phrases-alist *power-phrases*))))
 
 (defmethod run-a-star ((field hextris-map) (start-pos unit-on-map) (end-pos unit-on-map))
   (declare (optimize (debug 3)))
   (let ((queue (priority-queue:make-pqueue (transition-better-p end-pos) :key-type 'a*-st))
         (visited (make-instance 'visited-cache))
-        (pw-starts (mapcar #'car (power-phrases-alist *power-phrases*))))
-    (priority-queue:pqueue-push t (make-a*-st :pos start-pos :script '() :pws '()) queue)
+        (available-subtracks (a*-moves-w/power-words)))
+    (priority-queue:pqueue-push t (make-a*-st :pos start-pos :script '()) queue)
     (mark-visited visited start-pos)
     (iter (until (priority-queue:pqueue-empty-p queue))
           (for (values _ cur-state) = (priority-queue:pqueue-pop queue))
           (when (positions= (a*-st-pos cur-state) end-pos)
-            (return-from run-a-star (values t (reverse (a*-st-script cur-state)))))
-          (for transitions = (iter (for move in *a-star-moves*)
-                                   (for moved-unit = (move-unit move (a*-st-pos cur-state) field))
-                                   (when moved-unit
-                                     (let ((pw-tracks '()))
-                                       ;; start new power phrases tracks
-                                       (iter (for (pw-move . rest-pw-moves) in pw-starts)
-                                             (when (eq move pw-move)
-                                               (push (cons 1 rest-pw-moves) pw-tracks)))
-                                       ;; continue existing power phrases tracks
-                                       (iter (for (pw-count . pw-track) in (a*-st-pws cur-state))
-                                             (when pw-track
-                                               (for (pw-move . rest-pw-moves) = pw-track)
-                                               (when (eq move pw-move)
-                                                 (push (cons (1+ pw-count) rest-pw-moves) pw-tracks))))
-                                       (for trans = (make-a*-st :pos moved-unit
-                                                                :script (cons move (a*-st-script cur-state))
-                                                                :pws pw-tracks)))
-                                     (collect trans))))
-          (iter (for trans in transitions)
-                (multiple-value-bind (visited-p level-1-key)
-                    (fast-check visited (a*-st-pos trans))
-                  (unless visited-p
-                    (when (place-on-map (unit-on-map-unit (a*-st-pos trans)) (unit-on-map-coord (a*-st-pos trans)) field)
-                      (priority-queue:pqueue-push t trans queue)
-                      (mark-visited visited (a*-st-pos trans) :level-1-key level-1-key))))))))
+            (return-from run-a-star (values t (flatten (reverse (a*-st-script cur-state))))))
+          (for transitions+paths =
+               (iter (for subtrack in available-subtracks)
+                     (for path = 
+                          (iter (with current-pos = (a*-st-pos cur-state))
+                                (for move in subtrack)
+                                (for moved-pos = (move-unit move current-pos field))
+                                (unless (and moved-pos (place-on-map (unit-on-map-unit moved-pos) (unit-on-map-coord moved-pos) field))
+                                  (return nil))
+                                (when (or (positions= current-pos moved-pos) (find moved-pos path :test #'positions= :key #'cdr))
+                                  (return nil))
+                                (collect (cons move moved-pos) into path)
+                                (setf current-pos moved-pos)
+                                (finally (return path))))
+                     (when path
+                       (collect (cons (make-a*-st :pos (cdar (last path))
+                                                  :script (cons (mapcar #'car path) (a*-st-script cur-state)))
+                                      (mapcar #'cdr path))))))
+          (for sorted-transitions+paths = (sort transitions+paths (transition-better-p end-pos) :key #'car))
+          (iter (for (trans . history) in sorted-transitions+paths)
+                (for visited-p = (some (curry #'fast-check visited) history))
+                (unless visited-p
+                  (priority-queue:pqueue-push t trans queue)
+                  (iter (for pos in history) (mark-visited visited pos)))))))
           
           
