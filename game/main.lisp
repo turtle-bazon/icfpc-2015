@@ -52,15 +52,19 @@
           (executions (execution-plan files)))
       (thread-pool:start-pool tpool)
       (iter (for (game seed) in executions)
-            (thread-pool:execute tpool
-                                 (lambda ()
-                                   (let ((result (single-game-loop game seed
-                                                                   :time-limit time-limit
-                                                                   :memory-limit memory-limit
-                                                                   :number-cores number-cores
-                                                                   :phrases phrases)))
-                                     (bordeaux-threads:with-lock-held (solutions-lock)
-                                       (push result solutions))))))
+            (format t "~a,~a~&" (problem-id game) seed)
+            (let ((current-game game)
+                  (current-seed seed))
+              (thread-pool:execute tpool
+                                   (lambda ()
+                                     (let ((result
+                                            (single-game-loop current-game current-seed
+                                                              :time-limit time-limit
+                                                              :memory-limit memory-limit
+                                                              :number-cores number-cores
+                                                              :phrases phrases)))
+                                       (bordeaux-threads:with-lock-held (solutions-lock)
+                                         (push result solutions)))))))
       (thread-pool:stop-pool tpool)
       (let ((result-string (json:encode-json-to-string
                             (iter (for s in solutions)
