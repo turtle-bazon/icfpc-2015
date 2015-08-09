@@ -87,6 +87,11 @@
                     :translated-current translated-current
                     :translated-final translated-final)))))
 
+(defmethod debug-draw-unit ((obj unit))
+  (multiple-value-bind (width height) (unit-dimensions obj)
+    (let ((field (make-instance 'hextris-map :width (1+ (* width 2)) :height (1+ (* height 2)))))
+      (debug-draw field :current-position (make-unit-on-map :unit obj :coord (make-cell-row-col height width))))))
+
 (defmethod unit-left-most ((obj unit))
   (reduce #'(lambda (l r)
               (bind (((:values l-row l-col) (cell-row-col l))
@@ -122,6 +127,13 @@
   (bind (((:values _ l-col) (cell-row-col (unit-left-most obj)))
          ((:values _ r-col) (cell-row-col (unit-right-most obj))))
     (1+ (abs (- r-col l-col)))))
+
+(defmethod unit-dimensions ((obj unit))
+  (iter (for mem in (members obj))
+        (for (values row col) = (cell-row-col mem))
+        (minimizing row into min-row)
+        (maximizing row into max-row)
+        (finally (return (values (unit-width obj) (1+ (- max-row min-row)))))))
 
 (defmethod unit-initial-position ((obj unit) (field hextris-map))
   (bind ((left-most (unit-left-most obj))
