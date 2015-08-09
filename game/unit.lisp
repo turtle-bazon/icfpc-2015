@@ -59,16 +59,19 @@
           (setf (map-cell field-copy cell) t))
     field-copy))
 
-(defmethod debug-draw ((obj unit) (coord cell) (field hextris-map) &key final-position)
-  (iter (with translated-unit = (place-on-map obj coord field))
-        (with translated-final = (when final-position
-                                   (place-on-map (unit-on-map-unit final-position) (unit-on-map-coord final-position) field)))
+(defmethod debug-draw ((field hextris-map) &key current-position final-position)
+  (iter (with translated-current =
+              (when current-position
+                (place-on-map (unit-on-map-unit current-position) (unit-on-map-coord current-position) field)))
+        (with translated-final =
+              (when final-position
+                (place-on-map (unit-on-map-unit final-position) (unit-on-map-coord final-position) field)))
         (for row from 0 below (height field))
         (when (oddp row)
           (format t " "))
         (iter (for col from 0 below (width field))
               (multiple-value-bind (cell filled-p) (map-cell field (make-cell-row-col row col))
-                (format t "~a " (if (find cell (members translated-unit) :test #'cell=)
+                (format t "~a " (if (and translated-current (find cell (members translated-current) :test #'cell=))
                                     "o"
                                     (if (and translated-final (find cell (members translated-final) :test #'cell=))
                                         "#"

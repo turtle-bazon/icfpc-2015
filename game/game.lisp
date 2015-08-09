@@ -46,9 +46,9 @@
 
 ;;; vizualize for the weaks
                              (format t "~a~&" move)
-                             (debug-draw (unit-on-map-unit actor) (unit-on-map-coord actor) current-map :final-position final-position)
+                             (debug-draw current-map :current-position actor :final-position final-position)
                              (format t "~%")
-                             (debug-draw (unit-on-map-unit moved-actor) (unit-on-map-coord moved-actor) current-map)
+                             (debug-draw current-map :current-position moved-actor)
                              
                              (format t "---------------------~%")
                              (break)
