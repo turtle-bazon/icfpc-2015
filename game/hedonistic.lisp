@@ -26,20 +26,33 @@
     (declare (ignore map-with-burned-rows))
     burned-rows-count))
 
-(defun find-out-blockades-count (field)
+(defun find-out-blockades-count-col (field col)
   (iter (with blockades-count = 0)
-        (for col from 0 below (width field))
-        (iter (with blocked-p = nil)
-              (for row from 0 below (height field))
-              (if (map-cell-free-p* field row col)
-                  (setf blocked-p t)
-                  (when blocked-p
-                    (incf blockades-count))))
+        (with blocked-p = nil)
+        (for row from 0 below (height field))
+        (if (map-cell-free-p* field row col)
+            (when blocked-p
+              (incf blockades-count))
+            (setf blocked-p t))
         (finally (return blockades-count))))
 
+(defun find-out-blockades-count (field)
+  (iter (for col from 0 below (width field))
+        (summing (find-out-blockades-count-col field col))))
+
+(defparameter *cell-neighbours* '(:w :sw :se :e :ne :nw))
+
+(defun member-touching-something (mem field)
+  (iter (for direction in *cell-neighbours*)
+        (for neighbour = (cell-move mem direction))
+        (multiple-value-bind (cell filled-p)
+            (map-cell field neighbour)
+          (when (and cell filled-p)
+            (return-from member-touching-something t)))))
+
 (defun members-touching-something-count (pos field)
-  ;; TODO
-  0)
+  (iter (for mem in (members pos))
+        (counting (member-touching-something mem field))))
 
 (defun members-touching-wall-count (pos field)
   ;; TODO
@@ -50,12 +63,13 @@
   0)
 
 (defmethod estimate ((solver hedonistic-solver) (field hextris-map) (checking-pos unit-on-map))
-  (let ((locked-field (unit-lock (unit-on-map-unit checking-pos) (unit-on-map-coord checking-pos) field)))
+  (let ((locked-field (unit-lock (unit-on-map-unit checking-pos) (unit-on-map-coord checking-pos) field))
+        (translated-pos (place-on-map (unit-on-map-unit checking-pos) (unit-on-map-coord checking-pos) field)))
     (+ (* (find-out-sum-of-heights locked-field) *sum-of-heights-factor*)
        (* (find-out-burned-rows-count locked-field) *row-burn-factor*)
        (* (find-out-blockades-count locked-field) *blockade-factor*)
-       (* (members-touching-something-count checking-pos field) *touching-something-factor*)
-       (* (members-touching-wall-count checking-pos field) *touching-wall-factor*)
-       (* (members-touching-floor-count checking-pos field) *touching-floor-factor*))))
+       (* (members-touching-something-count translated-pos field) *touching-something-factor*)
+       (* (members-touching-wall-count translated-pos field) *touching-wall-factor*)
+       (* (members-touching-floor-count translated-pos field) *touching-floor-factor*))))
 
   
