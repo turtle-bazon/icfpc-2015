@@ -9,8 +9,7 @@
     "Yogsothoth"
     "Tsathoggua"
     "John BigBoote"
-    "Planet 10"
-    "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn!"))
+    "Planet 10"))
 
 (defparameter *char-mapping* '((:w .   "p'!.03")
                                (:e .   "bcefy2")
