@@ -98,15 +98,21 @@
   pos
   script)
 
+
+
 (defmethod transition-better-p (end-pos)
   (lambda (trans-a trans-b)
-    (or (> (length (car (a*-st-script trans-a)))
-           (length (car (a*-st-script trans-b))))
-        (and (= (length (car (a*-st-script trans-a)))
-                (length (car (a*-st-script trans-b))))
-             (funcall (position-better-p end-pos)
-                      (a*-st-pos trans-a)
-                      (a*-st-pos trans-b))))))
+    (let ((uniq-count-a (length (remove-duplicates (a*-st-script trans-a) :test #'equal)))
+          (uniq-count-b (length (remove-duplicates (a*-st-script trans-b) :test #'equal))))
+      (or (> uniq-count-a uniq-count-b)
+          (and (= uniq-count-a uniq-count-b)
+               (or (> (length (car (a*-st-script trans-a)))
+                      (length (car (a*-st-script trans-b))))
+                   (and (= (length (car (a*-st-script trans-a)))
+                           (length (car (a*-st-script trans-b))))
+                        (funcall (position-better-p end-pos)
+                                 (a*-st-pos trans-a)
+                                 (a*-st-pos trans-b)))))))))
 
 (defun a*-moves-w/power-words ()
   (append (mapcar 'list *a-star-moves*)
