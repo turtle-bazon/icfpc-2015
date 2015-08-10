@@ -7,7 +7,11 @@
                                     *touching-something-factor*
                                     *touching-wall-factor*
                                     *touching-floor-factor*
-                                    *row-fill-factor*)))
+                                    *row-fill-factor*
+                                    *distict-power-words-count-factor*
+                                    *total-power-words-count-factor*
+                                    *one-burnt-row-penalty*
+                                    )))
 
 (defmacro with-chromosome ((chromosome) &body body)
   (bind ((var (gensym)))
