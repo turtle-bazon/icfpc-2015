@@ -29,8 +29,8 @@
     ((:rcw :rcc)
      (make-unit-on-map :unit (unit-rotate (unit-on-map-unit obj) move) :coord (unit-on-map-coord obj)))))
 
-(defmethod gen-freeze-move ((field hextris-map) (final-position unit-on-map) &key script)
-  (declare (optimize (debug 3)) (ignore script))
+(defmethod gen-freeze-move ((field hextris-map) (final-position unit-on-map) &key script phrases)
+  (declare (optimize (debug 3)) (ignore script phrases))
   (flet ((try-escape (move)
            (let ((moved-unit (move-unit move final-position field)))
              (unless moved-unit
@@ -38,7 +38,7 @@
              (unless (place-on-map (unit-on-map-unit moved-unit) (unit-on-map-coord moved-unit) field)
                (return-from gen-freeze-move move)))))
     ;; (when script ;;; let's try to finish with powerword!
-    ;;   (let ((pws-rev (sort (mapcar (compose #'reverse #'car) (power-phrases-alist *power-phrases*)) #'> :key #'length))
+    ;;   (let ((pws-rev (sort (mapcar (compose #'reverse #'car) (power-phrases-alist phrases)) #'> :key #'length))
     ;;         (script-rev (reverse script)))
     ;;     (iter (while pws-rev)
     ;;           (for next-pw-rev = '())
@@ -96,41 +96,47 @@
 
 (defstruct a*-st
   pos
-  script)
-
-
+  script
+  mmarks)
 
 (defmethod transition-better-p (end-pos)
-  (lambda (trans-a trans-b)
-    (let ((uniq-count-a (length (remove-duplicates (a*-st-script trans-a) :test #'equal)))
-          (uniq-count-b (length (remove-duplicates (a*-st-script trans-b) :test #'equal))))
-      (or (> uniq-count-a uniq-count-b)
-          (and (= uniq-count-a uniq-count-b)
-               (or (> (length (car (a*-st-script trans-a)))
-                      (length (car (a*-st-script trans-b))))
-                   (and (= (length (car (a*-st-script trans-a)))
-                           (length (car (a*-st-script trans-b))))
-                        (funcall (position-better-p end-pos)
-                                 (a*-st-pos trans-a)
-                                 (a*-st-pos trans-b)))))))))
+  (flet ((distinct-count (pos)
+           (iter (for bit in-vector (a*-st-mmarks pos)) (counting (not (zerop bit))))))
+    (lambda (trans-a trans-b)
+      (let ((uniq-count-a (distinct-count trans-a))
+            (uniq-count-b (distinct-count trans-b)))
+        (or (> uniq-count-a uniq-count-b)
+            (and (= uniq-count-a uniq-count-b)
+                 (or (> (length (car (a*-st-script trans-a)))
+                        (length (car (a*-st-script trans-b))))
+                     (and (= (length (car (a*-st-script trans-a)))
+                             (length (car (a*-st-script trans-b))))
+                          (funcall (position-better-p end-pos)
+                                   (a*-st-pos trans-a)
+                                   (a*-st-pos trans-b))))))))))
 
-(defun a*-moves-w/power-words ()
-  (append (mapcar 'list *a-star-moves*)
-          (mapcar #'car (power-phrases-alist *power-phrases*))))
+(defun a*-moves-w/power-words (phrases)
+  (coerce (append (mapcar 'list *a-star-moves*)
+                  (mapcar #'car (power-phrases-alist phrases)))
+          'vector))
 
-(defmethod run-a-star ((field hextris-map) (start-pos unit-on-map) (end-pos unit-on-map))
+(defun make-mmarks (available-subtracks)
+  (make-array (length available-subtracks) :element-type 'bit))
+
+(defmethod run-a-star ((field hextris-map) (start-pos unit-on-map) (end-pos unit-on-map) phrases)
   (declare (optimize (debug 3)))
   (let ((queue (priority-queue:make-pqueue (transition-better-p end-pos) :key-type 'a*-st))
         (visited (make-instance 'visited-cache))
-        (available-subtracks (a*-moves-w/power-words)))
-    (priority-queue:pqueue-push t (make-a*-st :pos start-pos :script '()) queue)
+        (available-subtracks (a*-moves-w/power-words phrases)))
+    (priority-queue:pqueue-push t (make-a*-st :pos start-pos :script '() :mmarks (make-mmarks available-subtracks)) queue)
     (mark-visited visited start-pos)
     (iter (until (priority-queue:pqueue-empty-p queue))
           (for (values _ cur-state) = (priority-queue:pqueue-pop queue))
           (when (positions= (a*-st-pos cur-state) end-pos)
             (return-from run-a-star (values t (flatten (reverse (a*-st-script cur-state))))))
           (for transitions+paths =
-               (iter (for subtrack in available-subtracks)
+               (iter (for subtrack in-vector available-subtracks)
+                     (for subtrack-index from 0)
                      (for path = 
                           (iter (with current-pos = (a*-st-pos cur-state))
                                 (for move in subtrack)
@@ -144,7 +150,10 @@
                                 (finally (return path))))
                      (when path
                        (collect (cons (make-a*-st :pos (cdar (last path))
-                                                  :script (cons (mapcar #'car path) (a*-st-script cur-state)))
+                                                  :script (cons (mapcar #'car path) (a*-st-script cur-state))
+                                                  :mmarks (let ((v (copy-seq (a*-st-mmarks cur-state))))
+                                                            (setf (elt v subtrack-index) 1)
+                                                            v))
                                       (mapcar #'cdr path))))))
           (for sorted-transitions+paths = (sort transitions+paths (transition-better-p end-pos) :key #'car))
           (iter (for (trans . history) in sorted-transitions+paths)
