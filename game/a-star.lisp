@@ -29,8 +29,8 @@
     ((:rcw :rcc)
      (make-unit-on-map :unit (unit-rotate (unit-on-map-unit obj) move) :coord (unit-on-map-coord obj)))))
 
-(defmethod gen-freeze-move ((field hextris-map) (final-position unit-on-map) &key script)
-  (declare (optimize (debug 3)) (ignore script))
+(defmethod gen-freeze-move ((field hextris-map) (final-position unit-on-map) &key script phrases)
+  (declare (optimize (debug 3)) (ignore script phrases))
   (flet ((try-escape (move)
            (let ((moved-unit (move-unit move final-position field)))
              (unless moved-unit
@@ -38,7 +38,7 @@
              (unless (place-on-map (unit-on-map-unit moved-unit) (unit-on-map-coord moved-unit) field)
                (return-from gen-freeze-move move)))))
     ;; (when script ;;; let's try to finish with powerword!
-    ;;   (let ((pws-rev (sort (mapcar (compose #'reverse #'car) (power-phrases-alist *power-phrases*)) #'> :key #'length))
+    ;;   (let ((pws-rev (sort (mapcar (compose #'reverse #'car) (power-phrases-alist phrases)) #'> :key #'length))
     ;;         (script-rev (reverse script)))
     ;;     (iter (while pws-rev)
     ;;           (for next-pw-rev = '())
@@ -115,19 +115,19 @@
                                    (a*-st-pos trans-a)
                                    (a*-st-pos trans-b))))))))))
 
-(defun a*-moves-w/power-words ()
+(defun a*-moves-w/power-words (phrases)
   (coerce (append (mapcar 'list *a-star-moves*)
-                  (mapcar #'car (power-phrases-alist *power-phrases*)))
+                  (mapcar #'car (power-phrases-alist phrases)))
           'vector))
 
 (defun make-mmarks (available-subtracks)
   (make-array (length available-subtracks) :element-type 'bit))
 
-(defmethod run-a-star ((field hextris-map) (start-pos unit-on-map) (end-pos unit-on-map))
+(defmethod run-a-star ((field hextris-map) (start-pos unit-on-map) (end-pos unit-on-map) phrases)
   (declare (optimize (debug 3)))
   (let ((queue (priority-queue:make-pqueue (transition-better-p end-pos) :key-type 'a*-st))
         (visited (make-instance 'visited-cache))
-        (available-subtracks (a*-moves-w/power-words)))
+        (available-subtracks (a*-moves-w/power-words phrases)))
     (priority-queue:pqueue-push t (make-a*-st :pos start-pos :script '() :mmarks (make-mmarks available-subtracks)) queue)
     (mark-visited visited start-pos)
     (iter (until (priority-queue:pqueue-empty-p queue))
