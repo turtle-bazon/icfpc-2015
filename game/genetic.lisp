@@ -24,8 +24,8 @@
 (defun genetic-fitness (worlds phrases chromosome)
   (with-chromosome (chromosome)
     (iter (for world in (if (listp worlds) worlds (list worlds)))
-          (iter (for seed-result in (game-loop world :phrases phrases))
-                (sum (getf seed-result :move-score))))))
+          (sum (iter (for seed-result in (game-loop world :phrases phrases))
+                     (sum (getf seed-result :move-score)))))))
 
 (defun genetic-make-random-property (&optional (stretch 10.0))
   (- stretch (random (* 2 stretch))))
