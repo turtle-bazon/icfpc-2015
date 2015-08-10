@@ -1,7 +1,7 @@
 
 (in-package :hextris)
 
-(defparameter *bfs-max-depth* 256)
+(defparameter *bfs-max-depth* 384)
 
 (defmethod single-game-loop ((world game) seed &optional
                              &key record-film time-limit memory-limit number-cores phrases)
