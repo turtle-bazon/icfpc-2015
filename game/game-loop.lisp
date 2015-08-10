@@ -4,11 +4,11 @@
 (defparameter *bfs-max-depth* 256)
 
 (defmethod single-game-loop ((world game) seed &optional
-                             &key record-film time-limit memory-limit number-cores)
+                             &key record-film time-limit memory-limit number-cores phrases)
   (declare (optimize (debug 3))
            (ignore time-limit memory-limit number-cores))
   (let ((rng (make-rng seed))
-        (power-phrases-alist (power-phrases-alist *power-phrases*)))
+        (power-phrases-alist (power-phrases-alist phrases)))
     (multiple-value-bind (game-script move-score power-score)
         (iter (with current-map = (game-map world))
               (with move-score = 0)
@@ -28,7 +28,8 @@
               (multiple-value-bind (solution-exists-p moves-script final-position)
                   (let ((current-depth 0))
                     (run-a-star current-map solver init-position-on-map
-                                :limits-callback (lambda () (>= (incf current-depth) *bfs-max-depth*))))
+                                :limits-callback (lambda () (>= (incf current-depth) *bfs-max-depth*))
+                                :phrases phrases))
                 (unless solution-exists-p
                   (terminate))
                 ;;; record film (visualize)
@@ -99,7 +100,7 @@
                  (return (values script move-score power-score)))))
       (list :game world :seed seed :script game-script :move-score move-score :power-score power-score :score (+ move-score power-score)))))
 
-(defmethod game-loop ((world game) &optional &key record-film time-limit memory-limit number-cores) 
+(defmethod game-loop ((world game) &optional &key record-film time-limit memory-limit number-cores phrases)
   (iter (for seed in (seeds world))
         (for rng = (make-rng seed))
         (for (values game-script film) =
@@ -108,5 +109,6 @@
                                    :record-film record-film
                                    :time-limit time-limit
                                    :memory-limit memory-limit
-                                   :number-cores number-cores)))))
+                                   :number-cores number-cores
+                                   :phrases phrases)))))
 

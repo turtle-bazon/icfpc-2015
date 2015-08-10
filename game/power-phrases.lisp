@@ -36,9 +36,9 @@
                        phrase))))
 
 
-(defun power-phrase-encode-adt (adt)
+(defun power-phrase-encode-adt (adt phrases)
   "Translate adt to string representation using as many power phases as itit possible"
-  (bind ((phrase-map (power-phrases-alist *power-phrases*))
+  (bind ((phrase-map (power-phrases-alist phrases))
          ;; (phrase-map (sort phrase-map #'> :key #'(lambda (x)
          ;;                                           (length (cdr x)))))
          (adt (copy-seq adt)))
@@ -58,12 +58,9 @@
                                          x))
                                  adt))))
 
-(defparameter *power-phrase-check-solution-counter* 0)
-
 (defun power-phrase-check-solution (input phrases &key submit)
-  (bind ((*power-phrases* phrases)
-         (result (game-loop (parse-input-file input))))
+  (bind ((result (game-loop (parse-input-file input) :phrases phrases)))
 
     (if submit
         (remote-submit result 0 "word-discovery-")
-        (power-phrase-encode-adt (getf (car result) :script)))))
+        (power-phrase-encode-adt (getf (car result) :script) phrases))))

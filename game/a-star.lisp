@@ -29,8 +29,8 @@
     ((:rcw :rcc)
      (make-unit-on-map :unit (unit-rotate (unit-on-map-unit obj) move) :coord (unit-on-map-coord obj)))))
 
-(defmethod gen-freeze-move ((field hextris-map) (final-position unit-on-map))
-  (declare (optimize (debug 3)))
+(defmethod gen-freeze-move ((field hextris-map) (final-position unit-on-map) &key script phrases)
+  (declare (optimize (debug 3)) (ignore script phrases))
   (flet ((try-escape (move)
            (let ((moved-unit (move-unit move final-position field)))
              (unless moved-unit
@@ -115,18 +115,18 @@
                 :pws st-pws
                 :weight weight)))
 
-(defun a*-moves-w/power-words ()
+(defun a*-moves-w/power-words (phrases)
   (coerce (sort (append (mapcar 'list *a-star-moves*)
-                        (mapcar #'car (power-phrases-alist *power-phrases*)))
+                        (mapcar #'car (power-phrases-alist phrases)))
                 #'>
                 :key #'length)
           'vector))
 
-(defmethod run-a-star ((field hextris-map) (solver solver) (start-pos unit-on-map) &key limits-callback)
+(defmethod run-a-star ((field hextris-map) (solver solver) (start-pos unit-on-map) &key limits-callback phrases)
   (declare (optimize (debug 3)))
   (let* ((queue (priority-queue:make-pqueue #'a*-st> :key-type 'a*-st))
          (visited (make-instance 'visited-cache))
-         (available-subtracks (a*-moves-w/power-words)))
+         (available-subtracks (a*-moves-w/power-words phrases)))
     (priority-queue:pqueue-push t
                                 (a*-st-create :pos start-pos
                                               :field field
