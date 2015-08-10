@@ -92,9 +92,6 @@
 (defun a*-st> (trans-a trans-b)
   (> (a*-st-weight trans-a) (a*-st-weight trans-b)))
 
-(defparameter *distict-power-words-count-factor* 0.2)
-(defparameter *total-power-words-count-factor* 0.1)
-
 (defun a*-st-create (&key pos script field solver pws pws-inc pws-avail)
   (declare (optimize (debug 3)))
   (let* ((st-pws (if pws
@@ -106,9 +103,9 @@
          (score (estimate solver field pos))
          (weight (* score
                     (+ 1.0 (* (iter (for v in-vector st-pws) (counting (not (zerop v))))
-                              *distict-power-words-count-factor*))
+                              (distict-power-words-count-factor solver)))
                     (+ 1.0 (* (iter (for v in-vector st-pws) (summing v))
-                              *total-power-words-count-factor*)))))
+                              (total-power-words-count-factor solver))))))
     (make-a*-st :pos pos
                 :script script
                 :score score

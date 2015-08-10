@@ -4,7 +4,7 @@
 (defparameter *bfs-max-depth* 256)
 
 (defmethod single-game-loop ((world game) seed &optional
-                             &key record-film time-limit memory-limit number-cores)
+                             &key record-film time-limit memory-limit number-cores (solver (make-instance 'hedonistic-solver)))
   (declare (optimize (debug 3))
            (ignore time-limit memory-limit number-cores))
   (let ((rng (make-rng seed))
@@ -14,7 +14,6 @@
               (with move-score = 0)
               (with power-score = 0)
               (with power-phrases-used = (make-hash-table :test #'equal))
-              (with solver = (make-instance 'hedonistic-solver))
               (for ls = 0)
               (for ls-old initially 0 then ls)
               (repeat (source-length world)) ;; spawn as many units as given in source-length
