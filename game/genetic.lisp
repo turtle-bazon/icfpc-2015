@@ -100,6 +100,6 @@
   (iter (for gen from 0 to number-of-generations)
         (format t "Generation ~a...~%" gen)
         (setf population (genetic-fit-population world population number-of-cores phrases))
-        (format t "Population: ~a~%" population)
+        (format t "Population: ~a~%" (sort (copy-seq population) #'< :key #'first))
         (setf population (genetic-next-population population extinction-factor breed-op))
         (finally (return population))))
