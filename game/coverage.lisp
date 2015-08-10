@@ -1,7 +1,7 @@
 
 (in-package :hextris)
 
-(defmethod locate-target ((field hextris-map) (initial-unit unit-on-map) &key (solver (make-instance 'hedonistic-solver)))
+(defmethod locate-target ((field hextris-map) (initial-unit unit-on-map) phrases &key (solver (make-instance 'hedonistic-solver)))
   (iter outermost
         (for row from 0 below (height field))
         (iter (for col from 0 below (width field))
@@ -19,7 +19,7 @@
         (finally
          (iter (for (candidate-unit . estimate-score) in (sort candidates #'> :key #'cdr))
                (multiple-value-bind (reachable-p move-script)
-                   (run-a-star field initial-unit candidate-unit)
+                   (run-a-star field initial-unit candidate-unit phrases)
                  (when reachable-p
                    (return-from locate-target (values candidate-unit move-script))))))))
 
