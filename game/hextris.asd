@@ -22,5 +22,7 @@
                (:file "solver" :depends-on ("game"))
                (:file "a-star" :depends-on ("solver" "power-phrases"))
                (:file "hedonistic" :depends-on ("solver"))
-               (:file "game-loop" :depends-on ("a-star"))))
+               (:file "game-loop" :depends-on ("a-star"))
+               (:file "genetic" :depends-on ("game-loop"))
+               ))
 

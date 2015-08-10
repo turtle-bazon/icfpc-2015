@@ -53,8 +53,7 @@
   (destructuring-bind (files time-limit memory-limit number-cores phrases
                              publish score-only tag)
       (parse-args (rest args))
-    (let ((*power-phrases* phrases)
-          (solutions '())
+    (let ((solutions '())
           (solutions-lock (bordeaux-threads:make-lock "solutions"))
           (tpool (thread-pool:make-fixed-thread-pool "main-game"
                                                      :size (or number-cores 1)))
@@ -69,7 +68,8 @@
                                             (single-game-loop current-game current-seed
                                                               :time-limit time-limit
                                                               :memory-limit memory-limit
-                                                              :number-cores number-cores)))
+                                                              :number-cores number-cores
+                                                              :phrases phrases)))
 
                                        (bordeaux-threads:with-lock-held (solutions-lock)
                                          (push result solutions)))))))
@@ -91,7 +91,7 @@
                                       (for script = (getf s :script))
                                       (collecting `((:problem-id . ,(problem-id game))
                                                     (:seed . ,seed)
-                                                    (:solution . ,(power-phrase-encode-adt script))
+                                                    (:solution . ,(power-phrase-encode-adt script phrases))
                                                     ,@(when tag `((:tag . ,(format nil "~a-~a-~a"
                                                                                    tag
                                                                                    (problem-id game)

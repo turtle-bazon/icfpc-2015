@@ -8,8 +8,8 @@
                                       :solution ,command
                                       ,@(when tag `(:tag ,tag)))))
 
-(defun remote-make-solution-adt-json (task-id seed command-adt &optional tag)
-  (remote-make-solution-json task-id seed (power-phrase-encode-adt command-adt) tag))
+(defun remote-make-solution-adt-json (phrases task-id seed command-adt &optional tag)
+  (remote-make-solution-json task-id seed (power-phrase-encode-adt command-adt phrases) tag))
 
 (defun remote-submit-raw (task-id seed command &optional tag)
   (format t "Submitting task ~a (~a) with seed ~a: ~a~%" task-id tag seed command)
@@ -26,5 +26,5 @@
                                 (getf solution :script)
                                 (when tag (symbol-name (gensym tag)))))))
 
-(defun remote-submit* (task-id seed command-adt &optional tag)
-  (remote-submit-raw task-id seed (power-phrase-encode-adt command-adt) tag))
+(defun remote-submit* (phrases task-id seed command-adt &optional tag)
+  (remote-submit-raw task-id seed (power-phrase-encode-adt command-adt phrases) tag))
