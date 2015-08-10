@@ -8,6 +8,8 @@
     "R'lyeh"
     "Yogsothoth"
     "Tsathoggua"
+    "John BigBoote"
+    "Planet 10"
     "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn!"))
 
 (defparameter *char-mapping* '((:w .   "p'!.03")
