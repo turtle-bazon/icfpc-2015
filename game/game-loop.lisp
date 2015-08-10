@@ -6,11 +6,12 @@
            (ignore time-limit memory-limit number-cores))
   (let ((rng (make-rng seed))
         (power-phrases-alist (power-phrases-alist *power-phrases*)))
-    (multiple-value-bind (game-script film move-score power-score)
+    (multiple-value-bind (game-script move-score power-score)
         (iter (with current-map = (game-map world))
               (with move-score = 0)
               (with power-score = 0)
               (with power-phrases-used = (make-hash-table :test #'equal))
+              (with solver = (make-instance 'hedonistic-solver))
               (for ls = 0)
               (for ls-old initially 0 then ls)
               (repeat (source-length world)) ;; spawn as many units as given in source-length
@@ -21,47 +22,23 @@
               (for init-position-on-map = (make-unit-on-map :unit next-unit :coord init-position))
               (unless (unit-position-possible-p next-unit init-position current-map)
                 (terminate))
-              (multiple-value-bind (final-position moves-script)
-                  (locate-target current-map init-position-on-map)
-                (unless final-position ;; probably this is a stop condition?
+              (multiple-value-bind (solution-exists-p moves-script final-position)
+                  (run-a-star current-map solver init-position-on-map)
+                (unless solution-exists-p
                   (terminate))
-                ;;; record film
-                (for next-unit-frames =
-                     (when record-film
-                       (iter (with board-filled = (iter outer
-                                                        (for row from 0 below (height current-map))
-                                                        (iter (for col from 0 below (width current-map))
-                                                              (multiple-value-bind (cell filled-p)
-                                                                  (map-cell current-map (make-cell-row-col row col))
-                                                                (when (and cell filled-p)
-                                                                  (in outer (collect (list (cons :y row) (cons :x col)))))))))
-                             (with actor = init-position-on-map)
-                             (for move in moves-script)
-                             (for translated = (place-on-map (unit-on-map-unit actor)
-                                                             (unit-on-map-coord actor)
-                                                             current-map))
-                             (assert translated)
-                             (for moved-actor = (move-unit move actor current-map))
-
-;;; vizualize for the weaks
-                             (format t "~a~&" move)
-                             (debug-draw current-map :current-position actor :final-position final-position)
-                             (format t "~%")
-                             (debug-draw current-map :current-position moved-actor)
-                             
-                             (format t "---------------------~%")
-                             (format t "move score: ~a power score: ~a~%SCORE: ~a~%" move-score power-score (+ move-score
-                                                                                                               power-score))
-                             (break)
-                             (setf actor moved-actor)
-                             (collect (list (cons :filled (coerce board-filled 'vector))
-                                            (cons :unit-members (coerce (iter (for cell in (members translated))
-                                                                              (for (values row col) = (cell-row-col cell))
-                                                                              (collect (list (cons :y row) (cons :x col))))
-                                                                        'vector)))))))
-
+                ;;; record film (visualize)
+                (when record-film
+                  (iter (with actor = init-position-on-map)
+                        (for move in moves-script)
+                        (format t "~a~%" move)
+                        (debug-draw current-map :current-position actor :final-position final-position)
+                        (format t "---------------------~%")
+                        (format t "move score: ~a power score: ~a~%SCORE: ~a~%"
+                                move-score power-score (+ move-score power-score))
+                        (break)
+                        (setf actor (move-unit move actor current-map))))
 ;;; generate freeze move
-                (for freeze-move = (gen-freeze-move current-map final-position :script (append script moves-script)))
+                (for freeze-move = (gen-freeze-move current-map final-position))
 ;;; record script                
                 (for moves-script+freeze = (append moves-script (list freeze-move)))
                 (appending moves-script+freeze into script)
@@ -72,8 +49,8 @@
                                  current-map))
                 (multiple-value-bind (map rows-burned)
                     (map-burn-lines-v2 current-map) ;; maybe burn some rows if any
-                    (setf current-map map
-                          ls rows-burned))
+                  (setf current-map map
+                        ls rows-burned))
 ;; calculate move score
 ;; move_score = points + line_bonus
 ;;   where
@@ -91,9 +68,6 @@
                                                  10))
                                        0)))
                   (incf move-score (+ points line-bonus)))
-
-                (appending next-unit-frames into frames)
-
                 (finally
 
 ;; calculate power score
@@ -117,9 +91,8 @@
                        (unless (gethash phrase-script power-phrases-used)
                          (incf power-score 300)
                          (setf (gethash phrase-script power-phrases-used) t)))))
-
-                 (return (values script frames move-score power-score)))))
-      (list :game world :seed seed :script game-script :film film :move-score move-score :power-score power-score :score (+ move-score power-score)))))
+                 (return (values script move-score power-score)))))
+      (list :game world :seed seed :script game-script :move-score move-score :power-score power-score :score (+ move-score power-score)))))
 
 (defmethod game-loop ((world game) &optional &key record-film time-limit memory-limit number-cores) 
   (iter (for seed in (seeds world))

@@ -4,11 +4,12 @@
 (defclass hedonistic-solver (solver)
   ())
 
-(defparameter *sum-of-heights-factor* -0.03)
-(defparameter *row-burn-factor* 8.0)
-(defparameter *blockade-factor* -3.5)
+(defparameter *sum-of-heights-factor* 2.75)
+(defparameter *row-burn-factor* 1.0)
+(defparameter *one-burnt-row-penalty* -5.0)
+(defparameter *blockade-factor* -7.5)
 (defparameter *touching-something-factor* 3.0)
-(defparameter *touching-wall-factor* 2.5)
+(defparameter *touching-wall-factor* 3.5)
 (defparameter *touching-floor-factor* 5.0)
 
 (defun find-out-sum-of-heights (field)
@@ -24,7 +25,9 @@
   (multiple-value-bind (map-with-burned-rows burned-rows-count)
       (map-burn-lines-v2 field)
     (declare (ignore map-with-burned-rows))
-    burned-rows-count))
+    (cond ((zerop burned-rows-count) 0.0)
+          ((= burned-rows-count 1) *one-burnt-row-penalty*)
+          (t (ash 2 burned-rows-count)))))
 
 (defun find-out-blockades-count-col (field col)
   (iter (with blockades-count = 0)

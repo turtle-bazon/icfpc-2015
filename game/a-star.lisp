@@ -29,27 +29,15 @@
     ((:rcw :rcc)
      (make-unit-on-map :unit (unit-rotate (unit-on-map-unit obj) move) :coord (unit-on-map-coord obj)))))
 
-(defmethod gen-freeze-move ((field hextris-map) (final-position unit-on-map) &key script)
-  (declare (optimize (debug 3)) (ignore script))
+(defmethod gen-freeze-move ((field hextris-map) (final-position unit-on-map))
+  (declare (optimize (debug 3)))
   (flet ((try-escape (move)
            (let ((moved-unit (move-unit move final-position field)))
              (unless moved-unit
                (return-from gen-freeze-move move))
              (unless (place-on-map (unit-on-map-unit moved-unit) (unit-on-map-coord moved-unit) field)
                (return-from gen-freeze-move move)))))
-    ;; (when script ;;; let's try to finish with powerword!
-    ;;   (let ((pws-rev (sort (mapcar (compose #'reverse #'car) (power-phrases-alist *power-phrases*)) #'> :key #'length))
-    ;;         (script-rev (reverse script)))
-    ;;     (iter (while pws-rev)
-    ;;           (for next-pw-rev = '())
-    ;;           (iter (for (pw-move . pw-rev-tail) in pws-rev)
-    ;;                 (when (and (>= (length script-rev) (length pw-rev-tail))
-    ;;                            (equal pw-rev-tail (subseq script-rev 0 (length pw-rev-tail))))
-    ;;                   (try-escape pw-move))
-    ;;                 (when pw-rev-tail
-    ;;                   (push (cdr pw-rev-tail) next-pw-rev)))
-    ;;           (setf pws-rev (reverse next-pw-rev)))))
-    (iter (for move in *a-star-moves*) ;;; locate freeze move in standard way
+    (iter (for move in *a-star-moves*)
           (try-escape move))))
 
 (defun sq-dist (cell-a cell-b)
@@ -95,79 +83,107 @@
     (values (gethash level-1-key (level-1 cache)) level-1-key)))
 
 (defstruct a*-st
-  pos
-  script
-  mmarks)
+  (pos nil :type (or null unit-on-map))
+  (script nil :type list)
+  (score 0.0 :type single-float)
+  (pws (make-array 0 :element-type 'fixnum) :type (simple-array fixnum *))
+  (weight 0.0 :type single-float))
 
-(defmethod transition-better-p (end-pos)
-  (flet ((distinct-count (pos)
-           (iter (for bit in-vector (a*-st-mmarks pos)) (counting (not (zerop bit))))))
-    (lambda (trans-a trans-b)
-      (let ((uniq-count-a (distinct-count trans-a))
-            (uniq-count-b (distinct-count trans-b)))
-        (or (> uniq-count-a uniq-count-b)
-            (and (= uniq-count-a uniq-count-b)
-                 (or (> (length (car (a*-st-script trans-a)))
-                        (length (car (a*-st-script trans-b))))
-                     (and (= (length (car (a*-st-script trans-a)))
-                             (length (car (a*-st-script trans-b))))
-                          (funcall (position-better-p end-pos)
-                                   (a*-st-pos trans-a)
-                                   (a*-st-pos trans-b))))))))))
+(defun a*-st> (trans-a trans-b)
+  (> (a*-st-weight trans-a) (a*-st-weight trans-b)))
+
+(defparameter *distict-power-words-count-factor* 0.2)
+(defparameter *total-power-words-count-factor* 0.1)
+
+(defun a*-st-create (&key pos script field solver pws pws-inc pws-avail)
+  (declare (optimize (debug 3)))
+  (let* ((st-pws (if pws
+                     (let ((pws-copy (copy-seq pws)))
+                       (when pws-inc
+                         (incf (elt pws-copy pws-inc)))
+                       pws-copy)
+                     (make-array (length pws-avail) :element-type 'fixnum :initial-element 0)))
+         (score (estimate solver field pos))
+         (weight (* score
+                    (+ 1.0 (* (iter (for v in-vector st-pws) (counting (not (zerop v))))
+                              *distict-power-words-count-factor*))
+                    (+ 1.0 (* (iter (for v in-vector st-pws) (summing v))
+                              *total-power-words-count-factor*)))))
+    (make-a*-st :pos pos
+                :script script
+                :score score
+                :pws st-pws
+                :weight weight)))
 
 (defun a*-moves-w/power-words ()
-  (coerce (append (mapcar 'list *a-star-moves*)
-                  (mapcar #'car (power-phrases-alist *power-phrases*)))
+  (coerce (sort (append (mapcar 'list *a-star-moves*)
+                        (mapcar #'car (power-phrases-alist *power-phrases*)))
+                #'>
+                :key #'length)
           'vector))
 
-(defun make-mmarks (available-subtracks)
-  (make-array (length available-subtracks) :element-type 'bit))
-
-(defmethod run-a-star ((field hextris-map) (start-pos unit-on-map) (end-pos unit-on-map))
+(defmethod run-a-star ((field hextris-map) (solver solver) (start-pos unit-on-map) &key limits-callback)
   (declare (optimize (debug 3)))
-  (let ((queue (priority-queue:make-pqueue (transition-better-p end-pos) :key-type 'a*-st))
-        (visited (make-instance 'visited-cache))
-        (available-subtracks (a*-moves-w/power-words)))
-    (priority-queue:pqueue-push t (make-a*-st :pos start-pos :script '() :mmarks (make-mmarks available-subtracks)) queue)
+  (let* ((queue (priority-queue:make-pqueue #'a*-st> :key-type 'a*-st))
+         (visited (make-instance 'visited-cache))
+         (available-subtracks (a*-moves-w/power-words)))
+    (priority-queue:pqueue-push t
+                                (a*-st-create :pos start-pos
+                                              :field field
+                                              :solver solver
+                                              :pws-avail available-subtracks)
+                                queue)
     (mark-visited visited start-pos)
-    (iter (until (priority-queue:pqueue-empty-p queue))
+    (iter (with our-best-state = nil)
+          ;; check stop condition
+          (when (or (priority-queue:pqueue-empty-p queue)
+                    (and limits-callback (functionp limits-callback) (funcall limits-callback)))
+            (return (when our-best-state
+                      (values t (reverse (a*-st-script our-best-state)) (a*-st-pos our-best-state)))))
           (for (values _ cur-state) = (priority-queue:pqueue-pop queue))
-          (when (positions= (a*-st-pos cur-state) end-pos)
-            (return-from run-a-star (values t (flatten (reverse (a*-st-script cur-state))))))
-          (for transitions+paths =
-               (iter (for subtrack in-vector available-subtracks)
-                     (for subtrack-index from 0)
-                     (for path = 
-                          (iter (with current-pos = (a*-st-pos cur-state))
-                                (for move in subtrack)
-                                (for moved-pos = (move-unit move current-pos field))
-                                (unless (and moved-pos (place-on-map (unit-on-map-unit moved-pos) (unit-on-map-coord moved-pos) field))
-                                  (return nil))
-                                (when (or (positions= current-pos moved-pos) (find moved-pos path :test #'positions= :key #'cdr))
-                                  (return nil))
-                                (collect (cons move moved-pos) into path)
-                                (setf current-pos moved-pos)
-                                (finally (return path))))
-                     (when path
-                       (collect (cons (make-a*-st :pos (cdar (last path))
-                                                  :script (cons (mapcar #'car path) (a*-st-script cur-state))
-                                                  :mmarks (let ((v (copy-seq (a*-st-mmarks cur-state))))
-                                                            (setf (elt v subtrack-index) 1)
-                                                            v))
-                                      (mapcar #'cdr path))))))
-          (for sorted-transitions+paths = (sort transitions+paths (transition-better-p end-pos) :key #'car))
-          (iter (for (trans . history) in sorted-transitions+paths)
-                (for visited-p = (some (curry #'fast-check visited) history))
-                (unless visited-p
-                  (priority-queue:pqueue-push t trans queue)
-                  (iter (for pos in history) (mark-visited visited pos)))))))
-          
+          ;; track best
+          (when (and (or (not our-best-state)
+                         (a*-st> cur-state our-best-state))
+                     (gen-freeze-move field (a*-st-pos cur-state)))
+            (setf our-best-state cur-state))
+          ;; transitions
+          (iter (for subtrack in-vector available-subtracks)
+                (for subtrack-index from 0)
+                ;; check full path is passable
+                (for path = (iter (with cur-pos = (a*-st-pos cur-state))
+                                  (for move in subtrack)
+                                  (for moved-pos = (move-unit move cur-pos field))
+                                  (unless (and moved-pos
+                                               (place-on-map (unit-on-map-unit moved-pos) (unit-on-map-coord moved-pos) field)
+                                               (not (fast-check visited moved-pos)))
+                                    (return nil))
+                                  (setf cur-pos moved-pos)
+                                  (collect (cons move moved-pos))))
+                (unless path
+                  (next-iteration))
+                ;; make states
+                (iter (with iter-state = cur-state)
+                      (for ((move . moved-pos) . rest-moves) on path)
+                      (for next-state = (a*-st-create :pos moved-pos
+                                                      :script (cons move (a*-st-script iter-state))
+                                                      :field field
+                                                      :solver solver
+                                                      :pws (a*-st-pws iter-state)
+                                                      :pws-inc (when (and (not rest-moves)
+                                                                          (> (length subtrack) 1))
+                                                                 subtrack-index)))
+                      (priority-queue:pqueue-push t next-state queue)
+                      (mark-visited visited (a*-st-pos next-state))
+                      (setf iter-state next-state))))))
           
 (defun debug-locate-visualize (filename)
   (let ((*info-printer* (lambda (field &key current-position final-position &allow-other-keys)
                           (if final-position
-                              (format t " ;; FINAL estimate = ~a~%"
-                                      (estimate (make-instance 'hedonistic-solver) field final-position))
+                              (format t " ;; FINAL estimate = ~a, find-out-burned-rows-count = ~a~%"
+                                      (estimate (make-instance 'hedonistic-solver) field final-position)
+                                      (find-out-burned-rows-count (unit-lock (unit-on-map-unit final-position)
+                                                                             (unit-on-map-coord final-position)
+                                                                             field)))
                               (format t " ;; CURRENT estimate = ~a~%"
                                       (estimate (make-instance 'hedonistic-solver) field current-position))))))
     (game-loop (parse-input-file filename) :record-film t)))
