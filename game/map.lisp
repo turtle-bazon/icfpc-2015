@@ -91,10 +91,11 @@
 
 
 (defmethod count-free-cells (row (field hextris-map))
-  (iter (for col from 0 below (width field))
-        (for cell = (make-cell-row-col row col))
-        (counting (multiple-value-bind (cell filled-p) (map-cell field cell)
-                    (and cell (not filled-p))))))
+  (declare (optimize (speed 3))
+           (type fixnum row))
+  (iter (declare (declare-variables))
+        (for (the fixnum col) from 0 below (the fixnum (width field)))
+        (counting (map-cell-free-p* field row col))))
 
 (defmethod map-burn-lines-v2 ((field hextris-map))
   (let ((current-map (clone-map field))
@@ -104,29 +105,29 @@
             (iter (for row from lowest-row downto 1)
                   (iter (for col from 0 below (width current-map))
                         (setf (map-cell current-map (make-cell-row-col row col))
-                              (map-cell-free-p current-map (make-cell-row-col (1- row) col)))))
+                              (not (map-cell-free-p* current-map (1- row) col)))))
             (iter (for col from 0 below (width current-map))
                   (setf (map-cell current-map (make-cell-row-col 0 col)) nil))
             (incf lowest-row)
             (incf rows-burned)))
     (values current-map rows-burned)))
-
-(defmethod map-cell-free-p ((obj hextris-map) (c cell))
-  (multiple-value-bind (row col) (cell-row-col c)
-    (not (zerop (elt (field obj) (+ (* row (width obj)) col))))))
-
+    
 (defmethod map-cell-free-p* ((obj hextris-map) row col)
-  (zerop (elt (field obj) (+ (* row (width obj)) col))))
+  (declare (optimize (speed 3)))
+  (let ((field (field obj)))
+    (declare (type (simple-bit-vector *) field))
+    (zerop (elt field (+ (* row (the fixnum (width obj))) col)))))
 
 (defmethod map-cell-free-p** ((obj hextris-map) (c cell))
   (multiple-value-bind (row col) (cell-row-col c)
     (map-cell-free-p* obj row col)))
 
-
 (defmethod map-cell ((obj hextris-map) (c cell))
+  (declare (optimize (speed 3)))
   (multiple-value-bind (row col) (cell-row-col c)
-    (when (and (>= row 0) (< row (height obj)) (>= col 0) (< col (width obj)))
-      (values c (map-cell-free-p obj c)))))
+    (declare (type fixnum row col))
+    (when (and (>= row 0) (< row (the fixnum (height obj))) (>= col 0) (< col (the fixnum (width obj))))
+      (values c (not (map-cell-free-p* obj row col))))))
 
 (defmethod (setf map-cell) (value (obj hextris-map) (c cell))
   (multiple-value-bind (row col) (cell-row-col c)

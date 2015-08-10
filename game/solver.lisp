@@ -4,6 +4,6 @@
 (defclass solver ()
   ())
 
-(defgeneric estimate (solver field checking-pos))
+(defgeneric estimate (solver field checking-pos &key translated-pos))
 
   

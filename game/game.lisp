@@ -10,12 +10,15 @@
 
 (defmethod single-game-loop ((world game) seed &optional &key record-film time-limit memory-limit number-cores phrases)
   (declare (optimize (debug 3))
-           (ignore time-limit memory-limit number-cores phrases))
-  (let ((rng (make-rng seed)))
+           (ignore time-limit memory-limit number-cores))
+  (let ((rng (make-rng seed))
+        (*power-phrases* phrases)
+        (power-phrases-alist (power-phrases-alist *power-phrases*)))
     (multiple-value-bind (game-script film move-score power-score)
         (iter (with current-map = (game-map world))
               (with move-score = 0)
               (with power-score = 0)
+              (with power-phrases-used = (make-hash-table :test #'equal))
               (for ls = 0)
               (for ls-old initially 0 then ls)
               (repeat (source-length world)) ;; spawn as many units as given in source-length
@@ -66,7 +69,10 @@
                                                                         'vector)))))))
 
 ;;; generate freeze move
-                (for freeze-move = (gen-freeze-move current-map final-position))
+                (for freeze-move = (gen-freeze-move current-map final-position :script (append script moves-script)))
+;;; record script                
+                (for moves-script+freeze = (append moves-script (list freeze-move)))
+                (appending moves-script+freeze into script)
 ;;; update map
                 (setf current-map ;; freeze fallen unit at it's final position
                       (unit-lock (unit-on-map-unit final-position)
@@ -93,13 +99,39 @@
                                                  10))
                                        0)))
                   (incf move-score (+ points line-bonus)))
-                (for moves-script+freeze = (append moves-script (list freeze-move)))
-                (appending moves-script+freeze into script)
+
                 (appending next-unit-frames into frames)
-                (finally (return (values script frames move-score power-score)))))
+
+                (finally
+
+;; calculate power score
+;; power_scorep = 2 * lenp * repsp + power_bonusp
+;;   where
+;;   power_bonusp = if repsp > 0
+;;                  then 300
+;;                  else 0
+                 (bind ((script-copy (copy-seq script)))
+                   (iter
+                     (for (phrase-script . phrase-text) in power-phrases-alist)
+                     (for phrase-length = (length phrase-script))
+                     (iter
+                       (for pos
+                            initially (search phrase-script script-copy)
+                            then (search phrase-script script-copy :start2 (+ pos phrase-length)))
+                       (unless pos
+                         (terminate))
+                       (replace script-copy (make-list phrase-length) :start1 pos :end1 (+ pos phrase-length))
+                       (incf power-score (* 2 phrase-length))
+                       (unless (gethash phrase-script power-phrases-used)
+                         (incf power-score 300)
+                         (setf (gethash phrase-script power-phrases-used) t)))))
+
+                 (return (values script frames move-score power-score)))))
       (list :game world :seed seed :script game-script :film film :move-score move-score :power-score power-score :score (+ move-score power-score)))))
 
-(defmethod game-loop ((world game) &optional &key record-film time-limit memory-limit number-cores phrases)
+(defmethod game-loop ((world game) &optional &key record-film time-limit memory-limit number-cores (phrases nil phrases-p))
+  (unless phrases-p
+    (setf phrases *power-phrases*))
   (iter (for seed in (seeds world))
         (for rng = (make-rng seed))
         (for (values game-script film) =

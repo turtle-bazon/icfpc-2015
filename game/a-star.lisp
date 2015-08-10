@@ -29,14 +29,28 @@
     ((:rcw :rcc)
      (make-unit-on-map :unit (unit-rotate (unit-on-map-unit obj) move) :coord (unit-on-map-coord obj)))))
 
-
-(defmethod gen-freeze-move ((field hextris-map) (final-position unit-on-map))
-  (iter (for move in *a-star-moves*)
-        (for moved-unit = (move-unit move final-position field))
-        (unless moved-unit
-          (return-from gen-freeze-move move))
-        (unless (place-on-map (unit-on-map-unit moved-unit) (unit-on-map-coord moved-unit) field)
-          (return-from gen-freeze-move move))))
+(defmethod gen-freeze-move ((field hextris-map) (final-position unit-on-map) &key script)
+  (declare (optimize (debug 3)) (ignore script))
+  (flet ((try-escape (move)
+           (let ((moved-unit (move-unit move final-position field)))
+             (unless moved-unit
+               (return-from gen-freeze-move move))
+             (unless (place-on-map (unit-on-map-unit moved-unit) (unit-on-map-coord moved-unit) field)
+               (return-from gen-freeze-move move)))))
+    ;; (when script ;;; let's try to finish with powerword!
+    ;;   (let ((pws-rev (sort (mapcar (compose #'reverse #'car) (power-phrases-alist *power-phrases*)) #'> :key #'length))
+    ;;         (script-rev (reverse script)))
+    ;;     (iter (while pws-rev)
+    ;;           (for next-pw-rev = '())
+    ;;           (iter (for (pw-move . pw-rev-tail) in pws-rev)
+    ;;                 (when (and (>= (length script-rev) (length pw-rev-tail))
+    ;;                            (equal pw-rev-tail (subseq script-rev 0 (length pw-rev-tail))))
+    ;;                   (try-escape pw-move))
+    ;;                 (when pw-rev-tail
+    ;;                   (push (cdr pw-rev-tail) next-pw-rev)))
+    ;;           (setf pws-rev (reverse next-pw-rev)))))
+    (iter (for move in *a-star-moves*) ;;; locate freeze move in standard way
+          (try-escape move))))
 
 (defun sq-dist (cell-a cell-b)
   (declare (optimize (speed 3))
