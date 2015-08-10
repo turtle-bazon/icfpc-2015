@@ -19,10 +19,11 @@
                 :content-type "application/json"
                 :content (format nil "[~a]" (remote-make-solution-json task-id seed command tag))))
 
-(defun remote-submit (game-loop-result task-id &optional tag)
+(defun remote-submit (phrases game-loop-result task-id &optional tag)
   (iter (for solution in game-loop-result)
         (format t "Server response ~a~%"
-                (remote-submit* task-id (getf solution :seed)
+                (remote-submit* phrases
+                                task-id (getf solution :seed)
                                 (getf solution :script)
                                 (when tag (symbol-name (gensym tag)))))))
 

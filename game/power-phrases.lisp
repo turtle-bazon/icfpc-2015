@@ -62,5 +62,5 @@
   (bind ((result (game-loop (parse-input-file input) :phrases phrases)))
 
     (if submit
-        (remote-submit result 0 "word-discovery-")
+        (remote-submit phrases result 0 "word-discovery-")
         (power-phrase-encode-adt (getf (car result) :script) phrases))))
