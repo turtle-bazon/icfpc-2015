@@ -8,11 +8,10 @@
    (units :initarg :units :reader units)
    (seeds :initarg :seeds :reader seeds)))
 
-(defmethod single-game-loop ((world game) seed &optional &key record-film time-limit memory-limit number-cores phrases)
+(defmethod single-game-loop ((world game) seed &optional &key record-film time-limit memory-limit number-cores)
   (declare (optimize (debug 3))
            (ignore time-limit memory-limit number-cores))
   (let ((rng (make-rng seed))
-        (*power-phrases* phrases)
         (power-phrases-alist (power-phrases-alist *power-phrases*)))
     (multiple-value-bind (game-script film move-score power-score)
         (iter (with current-map = (game-map world))
@@ -129,9 +128,7 @@
                  (return (values script frames move-score power-score)))))
       (list :game world :seed seed :script game-script :film film :move-score move-score :power-score power-score :score (+ move-score power-score)))))
 
-(defmethod game-loop ((world game) &optional &key record-film time-limit memory-limit number-cores (phrases nil phrases-p))
-  (unless phrases-p
-    (setf phrases *power-phrases*))
+(defmethod game-loop ((world game) &optional &key record-film time-limit memory-limit number-cores) 
   (iter (for seed in (seeds world))
         (for rng = (make-rng seed))
         (for (values game-script film) =
@@ -140,8 +137,7 @@
                                    :record-film record-film
                                    :time-limit time-limit
                                    :memory-limit memory-limit
-                                   :number-cores number-cores
-                                   :phrases phrases)))))
+                                   :number-cores number-cores)))))
 
 (defun make-next-unit (game rng)
   (bind ((next-number (funcall rng))

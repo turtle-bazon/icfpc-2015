@@ -69,8 +69,8 @@
                                             (single-game-loop current-game current-seed
                                                               :time-limit time-limit
                                                               :memory-limit memory-limit
-                                                              :number-cores number-cores
-                                                              :phrases phrases)))
+                                                              :number-cores number-cores)))
+
                                        (bordeaux-threads:with-lock-held (solutions-lock)
                                          (push result solutions)))))))
       (thread-pool:stop-pool tpool)
