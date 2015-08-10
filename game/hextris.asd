@@ -19,8 +19,8 @@
                (:file "unit" :depends-on ("map"))
                (:file "game" :depends-on ("unit" "rng"))
                (:file "parser" :depends-on ("game"))
-               (:file "a-star" :depends-on ("game" "power-phrases"))
-               (:file "solver" :depends-on ("a-star"))
+               (:file "solver" :depends-on ("game"))
+               (:file "a-star" :depends-on ("solver" "power-phrases"))
                (:file "hedonistic" :depends-on ("solver"))
-               (:file "coverage" :depends-on ("hedonistic"))))
+               (:file "game-loop" :depends-on ("a-star"))))
 

@@ -163,3 +163,11 @@
                   (iter (for pos in history) (mark-visited visited pos)))))))
           
           
+(defun debug-locate-visualize (filename)
+  (let ((*info-printer* (lambda (field &key current-position final-position &allow-other-keys)
+                          (if final-position
+                              (format t " ;; FINAL estimate = ~a~%"
+                                      (estimate (make-instance 'hedonistic-solver) field final-position))
+                              (format t " ;; CURRENT estimate = ~a~%"
+                                      (estimate (make-instance 'hedonistic-solver) field current-position))))))
+    (game-loop (parse-input-file filename) :record-film t)))
