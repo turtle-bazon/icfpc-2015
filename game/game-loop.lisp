@@ -98,7 +98,8 @@
                  (return (values script move-score power-score)))))
       (list :game world :seed seed :script game-script :move-score move-score :power-score power-score :score (+ move-score power-score)))))
 
-(defmethod game-loop ((world game) &optional &key record-film time-limit memory-limit number-cores) 
+(defmethod game-loop ((world game) &optional
+                      &key record-film time-limit memory-limit number-cores (solver (make-instance 'hedonistic-solver)))
   (iter (for seed in (seeds world))
         (for rng = (make-rng seed))
         (for (values game-script film) =
@@ -107,5 +108,6 @@
                                    :record-film record-film
                                    :time-limit time-limit
                                    :memory-limit memory-limit
-                                   :number-cores number-cores)))))
+                                   :number-cores number-cores
+                                   :solver solver)))))
 
