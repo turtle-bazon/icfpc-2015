@@ -60,10 +60,10 @@
 
 (defparameter *power-phrase-check-solution-counter* 0)
 
-(defun power-phrase-check-solution (input phrase &optional submit)
-  (bind ((*power-phrases* (list phrase))
-         (solution (power-phrase-encode-adt (getf (car (game-loop (parse-input-file input)))
-                                                  :script))))
+(defun power-phrase-check-solution (input phrases &key submit)
+  (bind ((*power-phrases* phrases)
+         (result (game-loop (parse-input-file input))))
+
     (if submit
-        (remote-submit-raw 0 0 solution (format nil "alterator-~a" (incf *power-phrase-check-solution-counter*)))
-        solution)))
+        (remote-submit result 0 "word-discovery-")
+        (power-phrase-encode-adt (getf (car result) :script)))))
