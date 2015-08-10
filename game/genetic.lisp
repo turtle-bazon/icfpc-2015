@@ -6,7 +6,8 @@
                                     *blockade-factor*
                                     *touching-something-factor*
                                     *touching-wall-factor*
-                                    *touching-floor-factor*)))
+                                    *touching-floor-factor*
+                                    *row-fill-factor*)))
 
 (defmacro with-chromosome ((chromosome) &body body)
   (bind ((var (gensym)))
@@ -16,9 +17,9 @@
                       *chromosome-keys*))
        ,@body)))
 
-(defun genetic-fitness (world chromosome)
+(defun genetic-fitness (world phrases chromosome)
   (with-chromosome (chromosome)
-    (iter (for seed-result in (game-loop world))
+    (iter (for seed-result in (game-loop world :phrases phrases))
           (sum (getf seed-result :move-score)))))
 
 (defun genetic-make-random-property (&optional (stretch 10.0))
@@ -61,7 +62,7 @@
     (genetic-breed survived (length population) breed-op)))
 
 
-(defun genetic-fit-population (world population number-of-cores)
+(defun genetic-fit-population (world population number-of-cores phrases)
   (bind ((tpool (thread-pool:make-fixed-thread-pool "genetic-ai-improver"
                                                     :size number-of-cores))
          (new-population (list))
@@ -71,10 +72,11 @@
 
     (iter (for (_ chromosome) in population)
           (bind ((the-world world)
-                 (the-chromosome chromosome))
+                 (the-chromosome chromosome)
+                 (the-phrases phrases))
             (thread-pool:execute tpool
                                (lambda ()
-                                 (bind ((result (list (genetic-fitness the-world the-chromosome) the-chromosome)))
+                                 (bind ((result (list (genetic-fitness the-world the-phrases the-chromosome) the-chromosome)))
                                    (bordeaux-threads:with-lock-held (population-lock)
                                      (push result new-population)))))))
     (thread-pool:stop-pool tpool)
@@ -84,14 +86,15 @@
 
 (defun genetic-run (world number-of-generations
                     &key (population nil) (population-size 10) (extinction-factor 0.5)
-                      (breed-op #'genetic-breed-pair-random) (number-of-cores 1))
+                      (breed-op #'genetic-breed-pair-random) (number-of-cores 1)
+                      phrases)
 
   (unless population
     (setf population (genetic-make-random-population population-size)))
 
   (iter (for gen from 0 to number-of-generations)
         (format t "Generation ~a...~%" gen)
-        (setf population (genetic-fit-population world population number-of-cores))
+        (setf population (genetic-fit-population world population number-of-cores phrases))
         (format t "Population: ~a~%" population)
         (setf population (genetic-next-population population extinction-factor breed-op))
         (finally (return population))))
