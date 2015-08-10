@@ -13,6 +13,18 @@
 (defparameter *touching-floor-factor* 5.0)
 (defparameter *row-fill-factor* 10)
 
+;; 0: 7101, 10: 5538, 2: 5568
+;; (defparameter *sum-of-heights-factor* 0.7172661)
+;; (defparameter *row-burn-factor* -0.13707352)
+;; (defparameter *blockade-factor* 2.702942)
+;; (defparameter *touching-something-factor* 8.942196)
+;; (defparameter *touching-wall-factor* 8.346035)
+;; (defparameter *touching-floor-factor* 5.843904)
+;; (defparameter *row-fill-factor* 4.588444)
+;; (defparameter *distict-power-words-count-factor* 2.64328)
+;; (defparameter *total-power-words-count-factor* 8.137441)
+;; (defparameter *one-burnt-row-penalty* 8.351305)
+
 (defun count-rows-fill (field)
   (declare (optimize (speed 3))
            (type hextris-map field))
