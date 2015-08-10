@@ -1,7 +1,10 @@
 
 (in-package :hextris)
 
-(defmethod single-game-loop ((world game) seed &optional &key record-film time-limit memory-limit number-cores)
+(defparameter *bfs-max-depth* 256)
+
+(defmethod single-game-loop ((world game) seed &optional
+                             &key record-film time-limit memory-limit number-cores)
   (declare (optimize (debug 3))
            (ignore time-limit memory-limit number-cores))
   (let ((rng (make-rng seed))
@@ -23,7 +26,9 @@
               (unless (unit-position-possible-p next-unit init-position current-map)
                 (terminate))
               (multiple-value-bind (solution-exists-p moves-script final-position)
-                  (run-a-star current-map solver init-position-on-map)
+                  (let ((current-depth 0))
+                    (run-a-star current-map solver init-position-on-map
+                                :limits-callback (lambda () (>= (incf current-depth) *bfs-max-depth*))))
                 (unless solution-exists-p
                   (terminate))
                 ;;; record film (visualize)
